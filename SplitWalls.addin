@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>LAOS Split Walls</Name>
+    <Assembly>SplitWalls.dll</Assembly>
+    <AddInId>FCCCC12C-861E-48F7-BB56-9B2110C0CB3A</AddInId>
+    <FullClassName>SplitWalls.App</FullClassName>
+    <Text>LAOS Addin</Text>
+    <VendorId>LAOS</VendorId>
+    <VendorDescription>Luis Alonso Otero Seminario, www.dynoscript.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>

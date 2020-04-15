@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SplitWalls", "SplitWalls.csproj", "{C68E2235-E607-4F4E-951C-9CDC413DDB61}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SplitWallsAddin_Setup", "..\SplitWallsAddin_Setup\SplitWallsAddin_Setup\SplitWallsAddin_Setup.vdproj", "{70681A40-7AB4-4AB6-82A5-A91EDE9118C5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C68E2235-E607-4F4E-951C-9CDC413DDB61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C68E2235-E607-4F4E-951C-9CDC413DDB61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C68E2235-E607-4F4E-951C-9CDC413DDB61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C68E2235-E607-4F4E-951C-9CDC413DDB61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70681A40-7AB4-4AB6-82A5-A91EDE9118C5}.Debug|Any CPU.ActiveCfg = Debug
+		{70681A40-7AB4-4AB6-82A5-A91EDE9118C5}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {727EF4F1-5DBE-458C-8ECA-39674B542A7D}
+	EndGlobalSection
+EndGlobal
