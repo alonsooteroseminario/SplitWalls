@@ -7,6 +7,6 @@
     <FullClassName>SplitWalls.App</FullClassName>
     <Text>LAOS Addin</Text>
     <VendorId>LAOS</VendorId>
-    <VendorDescription>Luis Alonso Otero Seminario, www.dynoscript.com</VendorDescription>
+    <VendorDescription>LAOS, www.dynoscript.com</VendorDescription>
   </AddIn>
 </RevitAddIns>

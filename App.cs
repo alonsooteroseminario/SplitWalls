@@ -18,18 +18,23 @@ namespace SplitWalls
 
         public Result OnStartup(UIControlledApplication application)
         {
-            // Todo el codigo para crear los botonoes en la Ribbon. crear panel  
-            RibbonPanel panel11 = application.CreateRibbonPanel("Split Walls");
+            // Crear Tab 1 Dynoscript
+            string tabName = "TecnoTruss";
+            application.CreateRibbonTab(tabName);
+
+            // Crear Panel 1
+            RibbonPanel panel11 = application.CreateRibbonPanel(tabName, "Crear Paneles");
+
 
             // agregar un boton
-            PushButton button11 = panel11.AddItem(new PushButtonData("SplitWallsButton", "Split Walls", ExecutingAssemblyPath, "SplitWalls.ThisApplication")) as PushButton;
+            PushButton button11 = panel11.AddItem(new PushButtonData("SplitWallsButton", "Dividir Muros", ExecutingAssemblyPath, "SplitWalls.ThisApplication")) as PushButton;
 
 
             // agregar la imagen al button1
             button11.LargeImage = new BitmapImage(new Uri("pack://application:,,,/SplitWalls;component/Resources/split-(2).png"));
 
-            button11.ToolTip = "Dividir Muros";
-            button11.LongDescription = "Divide los Muros o los elementos de Categoría 'Walls' en partes iguales indicándole la longitud.";
+            button11.ToolTip = "Dividir Muros para fabricación de Paneles Standarizados";
+            button11.LongDescription = "Ingresa el Ancho de los Paneles (mm) que deseas Dividir y después Selecciona qué muro deseas Dividir: ";
 
             return Result.Succeeded;
         }
