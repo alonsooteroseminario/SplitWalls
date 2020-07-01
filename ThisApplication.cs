@@ -1881,17 +1881,17 @@ namespace SplitWalls
 										{
 											#region puerta
 
-											double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 0);
-											double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 0);
+											double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 1);
+											double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 1);
 
-											if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+											if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 											{
 												// Transf. BORDE PUERTA a la IZQUIERDA
 												//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
 												Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas.First(), anchoventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First(), Puntos_Ventada_dVFo.First(), height_double);
 												lista_walls.Add(wall_recibida);
 											}
-											else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+											else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 											{
 												// Transf. BORDE PUERTA a la DERECHA
 												//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
@@ -1959,17 +1959,17 @@ namespace SplitWalls
 									{
 										#region puerta
 
-										double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 0);
-										double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 0);
+										double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 1);
+										double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 1);
 
-										if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+										if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 										{
 											// Transf. BORDE PUERTA a la IZQUIERDA
 											//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
 											Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas.First(), anchoventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First(), Puntos_Ventada_dVFo.First(), height_double);
 											lista_walls.Add(wall_recibida);
 										}
-										else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+										else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 										{
 											// Transf. BORDE PUERTA a la DERECHA
 											//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
@@ -2044,17 +2044,19 @@ namespace SplitWalls
 											else
 											{
 												#region else
-												//&&  !(VF_nuf == Math.Round(lenght_double, 0))
-												double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 0);
-												double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 0);
 
+												double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 2);
+												double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 2);
+												Wall aaaaaa = wall_i as Wall;
 												if ((VI_nuf == 0)) // BORDE Inicio
 												{
-													//TaskDialog.Show("ALERTA", "AQUI PENDEJADA 2");
-													Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(wall_i, anchoventanas.First(), alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First());
-													lista_walls.Add(wall_recibida_dVIo);
+													if (aaaaaa.Id == primer_primero_wall.Id)
+													{
+														//TaskDialog.Show("ALERTA", "DVIo");
+														Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(wall_i, anchoventanas.First(), alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First());
+														lista_walls.Add(wall_recibida_dVIo);
+													}
 												}
-
 												else
 												{
 
@@ -2077,10 +2079,10 @@ namespace SplitWalls
 
 												Wall aaaaaa = wall_ii as Wall;
 
-												double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 0);
-												double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 0);
+												double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 2);
+												double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 2);
 
-												if (VF_nuf == Math.Round(lenght_double, 0))
+												if (VF_nuf == Math.Round(lenght_double, 2))
 												{
 													// Transf. BORDE PUERTA a la DERECHA
 
@@ -2103,20 +2105,24 @@ namespace SplitWalls
 											{
 												#region else
 
-												double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 0);
-												double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 0);
+												double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 2);
+												double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 2);
 
+												Wall aaaaaa = wall_ii as Wall;
 
-
-												if ((VF_nuf == Math.Round(lenght_double, 0))) // BORDE Final
+												if ((VF_nuf == Math.Round(lenght_double, 2))) // BORDE Final
 												{
-													//TaskDialog.Show("ALERTA", "AQUI PENDEJADA 2");
-													Wall wall_recibida_dVFo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(wall_ii, anchoventanas.First(), alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First());
-													lista_walls.Add(wall_recibida_dVFo);
+													if (aaaaaa.Id == ultimo_ultimo_wall.Id)
+													{
+														//TaskDialog.Show("ALERTA", "DVFo BORDE Final");
+														Wall wall_recibida_dVFo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(wall_ii, anchoventanas.First(), alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First());
+														lista_walls.Add(wall_recibida_dVFo);
+													}
+
 												}
 												else
 												{
-													//TaskDialog.Show("ALERTA", "AQUI");
+													//TaskDialog.Show("ALERTA", "DVFo");
 													Wall wall_recibida_dVFo = Revision6_DYNO_Create_New_Wall_EditProfile_dVFo_return(wall_ii, alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVFo.First());
 													lista_walls.Add(wall_recibida_dVFo);
 												}
@@ -2157,15 +2163,18 @@ namespace SplitWalls
 											else
 											{
 												#region else
-
-												double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 0);
-												double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 0);
+												Wall aaaaaa = wall_i as Wall;
+												double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 2);
+												double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 2);
 
 												if ((VI_nuf == 0)) // BORDE Inicio
 												{
-													//TaskDialog.Show("ALERTA", "AQUI PENDEJADA 2");
-													Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(wall_i, anchoventanas.First(), alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First());
-													lista_walls.Add(wall_recibida_dVIo);
+													if (aaaaaa.Id == primer_primero_wall.Id)
+													{
+														//TaskDialog.Show("ALERTA", "DVIo");
+														Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(wall_i, anchoventanas.First(), alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First());
+														lista_walls.Add(wall_recibida_dVIo);
+													}
 												}
 												else
 												{
@@ -2188,10 +2197,10 @@ namespace SplitWalls
 
 												Wall aaaaaa = wall_ii as Wall;
 
-												double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 0);
-												double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 0);
+												double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 2);
+												double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 2);
 
-												if (VF_nuf == Math.Round(lenght_double, 0))
+												if (VF_nuf == Math.Round(lenght_double, 2))
 												{
 													// Transf. BORDE PUERTA a la DERECHA
 
@@ -2212,19 +2221,22 @@ namespace SplitWalls
 											else
 											{
 												#region else
+												Wall aaaaaa = wall_ii as Wall;
+												double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 2);
+												double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 2);
 
-												double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 0);
-												double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 0);
-
-												if ((VF_nuf == Math.Round(lenght_double, 0))) // BORDE Final
+												if ((VF_nuf == Math.Round(lenght_double, 2))) // BORDE Final
 												{
-													//TaskDialog.Show("ALERTA", "AQUI PENDEJADA 2");
-													Wall wall_recibida_dVFo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(wall_ii, anchoventanas.First(), alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First());
-													lista_walls.Add(wall_recibida_dVFo);
+													if (aaaaaa.Id == ultimo_ultimo_wall.Id)
+													{
+														//TaskDialog.Show("ALERTA", "DVFo BORDE Final");
+														Wall wall_recibida_dVFo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(wall_ii, anchoventanas.First(), alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First());
+														lista_walls.Add(wall_recibida_dVFo);
+													}
 												}
 												else
 												{
-													//TaskDialog.Show("ALERTA", "AQUI");
+													//TaskDialog.Show("ALERTA", "DVFo");
 													Wall wall_recibida_dVFo = Revision6_DYNO_Create_New_Wall_EditProfile_dVFo_return(wall_ii, alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVFo.First());
 													lista_walls.Add(wall_recibida_dVFo);
 												}
@@ -2249,15 +2261,18 @@ namespace SplitWalls
 										else
 										{
 											#region else
-
-											double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 0);
-											double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 0);
+											Wall aaaaaa = wall_i as Wall;
+											double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 2);
+											double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 2);
 
 											if ((VI_nuf == 0)) // BORDE Inicio
 											{
-												//TaskDialog.Show("ALERTA", "AQUI PENDEJADA 2");
-												Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(wall_i, anchoventanas.First(), alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First());
-												lista_walls.Add(wall_recibida_dVIo);
+												if (aaaaaa.Id == primer_primero_wall.Id)
+												{
+													//TaskDialog.Show("ALERTA", "DVIo");
+													Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(wall_i, anchoventanas.First(), alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First());
+													lista_walls.Add(wall_recibida_dVIo);
+												}
 											}
 											else
 											{
@@ -2280,10 +2295,10 @@ namespace SplitWalls
 
 											Wall aaaaaa = wall_ii as Wall;
 
-											double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 0);
-											double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 0);
+											double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 2);
+											double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 2);
 
-											if (VF_nuf == Math.Round(lenght_double, 0))
+											if (VF_nuf == Math.Round(lenght_double, 2))
 											{
 												// Transf. BORDE PUERTA a la DERECHA
 
@@ -2304,19 +2319,22 @@ namespace SplitWalls
 										else
 										{
 											#region else
+											Wall aaaaaa = wall_ii as Wall;
+											double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 2);
+											double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 2);
 
-											double VI_nuf = Math.Round(lista_dPH.First() - anchoventanas.First() / 2, 0);
-											double VF_nuf = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 0);
-
-											if ((VF_nuf == Math.Round(lenght_double, 0))) // BORDE Final
+											if ((VF_nuf == Math.Round(lenght_double, 2))) // BORDE Final
 											{
-												//TaskDialog.Show("ALERTA", "AQUI PENDEJADA 2");
-												Wall wall_recibida_dVFo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(wall_ii, anchoventanas.First(), alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First());
-												lista_walls.Add(wall_recibida_dVFo);
+												if (aaaaaa.Id == ultimo_ultimo_wall.Id)
+												{
+													//TaskDialog.Show("ALERTA", "DVFo BORDE Final");
+													Wall wall_recibida_dVFo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(wall_ii, anchoventanas.First(), alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First());
+													lista_walls.Add(wall_recibida_dVFo);
+												}
 											}
 											else
 											{
-												//TaskDialog.Show("ALERTA", "AQUI");
+												//TaskDialog.Show("ALERTA", "DVFo");
 												Wall wall_recibida_dVFo = Revision6_DYNO_Create_New_Wall_EditProfile_dVFo_return(wall_ii, alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVFo.First());
 												lista_walls.Add(wall_recibida_dVFo);
 											}
@@ -2644,10 +2662,10 @@ namespace SplitWalls
 												{
 													#region  Puerta - Puerta
 													Wall aaaaaa = elements_dVIo.First() as Wall;
-													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 													{
 														// Transf. BORDE PUERTA a la IZQUIERDA
 														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(aaaaaa, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
@@ -2674,7 +2692,7 @@ namespace SplitWalls
 														#endregion
 														lista_NO_VIo.Add(wall_recibida.Id);
 													}
-													else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+													else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 													{
 														// Transf. BORDE PUERTA a la DERECHA
 														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(aaaaaa, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
@@ -2738,37 +2756,51 @@ namespace SplitWalls
 													//Puerta - Ventana
 													#region  Puerta - Ventana
 													Wall aaaaaa = elements_dVIo.First() as Wall;
-													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+													double VI_nuf2 = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 1);
+													double VF_nuf2 = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 1);
+
+
+													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 													{
-														// Transf. BORDE PUERTA a la IZQUIERDA
-														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(aaaaaa, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-
-														#region void
-														using (Transaction trans = new Transaction(doc, "wall"))
+														if (VF_nuf == VI_nuf2)
 														{
-															trans.Start();
 
-															XYZ arriba_dVFo = new XYZ(Puntos_Ventada_dVFo[i + 1].X, Puntos_Ventada_dVFo[i + 1].Y, Puntos_Ventada_dVFo[i + 1].Z + alturaventanas[i + 1]);
-															XYZ abajo_dVIo = new XYZ(Puntos_Ventada_dVIo[i + 1].X, Puntos_Ventada_dVIo[i + 1].Y, Puntos_Ventada_dVIo[i + 1].Z);
+															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_1MURO_Solitario_CasoEspecial_InicialMuro_return(aaaaaa, anchoventanas[i], alturaventanas[i], alturaventanas[i + 1], sillventanas[i], sillventanas[i + 1], Puntos_Ventada_dVIo[i + 1]);
 
-															Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
-															trans.Commit();
-
-
+															lista_NO_VIo.Add(wall_recibida.Id);
 														}
-														#endregion
-														lista_NO_VIo.Add(wall_recibida.Id);
+														else
+														{
+															// Transf. BORDE PUERTA a la IZQUIERDA
+															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(aaaaaa, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
+
+															#region void
+															using (Transaction trans = new Transaction(doc, "wall"))
+															{
+																trans.Start();
+
+																XYZ arriba_dVFo = new XYZ(Puntos_Ventada_dVFo[i + 1].X, Puntos_Ventada_dVFo[i + 1].Y, Puntos_Ventada_dVFo[i + 1].Z + alturaventanas[i + 1]);
+																XYZ abajo_dVIo = new XYZ(Puntos_Ventada_dVIo[i + 1].X, Puntos_Ventada_dVIo[i + 1].Y, Puntos_Ventada_dVIo[i + 1].Z);
+
+																Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
+
+																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
+																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
+
+																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
+																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
+																trans.Commit();
+
+
+															}
+															#endregion
+															lista_NO_VIo.Add(wall_recibida.Id);
+														}
 													}
-													else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+													else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 													{
 														// Transf. BORDE PUERTA a la DERECHA
 														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(aaaaaa, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
@@ -2832,15 +2864,15 @@ namespace SplitWalls
 													//Ventana - Puerta
 													#region  Ventana - Puerta
 													Wall aaaaaa = elements_dVIo.First() as Wall;
-													double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 0);
-													double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 0);
+													double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 1);
+													double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 1);
 
-													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 													{
 														// Transf. BORDE PUERTA a la IZQUIERDA
 
 													}
-													else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+													else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 													{
 														// Transf. BORDE PUERTA a la DERECHA
 														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(aaaaaa, alturaventanas[i + 1], anchoventanas[i + 1], sillventanas[i + 1], Puntos_Ventada_dVIo[i + 1], Puntos_Ventada_dVFo[i + 1], height_double);
@@ -3017,10 +3049,10 @@ namespace SplitWalls
 												{
 													#region Puerta Puerta
 													Wall aaaaaa = elements_dVIo.First() as Wall;
-													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 													{
 														// Transf. BORDE PUERTA a la IZQUIERDA
 														// A
@@ -3029,7 +3061,7 @@ namespace SplitWalls
 																										 Puntos_Ventada_dVIo[i + 1], height_double);
 														lista_NO_VIo.Add(wall_recibida_dVIo.Id);
 													}
-													else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+													else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 													{
 														// Transf. BORDE PUERTA a la DERECHA
 
@@ -3050,12 +3082,12 @@ namespace SplitWalls
 
 													#region Puerta Ventana
 													Wall aaaaaa = elements_dVIo.First() as Wall;
-													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
 
 
-													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 													{
 														// Transf. BORDE PUERTA a la IZQUIERDA
 														// B	
@@ -3064,7 +3096,7 @@ namespace SplitWalls
 																										 Puntos_Ventada_dVFo[i], height_double);
 														lista_NO_VIo.Add(wall_recibida_dVIo.Id);
 													}
-													else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+													else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 													{
 														// Transf. BORDE PUERTA a la DERECHA
 
@@ -3072,8 +3104,8 @@ namespace SplitWalls
 													else
 													{
 
-														double VI_nuf_2 = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 0);
-														double VF_nuf_2 = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 0);
+														double VI_nuf_2 = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 1);
+														double VF_nuf_2 = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 1);
 														// if
 														if (VF_nuf == VI_nuf_2)
 														{
@@ -3110,17 +3142,17 @@ namespace SplitWalls
 														{
 															#region puerta
 
-															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																// Transf. BORDE PUERTA a la IZQUIERDA
 																//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
 																Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
 																lista_walls.Add(wall_recibida);
 															}
-															else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+															else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 															{
 																// Transf. BORDE PUERTA a la DERECHA
 																//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
@@ -3138,34 +3170,6 @@ namespace SplitWalls
 																}
 															}
 
-															#region borrador
-
-															//													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i]/2, 0);
-															//													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i]/2, 0);
-															//													
-															//													//TaskDialog.Show("Es puerta", VI_nuf.ToString() + Environment.NewLine + VF_nuf.ToString() + Environment.NewLine + lenght_double.ToString());
-															//													
-															//													if (  (VI_nuf == 0)  &&  !(VF_nuf == Math.Round(lenght_double, 0))  )
-															//													{
-															//														// Transf. BORDE PUERTA a la IZQUIERDA
-															//														//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
-															//														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-															//														lista_walls.Add(wall_recibida);
-															//														
-															//													}
-															//													else if (  (VF_nuf == Math.Round(lenght_double, 0))  &&  !(VI_nuf == 0)  )
-															//													{
-															//														// Transf. BORDE PUERTA a la DERECHA
-															//														//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
-															//														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-															//														lista_walls.Add(wall_recibida);
-															//													}
-															//													else
-															//													{
-															//														
-															//														
-															//													}
-															#endregion
 
 															#endregion
 														}
@@ -3222,17 +3226,17 @@ namespace SplitWalls
 													{
 														#region puerta
 
-														double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-														double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+														double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+														double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-														if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+														if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 														{
 															// Transf. BORDE PUERTA a la IZQUIERDA
 															//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
 															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
 															lista_walls.Add(wall_recibida);
 														}
-														else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+														else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 														{
 															// Transf. BORDE PUERTA a la DERECHA
 															//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
@@ -3250,34 +3254,6 @@ namespace SplitWalls
 															}
 														}
 
-														#region borrador
-
-														//													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i]/2, 0);
-														//													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i]/2, 0);
-														//													
-														//													//TaskDialog.Show("Es puerta", VI_nuf.ToString() + Environment.NewLine + VF_nuf.ToString() + Environment.NewLine + lenght_double.ToString());
-														//													
-														//													if (  (VI_nuf == 0)  &&  !(VF_nuf == Math.Round(lenght_double, 0))  )
-														//													{
-														//														// Transf. BORDE PUERTA a la IZQUIERDA
-														//														//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
-														//														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-														//														lista_walls.Add(wall_recibida);
-														//														
-														//													}
-														//													else if (  (VF_nuf == Math.Round(lenght_double, 0))  &&  !(VI_nuf == 0)  )
-														//													{
-														//														// Transf. BORDE PUERTA a la DERECHA
-														//														//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
-														//														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-														//														lista_walls.Add(wall_recibida);
-														//													}
-														//													else
-														//													{
-														//														
-														//														
-														//													}
-														#endregion
 
 														#endregion
 													}
@@ -3364,10 +3340,10 @@ namespace SplitWalls
 												{
 													#region  Puerta - Puerta
 													Wall aaaaaa = elements_dVIo.First() as Wall;
-													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 													{
 														// Transf. BORDE PUERTA a la IZQUIERDA
 														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(aaaaaa, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
@@ -3394,7 +3370,7 @@ namespace SplitWalls
 														#endregion
 														lista_NO_VIo.Add(wall_recibida.Id);
 													}
-													else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+													else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 													{
 														// Transf. BORDE PUERTA a la DERECHA
 														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(aaaaaa, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
@@ -3458,37 +3434,52 @@ namespace SplitWalls
 													//Puerta - Ventana
 													#region  Puerta - Ventana
 													Wall aaaaaa = elements_dVIo.First() as Wall;
-													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+													double VI_nuf2 = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 1);
+													double VF_nuf2 = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 1);
+
+
+													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 													{
-														// Transf. BORDE PUERTA a la IZQUIERDA
-														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(aaaaaa, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
 
-														#region void
-														using (Transaction trans = new Transaction(doc, "wall"))
+														if (VF_nuf == VI_nuf2)
 														{
-															trans.Start();
 
-															XYZ arriba_dVFo = new XYZ(Puntos_Ventada_dVFo[i + 1].X, Puntos_Ventada_dVFo[i + 1].Y, Puntos_Ventada_dVFo[i + 1].Z + alturaventanas[i + 1]);
-															XYZ abajo_dVIo = new XYZ(Puntos_Ventada_dVIo[i + 1].X, Puntos_Ventada_dVIo[i + 1].Y, Puntos_Ventada_dVIo[i + 1].Z);
+															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_1MURO_Solitario_CasoEspecial_InicialMuro_return(aaaaaa, anchoventanas[i], alturaventanas[i], alturaventanas[i + 1], sillventanas[i], sillventanas[i + 1], Puntos_Ventada_dVIo[i + 1]);
 
-															Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
-															trans.Commit();
-
-
+															lista_NO_VIo.Add(wall_recibida.Id);
 														}
-														#endregion
-														lista_NO_VIo.Add(wall_recibida.Id);
+														else
+														{
+															// Transf. BORDE PUERTA a la IZQUIERDA
+															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(aaaaaa, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
+
+															#region void
+															using (Transaction trans = new Transaction(doc, "wall"))
+															{
+																trans.Start();
+
+																XYZ arriba_dVFo = new XYZ(Puntos_Ventada_dVFo[i + 1].X, Puntos_Ventada_dVFo[i + 1].Y, Puntos_Ventada_dVFo[i + 1].Z + alturaventanas[i + 1]);
+																XYZ abajo_dVIo = new XYZ(Puntos_Ventada_dVIo[i + 1].X, Puntos_Ventada_dVIo[i + 1].Y, Puntos_Ventada_dVIo[i + 1].Z);
+
+																Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
+
+																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
+																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
+
+																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
+																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
+																trans.Commit();
+
+
+															}
+															#endregion
+															lista_NO_VIo.Add(wall_recibida.Id);
+														}
 													}
-													else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+													else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 													{
 														// Transf. BORDE PUERTA a la DERECHA
 														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(aaaaaa, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
@@ -3552,15 +3543,15 @@ namespace SplitWalls
 													//Ventana - Puerta
 													#region  Ventana - Puerta
 													Wall aaaaaa = elements_dVIo.First() as Wall;
-													double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 0);
-													double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 0);
+													double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 1);
+													double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 1);
 
-													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 													{
 														// Transf. BORDE PUERTA a la IZQUIERDA
 
 													}
-													else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+													else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 													{
 														// Transf. BORDE PUERTA a la DERECHA
 														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(aaaaaa, alturaventanas[i + 1], anchoventanas[i + 1], sillventanas[i + 1], Puntos_Ventada_dVIo[i + 1], Puntos_Ventada_dVFo[i + 1], height_double);
@@ -3737,10 +3728,10 @@ namespace SplitWalls
 												{
 													#region Puerta Puerta
 													Wall aaaaaa = elements_dVIo.First() as Wall;
-													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 													{
 														// Transf. BORDE PUERTA a la IZQUIERDA
 														// A
@@ -3749,7 +3740,7 @@ namespace SplitWalls
 																										 Puntos_Ventada_dVIo[i + 1], height_double);
 														lista_NO_VIo.Add(wall_recibida_dVIo.Id);
 													}
-													else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+													else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 													{
 														// Transf. BORDE PUERTA a la DERECHA
 
@@ -3770,10 +3761,10 @@ namespace SplitWalls
 
 													#region Puerta Ventana
 													Wall aaaaaa = elements_dVIo.First() as Wall;
-													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 													{
 														// Transf. BORDE PUERTA a la IZQUIERDA
 														// B	
@@ -3782,15 +3773,15 @@ namespace SplitWalls
 																										 Puntos_Ventada_dVFo[i], height_double);
 														lista_NO_VIo.Add(wall_recibida_dVIo.Id);
 													}
-													else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+													else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 													{
 														// Transf. BORDE PUERTA a la DERECHA
 
 													}
 													else
 													{
-														double VI_nuf_2 = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 0);
-														double VF_nuf_2 = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 0);
+														double VI_nuf_2 = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 1);
+														double VF_nuf_2 = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 1);
 														// if
 														if (VF_nuf == VI_nuf_2)
 														{
@@ -3825,17 +3816,17 @@ namespace SplitWalls
 														{
 															#region puerta
 
-															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																// Transf. BORDE PUERTA a la IZQUIERDA
 																//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
 																Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
 																lista_walls.Add(wall_recibida);
 															}
-															else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+															else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 															{
 																// Transf. BORDE PUERTA a la DERECHA
 																//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
@@ -3853,34 +3844,6 @@ namespace SplitWalls
 																}
 															}
 
-															#region borrador
-
-															//													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i]/2, 0);
-															//													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i]/2, 0);
-															//													
-															//													//TaskDialog.Show("Es puerta", VI_nuf.ToString() + Environment.NewLine + VF_nuf.ToString() + Environment.NewLine + lenght_double.ToString());
-															//													
-															//													if (  (VI_nuf == 0)  &&  !(VF_nuf == Math.Round(lenght_double, 0))  )
-															//													{
-															//														// Transf. BORDE PUERTA a la IZQUIERDA
-															//														//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
-															//														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-															//														lista_walls.Add(wall_recibida);
-															//														
-															//													}
-															//													else if (  (VF_nuf == Math.Round(lenght_double, 0))  &&  !(VI_nuf == 0)  )
-															//													{
-															//														// Transf. BORDE PUERTA a la DERECHA
-															//														//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
-															//														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-															//														lista_walls.Add(wall_recibida);
-															//													}
-															//													else
-															//													{
-															//														
-															//														
-															//													}
-															#endregion
 
 															#endregion
 														}
@@ -3934,17 +3897,17 @@ namespace SplitWalls
 													{
 														#region puerta
 
-														double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-														double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+														double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+														double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-														if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+														if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 														{
 															// Transf. BORDE PUERTA a la IZQUIERDA
 															//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
 															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
 															lista_walls.Add(wall_recibida);
 														}
-														else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+														else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 														{
 															// Transf. BORDE PUERTA a la DERECHA
 															//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
@@ -3962,34 +3925,6 @@ namespace SplitWalls
 															}
 														}
 
-														#region borrador
-
-														//													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i]/2, 0);
-														//													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i]/2, 0);
-														//													
-														//													//TaskDialog.Show("Es puerta", VI_nuf.ToString() + Environment.NewLine + VF_nuf.ToString() + Environment.NewLine + lenght_double.ToString());
-														//													
-														//													if (  (VI_nuf == 0)  &&  !(VF_nuf == Math.Round(lenght_double, 0))  )
-														//													{
-														//														// Transf. BORDE PUERTA a la IZQUIERDA
-														//														//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
-														//														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-														//														lista_walls.Add(wall_recibida);
-														//														
-														//													}
-														//													else if (  (VF_nuf == Math.Round(lenght_double, 0))  &&  !(VI_nuf == 0)  )
-														//													{
-														//														// Transf. BORDE PUERTA a la DERECHA
-														//														//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
-														//														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-														//														lista_walls.Add(wall_recibida);
-														//													}
-														//													else
-														//													{
-														//														
-														//														
-														//													}
-														#endregion
 
 														#endregion
 													}
@@ -4039,24 +3974,28 @@ namespace SplitWalls
 													{
 														#region puerta
 
-														double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-														double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+														double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+														double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-														if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+														if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 														{
 															// Transf. BORDE PUERTA a la IZQUIERDA
 															//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
 															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
 															lista_walls.Add(wall_recibida);
 														}
-														else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+														else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 														{
-															// Transf. BORDE PUERTA a la DERECHA
-															//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
-															//Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(mierda, alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
+															if (mierda.Id == ultimo_ultimo_wall.Id)
+															{
+																// Transf. BORDE PUERTA a la DERECHA
+																//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
+																//Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
+																Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(mierda, alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 
-															lista_walls.Add(wall_recibida);
+																lista_walls.Add(wall_recibida);
+															}
+
 														}
 														else
 														{
@@ -4067,34 +4006,6 @@ namespace SplitWalls
 															}
 														}
 
-														#region borrador
-
-														//													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i]/2, 0);
-														//													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i]/2, 0);
-														//													
-														//													//TaskDialog.Show("Es puerta", VI_nuf.ToString() + Environment.NewLine + VF_nuf.ToString() + Environment.NewLine + lenght_double.ToString());
-														//													
-														//													if (  (VI_nuf == 0)  &&  !(VF_nuf == Math.Round(lenght_double, 0))  )
-														//													{
-														//														// Transf. BORDE PUERTA a la IZQUIERDA
-														//														//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
-														//														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-														//														lista_walls.Add(wall_recibida);
-														//														
-														//													}
-														//													else if (  (VF_nuf == Math.Round(lenght_double, 0))  &&  !(VI_nuf == 0)  )
-														//													{
-														//														// Transf. BORDE PUERTA a la DERECHA
-														//														//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
-														//														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-														//														lista_walls.Add(wall_recibida);
-														//													}
-														//													else
-														//													{
-														//														
-														//														
-														//													}
-														#endregion
 
 														#endregion
 													}
@@ -4148,24 +4059,28 @@ namespace SplitWalls
 												{
 													#region puerta
 
-													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+													if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 													{
 														// Transf. BORDE PUERTA a la IZQUIERDA
 														//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
 														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
 														lista_walls.Add(wall_recibida);
 													}
-													else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+													else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 													{
-														// Transf. BORDE PUERTA a la DERECHA
-														//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
-														//Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(mierda, alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
+														if (mierda.Id == ultimo_ultimo_wall.Id)
+														{
+															// Transf. BORDE PUERTA a la DERECHA
+															//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
+															//Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
+															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(mierda, alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 
-														lista_walls.Add(wall_recibida);
+															lista_walls.Add(wall_recibida);
+														}
+
 													}
 													else
 													{
@@ -4176,34 +4091,6 @@ namespace SplitWalls
 														}
 													}
 
-													#region borrador
-
-													//													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i]/2, 0);
-													//													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i]/2, 0);
-													//													
-													//													//TaskDialog.Show("Es puerta", VI_nuf.ToString() + Environment.NewLine + VF_nuf.ToString() + Environment.NewLine + lenght_double.ToString());
-													//													
-													//													if (  (VI_nuf == 0)  &&  !(VF_nuf == Math.Round(lenght_double, 0))  )
-													//													{
-													//														// Transf. BORDE PUERTA a la IZQUIERDA
-													//														//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
-													//														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-													//														lista_walls.Add(wall_recibida);
-													//														
-													//													}
-													//													else if (  (VF_nuf == Math.Round(lenght_double, 0))  &&  !(VI_nuf == 0)  )
-													//													{
-													//														// Transf. BORDE PUERTA a la DERECHA
-													//														//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
-													//														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-													//														lista_walls.Add(wall_recibida);
-													//													}
-													//													else
-													//													{
-													//														
-													//														
-													//													}
-													#endregion
 
 													#endregion
 												}
@@ -4292,10 +4179,10 @@ namespace SplitWalls
 														else
 														{
 															#region else
-															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																//lista_walls.Add(wall_recibida_dVIo);
@@ -4573,10 +4460,10 @@ namespace SplitWalls
 															else
 															{
 																#region else
-																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 																{
 																	Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																	//lista_walls.Add(wall_recibida_dVIo);
@@ -4667,15 +4554,15 @@ namespace SplitWalls
 														{
 															#region 2 puerta  EN medio y a la izquierda
 															Wall aaaaaa = elements_dVFo.First() as Wall;
-															double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																// Transf. BORDE PUERTA a la IZQUIERDA
 
 															}
-															else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+															else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 															{
 																// Transf. BORDE PUERTA a la DERECHA
 																// A
@@ -4703,18 +4590,18 @@ namespace SplitWalls
 														{
 															#region Puerta en medio Ventana a la Izquierda
 															Wall aaaaaa = elements_dVFo.First() as Wall;
-															double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 0); // Puerta
-															double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 1); // Puerta
+															double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 1);
 
-															double VI_nuf_1 = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);  // Ventana
-															double VF_nuf_1 = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf_1 = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);  // Ventana
+															double VF_nuf_1 = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																// Transf. BORDE PUERTA a la IZQUIERDA
 
 															}
-															else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+															else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 															{
 																// Transf. BORDE PUERTA a la DERECHA
 																// C
@@ -4786,10 +4673,10 @@ namespace SplitWalls
 															else
 															{
 																#region else
-																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 																{
 																	Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																	//lista_walls.Add(wall_recibida_dVIo);
@@ -4881,10 +4768,10 @@ namespace SplitWalls
 															else
 															{
 																#region else
-																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 																{
 																	Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																	//lista_walls.Add(wall_recibida_dVIo);
@@ -4915,10 +4802,10 @@ namespace SplitWalls
 														{
 															Wall aaaaaa = elements_dVFo.First() as Wall;
 
-															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if (VF_nuf == Math.Round(lenght_double, 0))
+															if (VF_nuf == Math.Round(lenght_double, 1))
 															{
 																// Transf. BORDE PUERTA a la DERECHA
 
@@ -5004,10 +4891,10 @@ namespace SplitWalls
 															else
 															{
 																#region else
-																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 																{
 																	Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																	//lista_walls.Add(wall_recibida_dVIo);
@@ -5098,15 +4985,15 @@ namespace SplitWalls
 														{
 															#region 2 puerta  EN medio y a la izquierda
 															Wall aaaaaa = elements_dVFo.First() as Wall;
-															double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																// Transf. BORDE PUERTA a la IZQUIERDA
 
 															}
-															else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+															else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 															{
 																// Transf. BORDE PUERTA a la DERECHA
 																// A
@@ -5134,11 +5021,11 @@ namespace SplitWalls
 														{
 															#region Puerta en medio Ventana a la Izquierda
 															Wall aaaaaa = elements_dVFo.First() as Wall;
-															double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 1);
 
-															double VI_nuf_1 = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf_1 = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf_1 = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf_1 = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
 															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
 															{
@@ -5216,10 +5103,10 @@ namespace SplitWalls
 															else
 															{
 																#region else
-																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 																{
 																	Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																	//lista_walls.Add(wall_recibida_dVIo);
@@ -5311,10 +5198,10 @@ namespace SplitWalls
 															else
 															{
 																#region else
-																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 																{
 																	Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																	//lista_walls.Add(wall_recibida_dVIo);
@@ -5347,10 +5234,10 @@ namespace SplitWalls
 														{
 															Wall aaaaaa = elements_dVFo.First() as Wall;
 
-															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if (VF_nuf == Math.Round(lenght_double, 0))
+															if (VF_nuf == Math.Round(lenght_double, 1))
 															{
 																// Transf. BORDE PUERTA a la DERECHA
 
@@ -5394,10 +5281,10 @@ namespace SplitWalls
 														else
 														{
 															#region else
-															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																//lista_walls.Add(wall_recibida_dVIo);
@@ -5428,10 +5315,10 @@ namespace SplitWalls
 													{
 														Wall aaaaaa = elements_dVFo.First() as Wall;
 
-														double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-														double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+														double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+														double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-														if (VF_nuf == Math.Round(lenght_double, 0))
+														if (VF_nuf == Math.Round(lenght_double, 1))
 														{
 															// Transf. BORDE PUERTA a la DERECHA
 
@@ -5506,10 +5393,10 @@ namespace SplitWalls
 														else
 														{
 															#region else
-															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																//lista_walls.Add(wall_recibida_dVIo);
@@ -5780,10 +5667,10 @@ namespace SplitWalls
 															else
 															{
 																#region else
-																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 																{
 																	Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																	//lista_walls.Add(wall_recibida_dVIo);
@@ -5866,15 +5753,15 @@ namespace SplitWalls
 														{
 															#region 2 puerta  EN medio y a la izquierda
 															Wall aaaaaa = elements_dVFo.First() as Wall;
-															double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																// Transf. BORDE PUERTA a la IZQUIERDA
 
 															}
-															else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+															else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 															{
 																// Transf. BORDE PUERTA a la DERECHA
 																// A
@@ -5902,18 +5789,18 @@ namespace SplitWalls
 														{
 															#region Puerta en medio Ventana a la Izquierda
 															Wall aaaaaa = elements_dVFo.First() as Wall;
-															double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 1);
 
-															double VI_nuf_1 = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf_1 = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf_1 = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf_1 = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																// Transf. BORDE PUERTA a la IZQUIERDA
 
 															}
-															else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+															else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 															{
 																// Transf. BORDE PUERTA a la DERECHA
 																// C
@@ -5984,10 +5871,10 @@ namespace SplitWalls
 															else
 															{
 																#region else
-																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 																{
 																	Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																	//lista_walls.Add(wall_recibida_dVIo);
@@ -6071,10 +5958,10 @@ namespace SplitWalls
 															else
 															{
 																#region else
-																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 																{
 																	Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																	//lista_walls.Add(wall_recibida_dVIo);
@@ -6097,10 +5984,10 @@ namespace SplitWalls
 														{
 															Wall aaaaaa = elements_dVFo.First() as Wall;
 
-															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if (VF_nuf == Math.Round(lenght_double, 0))
+															if (VF_nuf == Math.Round(lenght_double, 1))
 															{
 																// Transf. BORDE PUERTA a la DERECHA
 
@@ -6186,10 +6073,10 @@ namespace SplitWalls
 															else
 															{
 																#region else
-																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 																{
 																	Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																	//lista_walls.Add(wall_recibida_dVIo);
@@ -6272,15 +6159,15 @@ namespace SplitWalls
 														{
 															#region 2 puerta  EN medio y a la izquierda
 															Wall aaaaaa = elements_dVFo.First() as Wall;
-															double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																// Transf. BORDE PUERTA a la IZQUIERDA
 
 															}
-															else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+															else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 															{
 																// Transf. BORDE PUERTA a la DERECHA
 																// A
@@ -6308,18 +6195,18 @@ namespace SplitWalls
 														{
 															#region Puerta en medio Ventana a la Izquierda
 															Wall aaaaaa = elements_dVFo.First() as Wall;
-															double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 1);
 
-															double VI_nuf_1 = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf_1 = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf_1 = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf_1 = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																// Transf. BORDE PUERTA a la IZQUIERDA
 
 															}
-															else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+															else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 															{
 																// Transf. BORDE PUERTA a la DERECHA
 																// C
@@ -6391,10 +6278,10 @@ namespace SplitWalls
 															else
 															{
 																#region else
-																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 																{
 																	Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																	//lista_walls.Add(wall_recibida_dVIo);
@@ -6478,10 +6365,10 @@ namespace SplitWalls
 															else
 															{
 																#region else
-																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+																double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+																double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+																if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 																{
 																	Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																	//lista_walls.Add(wall_recibida_dVIo);
@@ -6504,10 +6391,10 @@ namespace SplitWalls
 														{
 															Wall aaaaaa = elements_dVFo.First() as Wall;
 
-															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if (VF_nuf == Math.Round(lenght_double, 0))
+															if (VF_nuf == Math.Round(lenght_double, 1))
 															{
 																// Transf. BORDE PUERTA a la DERECHA
 
@@ -6552,10 +6439,10 @@ namespace SplitWalls
 														else
 														{
 															#region else
-															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																//lista_walls.Add(wall_recibida_dVIo);
@@ -6578,10 +6465,10 @@ namespace SplitWalls
 													{
 														Wall aaaaaa = elements_dVFo.First() as Wall;
 
-														double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-														double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+														double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+														double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-														if (VF_nuf == Math.Round(lenght_double, 0))
+														if (VF_nuf == Math.Round(lenght_double, 1))
 														{
 															// Transf. BORDE PUERTA a la DERECHA
 
@@ -6657,10 +6544,10 @@ namespace SplitWalls
 													else
 													{
 														#region else
-														double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-														double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+														double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+														double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-														if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+														if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 														{
 															Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 															//lista_walls.Add(wall_recibida_dVIo);
@@ -6931,10 +6818,10 @@ namespace SplitWalls
 														else
 														{
 															#region else
-															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																//lista_walls.Add(wall_recibida_dVIo);
@@ -7017,15 +6904,15 @@ namespace SplitWalls
 													{
 														#region 2 puerta  EN medio y a la izquierda
 														Wall aaaaaa = elements_dVFo.First() as Wall;
-														double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 0);
-														double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 0);
+														double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 1);
+														double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 1);
 
-														if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+														if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 														{
 															// Transf. BORDE PUERTA a la IZQUIERDA
 
 														}
-														else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+														else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 														{
 															// Transf. BORDE PUERTA a la DERECHA
 															// A
@@ -7053,18 +6940,18 @@ namespace SplitWalls
 													{
 														#region Puerta en medio Ventana a la Izquierda
 														Wall aaaaaa = elements_dVFo.First() as Wall;
-														double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 0);
-														double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 0);
+														double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 1);
+														double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 1);
 
-														double VI_nuf_1 = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-														double VF_nuf_1 = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+														double VI_nuf_1 = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+														double VF_nuf_1 = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-														if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+														if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 														{
 															// Transf. BORDE PUERTA a la IZQUIERDA
 
 														}
-														else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+														else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 														{
 															// Transf. BORDE PUERTA a la DERECHA
 															// C
@@ -7135,10 +7022,10 @@ namespace SplitWalls
 														else
 														{
 															#region else
-															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																//lista_walls.Add(wall_recibida_dVIo);
@@ -7222,10 +7109,10 @@ namespace SplitWalls
 														else
 														{
 															#region else
-															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																//lista_walls.Add(wall_recibida_dVIo);
@@ -7248,10 +7135,10 @@ namespace SplitWalls
 													{
 														Wall aaaaaa = elements_dVFo.First() as Wall;
 
-														double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-														double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+														double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+														double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-														if (VF_nuf == Math.Round(lenght_double, 0))
+														if (VF_nuf == Math.Round(lenght_double, 1))
 														{
 															// Transf. BORDE PUERTA a la DERECHA
 
@@ -7337,10 +7224,10 @@ namespace SplitWalls
 														else
 														{
 															#region else
-															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																//lista_walls.Add(wall_recibida_dVIo);
@@ -7423,15 +7310,15 @@ namespace SplitWalls
 													{
 														#region 2 puerta  EN medio y a la izquierda
 														Wall aaaaaa = elements_dVFo.First() as Wall;
-														double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 0);
-														double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 0);
+														double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 1);
+														double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 1);
 
-														if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+														if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 														{
 															// Transf. BORDE PUERTA a la IZQUIERDA
 
 														}
-														else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+														else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 														{
 															// Transf. BORDE PUERTA a la DERECHA
 															// A
@@ -7459,18 +7346,18 @@ namespace SplitWalls
 													{
 														#region Puerta en medio Ventana a la Izquierda
 														Wall aaaaaa = elements_dVFo.First() as Wall;
-														double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 0);
-														double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 0);
+														double VI_nuf = Math.Round(lista_dPH[i + 1] - anchoventanas[i + 1] / 2, 1);
+														double VF_nuf = Math.Round(lista_dPH[i + 1] + anchoventanas[i + 1] / 2, 1);
 
-														double VI_nuf_1 = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-														double VF_nuf_1 = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+														double VI_nuf_1 = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+														double VF_nuf_1 = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-														if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+														if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 														{
 															// Transf. BORDE PUERTA a la IZQUIERDA
 
 														}
-														else if ((VF_nuf == Math.Round(lenght_double, 0)) && !(VI_nuf == 0)) // BORDE Final
+														else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 														{
 															// Transf. BORDE PUERTA a la DERECHA
 															// C
@@ -7542,10 +7429,10 @@ namespace SplitWalls
 														else
 														{
 															#region else
-															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																//lista_walls.Add(wall_recibida_dVIo);
@@ -7629,10 +7516,10 @@ namespace SplitWalls
 														else
 														{
 															#region else
-															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+															double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+															double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+															if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 															{
 																Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 																//lista_walls.Add(wall_recibida_dVIo);
@@ -7655,10 +7542,10 @@ namespace SplitWalls
 													{
 														Wall aaaaaa = elements_dVFo.First() as Wall;
 
-														double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-														double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+														double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+														double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-														if (VF_nuf == Math.Round(lenght_double, 0))
+														if (VF_nuf == Math.Round(lenght_double, 1))
 														{
 															// Transf. BORDE PUERTA a la DERECHA
 
@@ -7703,10 +7590,10 @@ namespace SplitWalls
 													else
 													{
 														#region else
-														double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-														double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+														double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+														double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-														if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 0))) // BORDE Inicio
+														if ((VI_nuf == 0) && !(VF_nuf == Math.Round(lenght_double, 1))) // BORDE Inicio
 														{
 															Wall wall_recibida_dVIo = Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(aaaaaa, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 															//lista_walls.Add(wall_recibida_dVIo);
@@ -7729,10 +7616,10 @@ namespace SplitWalls
 												{
 													Wall aaaaaa = elements_dVFo.First() as Wall;
 
-													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 0);
-													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
+													double VI_nuf = Math.Round(lista_dPH[i] - anchoventanas[i] / 2, 1);
+													double VF_nuf = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 1);
 
-													if (VF_nuf == Math.Round(lenght_double, 0))
+													if (VF_nuf == Math.Round(lenght_double, 1))
 													{
 														// Transf. BORDE PUERTA a la DERECHA
 
@@ -10012,7 +9899,7 @@ namespace SplitWalls
 				double stParam = wallCurve.GetEndParameter(0);
 				double endParam = wallCurve.GetEndParameter(1);
 
-				double endParam_4 = wallCurve.GetEndParameter(1);
+
 
 				Parameter longitud = wall_1.get_Parameter(BuiltInParameter.CURVE_ELEM_LENGTH);
 				double longitud_double = longitud.AsDouble();
@@ -10022,7 +9909,7 @@ namespace SplitWalls
 				XYZ stPoint = wallCurve.Evaluate(stParam, false);
 				XYZ endPoint = wallCurve.Evaluate(endParam, false);
 
-				XYZ endPoint_4 = wallCurve.Evaluate(endParam_4, false);
+
 
 				#endregion
 
@@ -10186,33 +10073,33 @@ namespace SplitWalls
 
 				#region Separar Paneles Antes dVIo lista_d3
 
-				List<double> lista_d_3 = new List<double>(); // lista de paneles menor o igual a dVIo
-
-
-
-				for (int i = 0; i < lista_d.Count(); i++)
-				{
-					//				double dVFo = lista_dPH.First() + (lista_width1.First()/2);
-					//				double dVIo = lista_dPH.First() - (lista_width1.First()/2);
-
-					if (lista_d[i] < dVFo && lista_d[i] < dVIo)
-					{
-						lista_d_3.Add(lista_d[i]); // menor o igual <= 1220
-						lista_d_muro4_3.Add(lista_d_muro4[i]);
-					}
-					else if (lista_d[i] < dVFo && lista_d[i] > dVIo)
-					{
-						lista_d_3.Add(lista_d[i]); // menor o igual <= 1220
-						lista_d_muro4_3.Add(lista_d_muro4[i]);
-					}
-					else if (lista_d[i] > dVFo && lista_d[i] > dVIo)
-					{
-						lista_d_3.Add(lista_d[i]); // menor o igual <= 1220
-						lista_d_muro4_3.Add(lista_d_muro4[i]);
-
-						i = i + lista_d.Count();
-					}
-				}
+				//			List<double> lista_d_3 = new List<double>(); // lista de paneles menor o igual a dVIo
+				//			
+				//			
+				//			
+				//			for (int i = 0; i < lista_d.Count(); i++) 
+				//			{
+				////				double dVFo = lista_dPH.First() + (lista_width1.First()/2);
+				////				double dVIo = lista_dPH.First() - (lista_width1.First()/2);
+				//				
+				//				if (lista_d[i]<dVFo && lista_d[i]<dVIo) 
+				//				{
+				//					lista_d_3.Add(lista_d[i]); // menor o igual <= 1220
+				//					lista_d_muro4_3.Add(lista_d_muro4[i]);
+				//				}
+				//				else if (lista_d[i]<dVFo && lista_d[i]>dVIo)
+				//				{
+				//					lista_d_3.Add(lista_d[i]); // menor o igual <= 1220
+				//					lista_d_muro4_3.Add(lista_d_muro4[i]);
+				//				}
+				//				else if (lista_d[i]>dVFo && lista_d[i]>dVIo)
+				//				{
+				//					lista_d_3.Add(lista_d[i]); // menor o igual <= 1220
+				//					lista_d_muro4_3.Add(lista_d_muro4[i]);
+				//					
+				//					i = i + lista_d.Count();
+				//				}
+				//			}
 
 
 				#endregion
@@ -10277,13 +10164,13 @@ namespace SplitWalls
 						#region Crear Walls siguientes
 
 						// Crear Walls Antes al dVIo
-						for (int i = 0; i < lista_d_3.Count() - 1; i++) // antes dVIo
+						for (int i = 0; i < lista_d.Count() - 1; i++) // antes dVIo
 						{
-							double di = lista_d_muro4_3[i] + (anchopanel / 304.8); // d2
+							double di = lista_d_muro4[i] + (anchopanel / 304.8); // d2
 							double di_4 = di + 4 / 304.8; // d2_4
 
 							//TaskDialog.Show("dynoscript", lista_d_3.Count().ToString());
-							XYZ PointA = wallCurve.Evaluate(lista_d_muro4_3[i], false);
+							XYZ PointA = wallCurve.Evaluate(lista_d_muro4[i], false);
 							XYZ PointB = wallCurve.Evaluate(di, false);
 
 							Line newLineN = Line.CreateBound(PointA, PointB);
@@ -10334,13 +10221,13 @@ namespace SplitWalls
 						#region Crear Walls siguientes
 
 						// Crear Walls Antes al dVIo
-						for (int i = 0; i < lista_d_3.Count() - 1; i++) // antes dVIo
+						for (int i = 0; i < lista_d.Count() - 1; i++) // antes dVIo
 						{
-							double di = lista_d_muro4_3[i] + (anchopanel / 304.8); // d2
+							double di = lista_d_muro4[i] + (anchopanel / 304.8); // d2
 							double di_4 = di + 4 / 304.8; // d2_4
 
 							//TaskDialog.Show("dynoscript", lista_d_3.Count().ToString());
-							XYZ PointA = wallCurve.Evaluate(lista_d_muro4_3[i], false);
+							XYZ PointA = wallCurve.Evaluate(lista_d_muro4[i], false);
 							XYZ PointB = wallCurve.Evaluate(di, false);
 
 							Line newLineN = Line.CreateBound(PointA, PointB);
@@ -10389,13 +10276,13 @@ namespace SplitWalls
 						#region Crear Walls siguientes
 
 						// Crear Walls Antes al dVIo
-						for (int i = 0; i < lista_d_3.Count() - 1; i++) // antes dVIo
+						for (int i = 0; i < lista_d.Count() - 1; i++) // antes dVIo
 						{
-							double di = lista_d_muro4_3[i] + (anchopanel / 304.8); // d2
+							double di = lista_d_muro4[i] + (anchopanel / 304.8); // d2
 							double di_4 = di + 4 / 304.8; // d2_4
 
 							//TaskDialog.Show("dynoscript", lista_d_3.Count().ToString());
-							XYZ PointA = wallCurve.Evaluate(lista_d_muro4_3[i], false);
+							XYZ PointA = wallCurve.Evaluate(lista_d_muro4[i], false);
 							XYZ PointB = wallCurve.Evaluate(di, false);
 
 							Line newLineN = Line.CreateBound(PointA, PointB);
@@ -10424,10 +10311,10 @@ namespace SplitWalls
 
 					#region wall final final agregarle las ventanas que falta en el ubicación dPH respectiva.
 
-					double ultimo_d_4 = lista_d_muro4_3.Last();
+					double ultimo_d_4 = lista_d_muro4.Last();
 					XYZ Point_ultimo_d_4 = wallCurve.Evaluate(ultimo_d_4, false);
 
-					Line newLineF3_ultimo = Line.CreateBound(Point_ultimo_d_4, endPoint_4);
+					Line newLineF3_ultimo = Line.CreateBound(Point_ultimo_d_4, endPoint);
 
 					Wall wall_F3_ultimo = Wall.Create(doc, newLineF3_ultimo, wall_1.LevelId, false);
 
@@ -16708,6 +16595,116 @@ namespace SplitWalls
 					if (!WALL_USER_HEIGHT_PARAMF1_abajo.IsReadOnly)
 					{
 						WALL_USER_HEIGHT_PARAMF1_abajo.Set(stPoint.Z + sill_v);
+					}
+
+
+					//	            doc.Delete(wall_I.Id);
+
+					trans.Commit();
+
+				}
+
+				return lista_wall_return.First();
+
+			}
+			// ESTE FUNCIONA ACTUALMENTE
+			// ESTE FUNCIONA ACTUALMENTE
+			Wall Revision6_DYNO_Create_New_Wall_1MURO_Solitario_CasoEspecial_InicialMuro_return(Wall _wall_, double _anchoventana_, double _alturaventana_, double alturaventana_2,
+																															 double _sillventanda_, double sillventanda_2, XYZ _Point_dVI1_)
+			{
+				//UIDocument uidoc = this.ActiveUIDocument;
+				//Document doc = uidoc.Document;
+
+				//Application app = this.Application;
+				List<Wall> lista_wall_return = new List<Wall>();
+
+				// INPUTS
+				Wall wall_I = _wall_;
+
+				XYZ Point_dVI1 = _Point_dVI1_;
+				double alturaventana = _alturaventana_;
+				double sillventanda = _sillventanda_;
+				double anchoventana = _anchoventana_;
+				// INPUTS
+
+				Curve wallCurve = ((LocationCurve)wall_I.Location).Curve;
+
+				WallType wallType = wall_I.WallType as WallType;
+
+				Parameter height = wall_I.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM); // altura primer Wall o  Wall_I
+				double height_double = height.AsDouble(); // altura primer Wall o  Wall_I = 2440
+
+				double stParam = wallCurve.GetEndParameter(0);
+				double endParam = wallCurve.GetEndParameter(1);
+
+				double distanta_total_wall = endParam - stParam; // deberia ser 1220 == anchopanel
+
+
+
+				// Crear linea y corregir primero Wall no crear nada.
+				XYZ stPoint = wallCurve.Evaluate(stParam, false); // Point 1
+				XYZ endPoint = wallCurve.Evaluate(endParam, false); // Point 2
+
+				XYZ Nuevo_Point_dVI1 = new XYZ(Point_dVI1.X, Point_dVI1.Y, endPoint.Z);
+
+				double dis = Nuevo_Point_dVI1.DistanceTo(endPoint);
+
+				double dm = endParam - dis; // 3800 - 610 = 3190
+
+				double hv = alturaventana;
+
+				double hv_2 = alturaventana_2;
+
+				double sill_v = sillventanda;
+
+				double sill_v_2 = sillventanda_2;
+
+
+				using (Transaction trans = new Transaction(doc, "wall"))
+
+				{
+
+					trans.Start();
+
+					//		        IList<Curve> profile = new List<Curve>();
+
+					Line linea1 = Line.CreateBound(stPoint, endPoint);
+
+					Line linea1_casoEspecial = Line.CreateBound(Nuevo_Point_dVI1, endPoint);
+
+					if (WallUtils.IsWallJoinAllowedAtEnd(wall_I, 1))
+						WallUtils.DisallowWallJoinAtEnd(wall_I, 1);
+
+					if (WallUtils.IsWallJoinAllowedAtEnd(wall_I, 0))
+						WallUtils.DisallowWallJoinAtEnd(wall_I, 0);
+
+					((LocationCurve)wall_I.Location).Curve = linea1;
+
+
+
+					Parameter WALL_USER_HEIGHT_PARAMF1_arriba = wall_I.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
+					if (!WALL_USER_HEIGHT_PARAMF1_arriba.IsReadOnly)
+					{
+						WALL_USER_HEIGHT_PARAMF1_arriba.Set(stPoint.Z + height_double - (sill_v_2 + hv_2));
+					}
+
+					Parameter WALL_USER_BASEOFFSET_PARAM_2 = wall_I.get_Parameter(BuiltInParameter.WALL_BASE_OFFSET);
+					if (!WALL_USER_BASEOFFSET_PARAM_2.IsReadOnly)
+					{
+						WALL_USER_BASEOFFSET_PARAM_2.Set(stPoint.Z + sill_v_2 + hv_2);
+					}
+
+
+
+
+					Wall wall_casoEspecial = Wall.Create(doc, linea1_casoEspecial, wall_I.LevelId, false);
+
+					lista_wall_return.Add(wall_casoEspecial);
+
+					Parameter WALL_USER_HEIGHT_PARAMF1_abajo = wall_casoEspecial.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
+					if (!WALL_USER_HEIGHT_PARAMF1_abajo.IsReadOnly)
+					{
+						WALL_USER_HEIGHT_PARAMF1_abajo.Set(stPoint.Z + sill_v_2);
 					}
 
 
