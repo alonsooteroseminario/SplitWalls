@@ -1,0 +1,29 @@
+# Build output
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userprefs
+*.userosscache
+*.sln.docstates
+
+# NuGet
+packages/
+*.nupkg
+project.lock.json
+project.assets.json
+
+# Rider
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# IDE agents / AI tools
+.agents/
+.cursor/
+.opencode/
