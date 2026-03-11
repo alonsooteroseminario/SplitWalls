@@ -12,21 +12,16 @@ namespace SplitWalls
 {
     public partial class Form1 : Form
     {
-        public string textString { set; get; }
+        public PanelOptions Options { get; private set; }
 
-        public bool checkBox_1 { get; set; }
-
-        public bool checkBox_2 { get; set; }
-
-        public bool checkBox_3 { get; set; }
-
-        public bool checkBox_4 { get; set; }
-
-        public bool checkBox_5 { get; set; }
-
-        public bool checkBox_6 { get; set; }
-
-        public bool checkBox_7 { get; set; }
+        private string textString;
+        private bool checkBox_1;
+        private bool checkBox_2;
+        private bool checkBox_3;
+        private bool checkBox_4;
+        private bool checkBox_5;
+        private bool checkBox_6;
+        private bool checkBox_7;
 
 
         public Form1()
@@ -142,10 +137,21 @@ namespace SplitWalls
             {
                 MessageBox.Show("Por Favor elige las opciones correctas", "No has ingresado los Valores correctos!");
             }
-            else if (textString =="" && !checkBox_1)
+            else if (textString == "" && !checkBox_1)
             {
                 MessageBox.Show("Por Favor elige las opciones correctas", "No has ingresado los Valores correctos!");
             }
+
+            Options = new PanelOptions
+            {
+                AnchoPanel                = textString,
+                MuroSinVentanas           = checkBox_2,
+                MuroOsbConVentanas        = checkBox_3,
+                MuroSmartPanelConVentanas = checkBox_6,
+                TodoMuro                  = checkBox_7,
+                Esquina1                  = checkBox_4,
+                Esquina2OtroLado          = checkBox_5,
+            };
         }
 
         private void checkBox6_CheckedChanged(object sender, EventArgs e)

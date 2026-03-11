@@ -82,7 +82,7 @@ namespace SplitWalls
 						if (form.DialogResult == forms.DialogResult.OK)
 						{
 							
-							string numero = form.textString.ToString();
+							string numero = form.Options.AnchoPanel;
 
 							if (numero =="")
 							{
@@ -90,20 +90,20 @@ namespace SplitWalls
 								return;
 							}
 							//NumberFormatInfo provider = new NumberFormatInfo();
-							//double val = Convert.ToDouble(numero, provider); 
+							//double val = Convert.ToDouble(numero, provider);
 							double val = Convert.ToDouble(numero);
 							numero_final = val; // double
 
-							Muro_sin_Ventanas = form.checkBox_2;
-							Muro_OSB_con_Ventanas = form.checkBox_3;
-							Muro_SMART_PANEL_con_Ventanas = form.checkBox_6;
+							Muro_sin_Ventanas             = form.Options.MuroSinVentanas;
+							Muro_OSB_con_Ventanas         = form.Options.MuroOsbConVentanas;
+							Muro_SMART_PANEL_con_Ventanas = form.Options.MuroSmartPanelConVentanas;
 
-							_todoMuro = form.checkBox_7;
+							_todoMuro = form.Options.TodoMuro;
 							//primera_ERA_VENT = form.checkBox_8;
 
 
-							esquina_1 = form.checkBox_4;
-							esquina_2_otro_lado = form.checkBox_5;
+							esquina_1           = form.Options.Esquina1;
+							esquina_2_otro_lado = form.Options.Esquina2OtroLado;
 
 							
 
