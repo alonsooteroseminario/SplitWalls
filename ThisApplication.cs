@@ -1100,7 +1100,7 @@ namespace SplitWalls
 										{
 											if (sillventanas.First() == 0)
 											{
-												Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA(wall_i, alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First());
+												Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(wall_i, alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First());
 											}
 											else
 											{
@@ -1156,7 +1156,7 @@ namespace SplitWalls
 												else
 												{
 
-													Revision6_DYNO_Create_New_Wall_EditProfile_dVFo_PUERTA(wall_ii, alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVFo.First());
+													Revision6_DYNO_Create_New_Wall_EditProfile_dVFo_PUERTA_return(wall_ii, alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVFo.First());
 
 												}
 
@@ -1219,7 +1219,7 @@ namespace SplitWalls
 										{
 											if (sillventanas.First() == 0)
 											{
-												Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA(wall_i, alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First());
+												Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(wall_i, alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First());
 											}
 											else
 											{
@@ -1273,7 +1273,7 @@ namespace SplitWalls
 												}
 												else
 												{
-													Revision6_DYNO_Create_New_Wall_EditProfile_dVFo_PUERTA(wall_ii, alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVFo.First());
+													Revision6_DYNO_Create_New_Wall_EditProfile_dVFo_PUERTA_return(wall_ii, alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVFo.First());
 
 												}
 
@@ -1317,7 +1317,7 @@ namespace SplitWalls
 									{
 										if (sillventanas.First() == 0)
 										{
-											Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA(wall_i, alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First());
+											Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(wall_i, alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First());
 										}
 										else
 										{
@@ -1371,7 +1371,7 @@ namespace SplitWalls
 											}
 											else
 											{
-												Revision6_DYNO_Create_New_Wall_EditProfile_dVFo_PUERTA(wall_ii, alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVFo.First());
+												Revision6_DYNO_Create_New_Wall_EditProfile_dVFo_PUERTA_return(wall_ii, alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVFo.First());
 
 											}
 
@@ -11305,105 +11305,6 @@ Wall Revision6_DYNO_Wall_EditProfile_U_PUERTA_VENTANA_derecha_return(Wall _wall_
 				return ReplaceWallWithProfile(wall_I, profile);
 			}
 
-			void Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA(Wall _wall_, double _alturaventana_, double _sillventanda_, XYZ _Point_dVIo_)
-			{
-				#region inicio
-
-
-				#endregion
-
-
-				#region INPUTS
-
-				Wall wall_I = _wall_;
-
-				XYZ Point_dVIo = _Point_dVIo_;
-
-				double alturaventana = _alturaventana_;
-				double sillventanda = _sillventanda_;
-				#endregion
-
-
-				#region infoWAll
-
-				Curve wallCurve = ((LocationCurve)wall_I.Location).Curve;
-
-				WallType wallType = wall_I.WallType as WallType;
-
-				Parameter height = wall_I.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM); // altura primer Wall o  Wall_I
-				double height_double = height.AsDouble(); // altura primer Wall o  Wall_I = 2440
-
-				double stParam = wallCurve.GetEndParameter(0);
-				double endParam = wallCurve.GetEndParameter(1);
-
-				double distanta_total_wall = endParam - stParam; // deberia ser 1220 == anchopanel
-				#endregion
-
-
-
-
-
-				// Crear linea y corregir primero Wall no crear nada.
-				XYZ stPoint = wallCurve.Evaluate(stParam, false); // Point 1
-				XYZ endPoint = wallCurve.Evaluate(endParam, false); // Point 2
-
-				XYZ Nuevo_Point_dVIo = new XYZ(Point_dVIo.X, Point_dVIo.Y, stPoint.Z);
-
-				double dis = Nuevo_Point_dVIo.DistanceTo(endPoint);
-
-				double dm = endParam - dis; // 3800 - 610 = 3190
-
-				double hv = alturaventana;
-				double sill_v = sillventanda;
-
-				XYZ Nuevo_Point_dVIo_actual = wallCurve.Evaluate(dm, false); // Point 2
-
-
-				XYZ Nuevo_Point_dVIo_arriba = new XYZ(Nuevo_Point_dVIo_actual.X, Nuevo_Point_dVIo_actual.Y, stPoint.Z + hv);
-				XYZ Point_arriba_Esquina1 = new XYZ(endPoint.X, endPoint.Y, stPoint.Z + hv);
-				XYZ endPoint_arriba = new XYZ(endPoint.X, endPoint.Y, stPoint.Z + height_double); // Point 2 arriba
-				XYZ stPoint_arriba = new XYZ(stPoint.X, stPoint.Y, stPoint.Z + height_double);// Point 1 arriba
-
-				using (Transaction trans = new Transaction(doc, "wall"))
-
-				{
-
-					trans.Start();
-
-					//Revision5_InsertOpening_void(wall_I, alturaventana, dis, (dm + dis/2), alturaventana/2);
-
-
-					IList<Curve> profile = new List<Curve>();
-
-
-
-					Line linea1 = Line.CreateBound(stPoint, Nuevo_Point_dVIo_actual); // 1 Linea
-					Line linea2 = Line.CreateBound(Nuevo_Point_dVIo_actual, Nuevo_Point_dVIo_arriba); // 2 Linea
-					Line linea3 = Line.CreateBound(Nuevo_Point_dVIo_arriba, Point_arriba_Esquina1); // 3 Linea
-					Line linea4 = Line.CreateBound(Point_arriba_Esquina1, endPoint_arriba); // 4 Linea
-					Line linea5 = Line.CreateBound(endPoint_arriba, stPoint_arriba); // 5 Linea
-					Line linea6 = Line.CreateBound(stPoint_arriba, stPoint); // 6 Linea
-
-
-					profile.Add(linea1);
-					profile.Add(linea2);
-					profile.Add(linea3);
-					profile.Add(linea4);
-					profile.Add(linea5);
-					profile.Add(linea6);
-
-
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-
-					WallJoinHelper.DisableJoins(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-
-			}
 			Wall Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(Wall _wall_, double _alturaventana_, double _sillventanda_, XYZ _Point_dVIo_)
 			{
 				#region inicio
@@ -11483,93 +11384,6 @@ Wall Revision6_DYNO_Wall_EditProfile_U_PUERTA_VENTANA_derecha_return(Wall _wall_
 
 
 				return ReplaceWallWithProfile(wall_I, profile);
-			}
-			void Revision6_DYNO_Create_New_Wall_EditProfile_dVFo_PUERTA(Wall _wall_, double _alturaventana_, double _sillventanda_, XYZ _Point_dVFo_)
-			{
-
-
-				// INPUTS
-				Wall wall_I = _wall_;
-
-				XYZ Point_dVFo = _Point_dVFo_;
-
-				double alturaventana = _alturaventana_;
-				double sillventanda = _sillventanda_;
-				// INPUTS
-
-				Curve wallCurve = ((LocationCurve)wall_I.Location).Curve;
-
-				WallType wallType = wall_I.WallType as WallType;
-
-				Parameter height = wall_I.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM); // altura primer Wall o  Wall_I
-				double height_double = height.AsDouble(); // altura primer Wall o  Wall_I = 2440
-
-				double stParam = wallCurve.GetEndParameter(0);
-				double endParam = wallCurve.GetEndParameter(1);
-
-				double distanta_total_wall = endParam - stParam; // deberia ser 1220 == anchopanel
-
-
-
-				// Crear linea y corregir primero Wall no crear nada.
-				XYZ stPoint = wallCurve.Evaluate(stParam, false); // Point 1
-				XYZ endPoint = wallCurve.Evaluate(endParam, false); // Point 2
-
-				XYZ Nuevo_Point_dVFo = new XYZ(Point_dVFo.X, Point_dVFo.Y, endPoint.Z);
-
-				double dis = Nuevo_Point_dVFo.DistanceTo(endPoint);
-
-				double dm = endParam - dis; // 3800 - 610 = 3190
-
-				double hv = alturaventana;
-				double sill_v = sillventanda;
-
-				XYZ Nuevo_Point_dVFo_actual = wallCurve.Evaluate(dm, false);
-
-				XYZ stPoint_arriba = new XYZ(stPoint.X, stPoint.Y, endPoint.Z + height_double);// Point 1 arriba 
-				XYZ endPoint_arriba = new XYZ(endPoint.X, endPoint.Y, endPoint.Z + height_double); // Point 2 arriba
-
-				XYZ Point_arriba_Esquina2 = new XYZ(stPoint.X, stPoint.Y, endPoint.Z + hv);
-
-				XYZ Nuevo_Point_dVFo_arriba = new XYZ(Nuevo_Point_dVFo_actual.X, Nuevo_Point_dVFo_actual.Y, endPoint.Z + hv);
-
-				using (Transaction trans = new Transaction(doc, "wall"))
-
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
-
-					//		        Revision5_InsertOpening_void(wall_I, alturaventana, dm, dm/2, alturaventana/2);
-
-
-					Line linea1 = Line.CreateBound(Nuevo_Point_dVFo_actual, endPoint); // 1 Linea
-					Line linea2 = Line.CreateBound(endPoint, endPoint_arriba); // 2 Linea 
-					Line linea3 = Line.CreateBound(endPoint_arriba, stPoint_arriba); // 3 Linea
-					Line linea4 = Line.CreateBound(stPoint_arriba, Point_arriba_Esquina2); // 4 Linea
-					Line linea5 = Line.CreateBound(Point_arriba_Esquina2, Nuevo_Point_dVFo_arriba); // 5 Linea
-					Line linea6 = Line.CreateBound(Nuevo_Point_dVFo_arriba, Nuevo_Point_dVFo_actual); // 6 Linea
-
-
-					profile.Add(linea1);
-					profile.Add(linea2);
-					profile.Add(linea3);
-					profile.Add(linea4);
-					profile.Add(linea5);
-					profile.Add(linea6);
-
-
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-
-					WallJoinHelper.DisableJoins(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-
 			}
 			Wall Revision6_DYNO_Create_New_Wall_EditProfile_dVFo_PUERTA_return(Wall _wall_, double _alturaventana_, double _sillventanda_, XYZ _Point_dVFo_)
 			{
