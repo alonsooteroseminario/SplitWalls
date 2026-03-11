@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -591,36 +591,7 @@ namespace SplitWalls
 				#region VENTANAS Y PUERTAS
 
 
-				BuiltInCategory[] bics_familyIns = new BuiltInCategory[]
-					{
-
-					BuiltInCategory.OST_Doors,
-					BuiltInCategory.OST_Windows,
-
-					};
-
-				List<Element> windows_hosted = new List<Element>();
-
-				foreach (BuiltInCategory bic in bics_familyIns)
-				{
-					ElementClassFilter familyFilter = new ElementClassFilter(typeof(FamilyInstance));
-					// Create a category filter for MechanicalEquipment
-					ElementCategoryFilter MECategoryfilter = new ElementCategoryFilter(bic);
-					// Create a logic And filter for all MechanicalEquipment Family
-					LogicalAndFilter MEInstancesFilter = new LogicalAndFilter(familyFilter, MECategoryfilter);
-					// Apply the filter to the elements in the active document
-					FilteredElementCollector MEcoll = new FilteredElementCollector(doc);
-					IList<Element> familyinstance = MEcoll.WherePasses(MEInstancesFilter).ToElements();
-
-					foreach (Element elem in familyinstance)
-					{
-						FamilyInstance fintance = elem as FamilyInstance;
-						if (fintance.Host.Id == lista_de_listas_walls.Last().Id)
-						{
-							windows_hosted.Add(elem);
-						}
-					}
-				}
+				List<Element> windows_hosted = WindowDetectionService.GetHostedOpenings(doc, lista_de_listas_walls.Last());
 
 				#endregion
 
@@ -662,36 +633,7 @@ namespace SplitWalls
 						#region VENTANAS Y PUERTAS
 
 
-						BuiltInCategory[] bics_familyIns_2 = new BuiltInCategory[]
-							{
-
-						BuiltInCategory.OST_Doors,
-						BuiltInCategory.OST_Windows,
-
-							};
-
-						List<Element> windows_hosted_2 = new List<Element>();
-
-						foreach (BuiltInCategory bic in bics_familyIns_2)
-						{
-							ElementClassFilter familyFilter_2 = new ElementClassFilter(typeof(FamilyInstance));
-							// Create a category filter for MechanicalEquipment
-							ElementCategoryFilter MECategoryfilter_2 = new ElementCategoryFilter(bic);
-							// Create a logic And filter for all MechanicalEquipment Family
-							LogicalAndFilter MEInstancesFilter_2 = new LogicalAndFilter(familyFilter_2, MECategoryfilter_2);
-							// Apply the filter to the elements in the active document
-							FilteredElementCollector MEcoll_2 = new FilteredElementCollector(doc);
-							IList<Element> familyinstance_2 = MEcoll_2.WherePasses(MEInstancesFilter_2).ToElements();
-
-							foreach (Element elem in familyinstance_2)
-							{
-								FamilyInstance fintance = elem as FamilyInstance;
-								if (fintance.Host.Id == lista_de_listas_walls.Last().Id)
-								{
-									windows_hosted_2.Add(elem);
-								}
-							}
-						}
+						List<Element> windows_hosted_2 = WindowDetectionService.GetHostedOpenings(doc, lista_de_listas_walls.Last());
 
 						#endregion
 
@@ -766,36 +708,7 @@ namespace SplitWalls
 					#region VENTANAS Y PUERTAS
 
 
-					BuiltInCategory[] bics_familyIns = new BuiltInCategory[]
-						{
-
-					BuiltInCategory.OST_Doors,
-					BuiltInCategory.OST_Windows,
-
-						};
-
-					List<Element> windows_hosted = new List<Element>();
-
-					foreach (BuiltInCategory bic in bics_familyIns)
-					{
-						ElementClassFilter familyFilter = new ElementClassFilter(typeof(FamilyInstance));
-						// Create a category filter for MechanicalEquipment
-						ElementCategoryFilter MECategoryfilter = new ElementCategoryFilter(bic);
-						// Create a logic And filter for all MechanicalEquipment Family
-						LogicalAndFilter MEInstancesFilter = new LogicalAndFilter(familyFilter, MECategoryfilter);
-						// Apply the filter to the elements in the active document
-						FilteredElementCollector MEcoll = new FilteredElementCollector(doc);
-						IList<Element> familyinstance = MEcoll.WherePasses(MEInstancesFilter).ToElements();
-
-						foreach (Element elem in familyinstance)
-						{
-							FamilyInstance fintance = elem as FamilyInstance;
-							if (fintance.Host.Id == e.Id)
-							{
-								windows_hosted.Add(elem);
-							}
-						}
-					}
+					List<Element> windows_hosted = WindowDetectionService.GetHostedOpenings(doc, e);
 
 					#endregion
 
@@ -1169,36 +1082,7 @@ namespace SplitWalls
 					#region VENTANAS Y PUERTAS
 
 
-					BuiltInCategory[] bics_familyIns = new BuiltInCategory[]
-						{
-
-					BuiltInCategory.OST_Doors,
-					BuiltInCategory.OST_Windows,
-
-						};
-
-					List<Element> windows_hosted = new List<Element>();
-
-					foreach (BuiltInCategory bic in bics_familyIns)
-					{
-						ElementClassFilter familyFilter = new ElementClassFilter(typeof(FamilyInstance));
-						// Create a category filter for MechanicalEquipment
-						ElementCategoryFilter MECategoryfilter = new ElementCategoryFilter(bic);
-						// Create a logic And filter for all MechanicalEquipment Family
-						LogicalAndFilter MEInstancesFilter = new LogicalAndFilter(familyFilter, MECategoryfilter);
-						// Apply the filter to the elements in the active document
-						FilteredElementCollector MEcoll = new FilteredElementCollector(doc, activeView.Id);
-						IList<Element> familyinstance = MEcoll.WherePasses(MEInstancesFilter).ToElements();
-
-						foreach (Element elem in familyinstance)
-						{
-							FamilyInstance fintance = elem as FamilyInstance;
-							if (fintance.Host.Id == e.Id)
-							{
-								windows_hosted.Add(elem);
-							}
-						}
-					}
+					List<Element> windows_hosted = WindowDetectionService.GetHostedOpenings(doc, activeView, e);
 
 
 					//				ElementClassFilter familyFilter = new ElementClassFilter(typeof(FamilyInstance));
@@ -7101,36 +6985,7 @@ namespace SplitWalls
 				#region VENTANAS Y PUERTAS
 
 
-				BuiltInCategory[] bics_familyIns = new BuiltInCategory[]
-					{
-
-					BuiltInCategory.OST_Doors,
-					BuiltInCategory.OST_Windows,
-
-					};
-
-				List<Element> windows_hosted = new List<Element>();
-
-				foreach (BuiltInCategory bic in bics_familyIns)
-				{
-					ElementClassFilter familyFilter = new ElementClassFilter(typeof(FamilyInstance));
-					// Create a category filter for MechanicalEquipment
-					ElementCategoryFilter MECategoryfilter = new ElementCategoryFilter(bic);
-					// Create a logic And filter for all MechanicalEquipment Family
-					LogicalAndFilter MEInstancesFilter = new LogicalAndFilter(familyFilter, MECategoryfilter);
-					// Apply the filter to the elements in the active document
-					FilteredElementCollector MEcoll = new FilteredElementCollector(doc);
-					IList<Element> familyinstance = MEcoll.WherePasses(MEInstancesFilter).ToElements();
-
-					foreach (Element elem in familyinstance)
-					{
-						FamilyInstance fintance = elem as FamilyInstance;
-						if (fintance.Host.Id == e.Id)
-						{
-							windows_hosted.Add(elem);
-						}
-					}
-				}
+				List<Element> windows_hosted = WindowDetectionService.GetHostedOpenings(doc, e);
 
 				#endregion
 
@@ -7895,36 +7750,7 @@ namespace SplitWalls
 				#region VENTANAS Y PUERTAS
 
 
-				BuiltInCategory[] bics_familyIns = new BuiltInCategory[]
-					{
-
-					BuiltInCategory.OST_Doors,
-					BuiltInCategory.OST_Windows,
-
-					};
-
-				List<Element> windows_hosted = new List<Element>();
-
-				foreach (BuiltInCategory bic in bics_familyIns)
-				{
-					ElementClassFilter familyFilter = new ElementClassFilter(typeof(FamilyInstance));
-					// Create a category filter for MechanicalEquipment
-					ElementCategoryFilter MECategoryfilter = new ElementCategoryFilter(bic);
-					// Create a logic And filter for all MechanicalEquipment Family
-					LogicalAndFilter MEInstancesFilter = new LogicalAndFilter(familyFilter, MECategoryfilter);
-					// Apply the filter to the elements in the active document
-					FilteredElementCollector MEcoll = new FilteredElementCollector(doc);
-					IList<Element> familyinstance = MEcoll.WherePasses(MEInstancesFilter).ToElements();
-
-					foreach (Element elem in familyinstance)
-					{
-						FamilyInstance fintance = elem as FamilyInstance;
-						if (fintance.Host.Id == e.Id)
-						{
-							windows_hosted.Add(elem);
-						}
-					}
-				}
+				List<Element> windows_hosted = WindowDetectionService.GetHostedOpenings(doc, e);
 
 				#endregion
 
@@ -8596,36 +8422,7 @@ namespace SplitWalls
 				#region VENTANAS Y PUERTAS
 
 
-				BuiltInCategory[] bics_familyIns = new BuiltInCategory[]
-					{
-
-					BuiltInCategory.OST_Doors,
-					BuiltInCategory.OST_Windows,
-
-					};
-
-				List<Element> windows_hosted = new List<Element>();
-
-				foreach (BuiltInCategory bic in bics_familyIns)
-				{
-					ElementClassFilter familyFilter = new ElementClassFilter(typeof(FamilyInstance));
-					// Create a category filter for MechanicalEquipment
-					ElementCategoryFilter MECategoryfilter = new ElementCategoryFilter(bic);
-					// Create a logic And filter for all MechanicalEquipment Family
-					LogicalAndFilter MEInstancesFilter = new LogicalAndFilter(familyFilter, MECategoryfilter);
-					// Apply the filter to the elements in the active document
-					FilteredElementCollector MEcoll = new FilteredElementCollector(doc);
-					IList<Element> familyinstance = MEcoll.WherePasses(MEInstancesFilter).ToElements();
-
-					foreach (Element elem in familyinstance)
-					{
-						FamilyInstance fintance = elem as FamilyInstance;
-						if (fintance.Host.Id == e.Id)
-						{
-							windows_hosted.Add(elem);
-						}
-					}
-				}
+				List<Element> windows_hosted = WindowDetectionService.GetHostedOpenings(doc, e);
 
 
 				//				ElementClassFilter familyFilter = new ElementClassFilter(typeof(FamilyInstance));
@@ -9100,36 +8897,7 @@ namespace SplitWalls
 				#region VENTANAS Y PUERTAS
 
 
-				BuiltInCategory[] bics_familyIns = new BuiltInCategory[]
-					{
-
-					BuiltInCategory.OST_Doors,
-					BuiltInCategory.OST_Windows,
-
-					};
-
-				List<Element> windows_hosted = new List<Element>();
-
-				foreach (BuiltInCategory bic in bics_familyIns)
-				{
-					ElementClassFilter familyFilter = new ElementClassFilter(typeof(FamilyInstance));
-					// Create a category filter for MechanicalEquipment
-					ElementCategoryFilter MECategoryfilter = new ElementCategoryFilter(bic);
-					// Create a logic And filter for all MechanicalEquipment Family
-					LogicalAndFilter MEInstancesFilter = new LogicalAndFilter(familyFilter, MECategoryfilter);
-					// Apply the filter to the elements in the active document
-					FilteredElementCollector MEcoll = new FilteredElementCollector(doc);
-					IList<Element> familyinstance = MEcoll.WherePasses(MEInstancesFilter).ToElements();
-
-					foreach (Element elem in familyinstance)
-					{
-						FamilyInstance fintance = elem as FamilyInstance;
-						if (fintance.Host.Id == e.Id)
-						{
-							windows_hosted.Add(elem);
-						}
-					}
-				}
+				List<Element> windows_hosted = WindowDetectionService.GetHostedOpenings(doc, e);
 
 
 				//				ElementClassFilter familyFilter = new ElementClassFilter(typeof(FamilyInstance));
@@ -15982,36 +15750,7 @@ namespace SplitWalls
 				#region VENTANAS Y PUERTAS
 
 
-				BuiltInCategory[] bics_familyIns = new BuiltInCategory[]
-					{
-
-				   BuiltInCategory.OST_Doors,
-				   BuiltInCategory.OST_Windows,
-
-					};
-
-				List<Element> windows_hosted = new List<Element>();
-
-				foreach (BuiltInCategory bic in bics_familyIns)
-				{
-					ElementClassFilter familyFilter = new ElementClassFilter(typeof(FamilyInstance));
-					// Create a category filter for MechanicalEquipment
-					ElementCategoryFilter MECategoryfilter = new ElementCategoryFilter(bic);
-					// Create a logic And filter for all MechanicalEquipment Family
-					LogicalAndFilter MEInstancesFilter = new LogicalAndFilter(familyFilter, MECategoryfilter);
-					// Apply the filter to the elements in the active document
-					FilteredElementCollector MEcoll = new FilteredElementCollector(doc, activeView.Id);
-					IList<Element> familyinstance = MEcoll.WherePasses(MEInstancesFilter).ToElements();
-
-					foreach (Element elem in familyinstance)
-					{
-						FamilyInstance fintance = elem as FamilyInstance;
-						if (fintance.Host.Id == wall_1.Id)
-						{
-							windows_hosted.Add(elem);
-						}
-					}
-				}
+				List<Element> windows_hosted = WindowDetectionService.GetHostedOpenings(doc, activeView, wall_1);
 
 
 

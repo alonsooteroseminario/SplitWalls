@@ -75,6 +75,7 @@
     <Compile Include="App.cs" />
     <Compile Include="Helpers\RevitUnitHelper.cs" />
     <Compile Include="Helpers\WallJoinHelper.cs" />
+    <Compile Include="Services\WindowDetectionService.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
