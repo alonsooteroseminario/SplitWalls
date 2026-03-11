@@ -116,65 +116,39 @@ namespace SplitWalls
 					// MURO SIN VENTANAS
 					int anchopanel_UI = (int)numero_final;// 1220 
 
-					if (Muro_sin_Ventanas && _todoMuro && esquina_1 ) // button 1
-					{
-						Revision6_BUTTON_1_mod(anchopanel_UI);
-					}
-					else if (Muro_sin_Ventanas && _todoMuro && esquina_2_otro_lado) // button 1 OTRO LADO
-					{
-						Revision6_BUTTON_1_Lado_Opuesto_mod(anchopanel_UI);
-					}
-					// MURO SIN VENTANAS
+					const string msgNoVent  = "Para aplicarlo a varios Muros a la vez, seleccióna solo muros que no tienen Ventanas. ";
+					const string msgConVent = "Para aplicarlo a varios Muros a la vez, seleccióna solo muros que tienen Ventanas. ";
 
-
-					// MURO OSB CON VENTANAS
-					else if (Muro_OSB_con_Ventanas && primera_ERA_VENT && esquina_1) // Muro OSB solo 1era Ventana
-					{
-						Revision6_BUTTON_2_OBS_mod(anchopanel_UI);
-					}
-					else if (Muro_OSB_con_Ventanas && primera_ERA_VENT && esquina_2_otro_lado) // Muro OSB solo 1era Ventana OTRO LADO
-					{
-						Revision6_BUTTON_2_OBS_OtroLado_mod(anchopanel_UI);
-					}
-					else if (Muro_OSB_con_Ventanas && _todoMuro && esquina_1) // Muro OSB solo TODO MURO
-					{
-						Revision6_BUTTON_2_OBS_TODO_WALL_mod(anchopanel_UI);
-					}
-					else if (Muro_OSB_con_Ventanas && _todoMuro && esquina_2_otro_lado) // Muro OSB solo TODO MURO OTRO LADO
-					{
-						Revision6_BUTTON_2_OBS_TODO_WALL_OtroLado_mod(anchopanel_UI);
-					}
-					// MURO OSB CON VENTANAS
-
-
-
-					// MURO SMART PANEL CON VENTANAS
-					else if (Muro_SMART_PANEL_con_Ventanas && primera_ERA_VENT && esquina_1) // Muro SMART PANEL 1era Ventana 
-					{
-						Revision6_BUTTON_2_SMARTPANEL_mod(anchopanel_UI);
-					}
-					else if (Muro_SMART_PANEL_con_Ventanas && primera_ERA_VENT && esquina_2_otro_lado) // Muro SMART PANEL 1era Ventana  OTRO LADO
-					{
-						Revision6_BUTTON_2_SMARTPANEL_OtroLado_mod(anchopanel_UI);
-					}
-
-
-					else if (Muro_SMART_PANEL_con_Ventanas && _todoMuro && esquina_1) // Muro SMART PANEL 1era Ventana  OTRO LADO
-					{
-						Revision6_BUTTON_2_SMARTPANEL_TODO_WALL_mod(anchopanel_UI);
-					}
-					else if (Muro_SMART_PANEL_con_Ventanas && _todoMuro && esquina_2_otro_lado) // Muro SMART PANEL 1era Ventana  OTRO LADO
-					{
-						Revision6_BUTTON_2_SMARTPANEL_TODO_WALL_OtroLado_mod(anchopanel_UI);
-					}
-					// MURO SMART PANEL CON VENTANAS
-
-
-					else
-					{
-						//TaskDialog.Show("Atención", "Por favor Elige una opción valida . No se seleccionó ninguna Opción");
-						
-					}
+					if (Muro_sin_Ventanas && _todoMuro && esquina_1)
+						DispatchButton(anchopanel_UI, true, msgNoVent, e => e,
+							w => Revision6_DYNO_PanelizarMuroInicial_SMARTPANEL_0_VENTANA(w as Wall, anchopanel_UI));
+					else if (Muro_sin_Ventanas && _todoMuro && esquina_2_otro_lado)
+						DispatchButton(anchopanel_UI, true, msgNoVent, Revision6_DYNO_DarVuelta_Muro_SinVentanas,
+							w => Revision6_DYNO_PanelizarMuroInicial_SMARTPANEL_0_VENTANA(w as Wall, anchopanel_UI));
+					else if (Muro_OSB_con_Ventanas && primera_ERA_VENT && esquina_1)
+						DispatchButton(anchopanel_UI, false, null, e => e,
+							w => Revision6_Button_2_OBS(anchopanel_UI, w));
+					else if (Muro_OSB_con_Ventanas && primera_ERA_VENT && esquina_2_otro_lado)
+						DispatchButton(anchopanel_UI, false, null, Revision6_DYNO_DarVuelta_Muro_ConVentanas,
+							w => Revision6_Button_2_OBS(anchopanel_UI, w));
+					else if (Muro_OSB_con_Ventanas && _todoMuro && esquina_1)
+						DispatchButton(anchopanel_UI, true, msgNoVent, e => e,
+							w => Revision6_Button_2_OBS_TODO_WALL(anchopanel_UI, w));
+					else if (Muro_OSB_con_Ventanas && _todoMuro && esquina_2_otro_lado)
+						DispatchButton(anchopanel_UI, true, msgNoVent, Revision6_DYNO_DarVuelta_Muro_ConVentanas,
+							w => Revision6_Button_2_OBS_TODO_WALL(anchopanel_UI, w));
+					else if (Muro_SMART_PANEL_con_Ventanas && primera_ERA_VENT && esquina_1)
+						DispatchButton(anchopanel_UI, false, null, e => e,
+							w => Revision6_Button_2_SMARTPANEL(anchopanel_UI, w));
+					else if (Muro_SMART_PANEL_con_Ventanas && primera_ERA_VENT && esquina_2_otro_lado)
+						DispatchButton(anchopanel_UI, false, null, Revision6_DYNO_DarVuelta_Muro_ConVentanas,
+							w => Revision6_Button_2_SMARTPANEL(anchopanel_UI, w));
+					else if (Muro_SMART_PANEL_con_Ventanas && _todoMuro && esquina_1)
+						DispatchButton(anchopanel_UI, true, msgConVent, e => e,
+							w => Revision6_Button_2_SMARTPANEL(anchopanel_UI, w));
+					else if (Muro_SMART_PANEL_con_Ventanas && _todoMuro && esquina_2_otro_lado)
+						DispatchButton(anchopanel_UI, true, msgConVent, Revision6_DYNO_DarVuelta_Muro_ConVentanas,
+							w => Revision6_Button_2_SMARTPANEL(anchopanel_UI, w));
 
 
 				}
@@ -188,369 +162,30 @@ namespace SplitWalls
 
 			#endregion
 
-			#region BUTTONS MODIFICADOS PARA ADDIN
-
-			void Revision6_BUTTON_1_mod(int anchopanel_UI) // Dividir Muros sin Ventanas, Ingresando el Valor del Ancho del Panel Deseado .
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					//int anchopanel_UI = 1220;
-
-					int _anchopanel_ = anchopanel_UI;
-
-					List<Wall> lista_walls = new List<Wall>();
-
-					IList<Reference> references = uidoc.Selection.PickObjects(ObjectType.Element, "Para aplicarlo a varios Muros a la vez, seleccióna solo muros que no tienen Ventanas. ");
-
-					foreach (Reference reference in references)
-					{
-						Element e = doc.GetElement(reference);
-						Wall wall = e as Wall;
-						lista_walls.Add(wall);
-					}
-
-					foreach (Wall _wall_ in lista_walls)
-					{
-
-						Revision6_DYNO_PanelizarMuroInicial_SMARTPANEL_0_VENTANA(_wall_, _anchopanel_);
-					}
-
-
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-
-			} // OK! Dividir Muros sin Ventanas, Ingresando el Valor del Ancho del Panel Deseado . Pick Objects Selection .
-
-			void Revision6_BUTTON_1_Lado_Opuesto_mod(int anchopanel_UI) // Dividir Muros sin Ventanas, Ingresando el Valor del Ancho del Panel Deseado .
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					//int anchopanel_UI = 1220;
-
-					int _anchopanel_ = anchopanel_UI;
-
-					List<Wall> lista_walls = new List<Wall>();
-
-					IList<Reference> references = uidoc.Selection.PickObjects(ObjectType.Element, "Para aplicarlo a varios Muros a la vez, seleccióna solo muros que no tienen Ventanas. ");
-
-					foreach (Reference reference in references)
-					{
-						Element e = doc.GetElement(reference);
-						Wall wall = e as Wall;
-						lista_walls.Add(Revision6_DYNO_DarVuelta_Muro_SinVentanas(wall));
-					}
-
-
-
-
-					foreach (Wall _wall_ in lista_walls)
-					{
-
-						Revision6_DYNO_PanelizarMuroInicial_SMARTPANEL_0_VENTANA(_wall_, _anchopanel_);
-					}
-
-
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-
-			} // OK! Dividir Muros sin Ventanas, Ingresando el Valor del Ancho del Panel Deseado . Pick Objects Selection .
-
-
-
-
-
-			void Revision6_BUTTON_2_OBS_mod(int anchopanel_UI)
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					//int anchopanel_UI = 1220; // 1220
-
-					Element _wall_ = doc.GetElement(uidoc.Selection.PickObject(ObjectType.Element)); // Wall que se elige
-
-					Revision6_Button_2_OBS(anchopanel_UI, _wall_);
-
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-
-			} // OK ! Panelizar antes del vano . Pick Object Selection .
-
-			void Revision6_BUTTON_2_OBS_OtroLado_mod(int anchopanel_UI)
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					//int anchopanel_UI = 1220; // 1220
-
-					Element _wall_ = doc.GetElement(uidoc.Selection.PickObject(ObjectType.Element)); // Wall que se elige
-
-
-					Element wall_iii = Revision6_DYNO_DarVuelta_Muro_ConVentanas(_wall_);
-
-					Revision6_Button_2_OBS(anchopanel_UI, wall_iii);
-
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-
-			} // OK ! Panelizar antes del vano . Pick Object Selection .
-
-
-			void Revision6_BUTTON_2_OBS_TODO_WALL_OtroLado_mod(int anchopanel_UI)
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					//int anchopanel_UI = 1220; // 1220
-
-					List<Wall> lista_walls = new List<Wall>();
-
-					IList<Reference> references = uidoc.Selection.PickObjects(ObjectType.Element, "Para aplicarlo a varios Muros a la vez, seleccióna solo muros que no tienen Ventanas. ");
-
-					foreach (Reference reference in references)
-					{
-						Element e = doc.GetElement(reference);
-						Wall wall = e as Wall;
-						lista_walls.Add(wall);
-					}
-
-					foreach (Wall w in lista_walls)
-					{
-						Element wall_iii = Revision6_DYNO_DarVuelta_Muro_ConVentanas(w);
-						Revision6_BUTTON_2_OBS_TODO_WALL_INPUT(anchopanel_UI, wall_iii);
-					}
-
-
-
-
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-
-			} // OK ! Panelizar antes del vano . Pick Objects Selection .
-
-			void Revision6_BUTTON_2_OBS_TODO_WALL_mod(int anchopanel_UI)
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					//int anchopanel_UI = 1220; // 1220
-
-					List<Wall> lista_walls = new List<Wall>();
-
-					IList<Reference> references = uidoc.Selection.PickObjects(ObjectType.Element, "Para aplicarlo a varios Muros a la vez, seleccióna solo muros que no tienen Ventanas. ");
-
-					foreach (Reference reference in references)
-					{
-						Element e = doc.GetElement(reference);
-						Wall wall = e as Wall;
-						lista_walls.Add(wall);
-					}
-
-					foreach (Wall _wall_ in lista_walls)
-					{
-						Revision6_BUTTON_2_OBS_TODO_WALL_INPUT(anchopanel_UI, _wall_);
-					}
-
-
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-
-			} // OK ! Panelizar antes del vano . Pick Objects Selection .
-
-
-
-
-
-			void Revision6_BUTTON_2_SMARTPANEL_mod(int anchopanel_UI) //OKKKKKKKKKKKKKKKKKKKK!
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					//int anchopanel_UI = 1220; // 1220
-
-					Element _wall_ = doc.GetElement(uidoc.Selection.PickObject(ObjectType.Element)); // Wall que se elige
-
-					Revision6_Button_2_SMARTPANEL(anchopanel_UI, _wall_);
-
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-
-			} // OKKKKKKKKKKKKKKKKKKKK! ! Panelizar antes del vano . Pick Object Selection .
-
-			void Revision6_BUTTON_2_SMARTPANEL_OtroLado_mod(int anchopanel_UI)
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					//int anchopanel_UI = 1220; // 1220
-
-					Element _wall_ = doc.GetElement(uidoc.Selection.PickObject(ObjectType.Element)); // Wall que se elige
-
-					Element wall_iii = Revision6_DYNO_DarVuelta_Muro_ConVentanas(_wall_);
-
-					Revision6_Button_2_SMARTPANEL(anchopanel_UI, wall_iii);
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-
-			} // OK ! Panelizar antes del vano . Pick Object Selection .
-
-
-
-			void Revision6_BUTTON_2_SMARTPANEL_TODO_WALL_OtroLado_mod(int anchopanel_UI)
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					//int anchopanel_UI = 1220; // 1220
-
-					List<Wall> lista_walls = new List<Wall>();
-
-					IList<Reference> references = uidoc.Selection.PickObjects(ObjectType.Element, "Para aplicarlo a varios Muros a la vez, seleccióna solo muros que no tienen Ventanas. ");
-
-					foreach (Reference reference in references)
-					{
-						Element e = doc.GetElement(reference);
-						Wall wall = e as Wall;
-						lista_walls.Add(wall);
-					}
-
-					foreach (Wall w in lista_walls)
-					{
-						Element wall_iii = Revision6_DYNO_DarVuelta_Muro_ConVentanas(w);
-						Revision6_Button_2_SMARTPANEL(anchopanel_UI, wall_iii);
-					}
-
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-
-			} // OK ! Panelizar antes del vano . Pick Objects Selection .
-
-			void Revision6_BUTTON_2_SMARTPANEL_TODO_WALL_mod(int anchopanel_UI)
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					//int anchopanel_UI = 1220; // 1220
-
-					List<Wall> lista_walls = new List<Wall>();
-
-					IList<Reference> references = uidoc.Selection.PickObjects(ObjectType.Element, "Para aplicarlo a varios Muros a la vez, seleccióna solo muros que tienen Ventanas. ");
-
-					foreach (Reference reference in references)
-					{
-						Element e = doc.GetElement(reference);
-						Wall wall = e as Wall;
-						lista_walls.Add(wall);
-					}
-
-					foreach (Wall _wall_ in lista_walls)
-					{
-						Revision6_Button_2_SMARTPANEL(anchopanel_UI, _wall_);
-					}
-
-
-
-
-
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-
-
-			} // OK ! Panelizar antes del vano . Pick Objects Selection .
-
-
-
-
-
-			#endregion
-
 			#region 6ta Revision
 
-			void Revision6_BUTTON_2_OBS_TODO_WALL_INPUT(int anchopanel_UI, Element _wall_)
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					//int anchopanel_UI = 1220; // 1220
-
-					//Element _wall_ = doc.GetElement(uidoc.Selection.PickObject(ObjectType.Element)); // Wall que se elige
-
-					Revision6_Button_2_OBS_TODO_WALL(anchopanel_UI, _wall_);
-
-
-
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-
-			} // OK ! Panelizar antes del vano . Pick Object Selection .
 			  // ESTE FUNCIONA ACTUALMENTE
+			/// <summary>
+			/// Unified button dispatcher: pick one or many walls, optionally flip each,
+			/// then call <paramref name="strategy"/> on each.
+			/// </summary>
+			void DispatchButton(int anchopanel_UI, bool multiSelect, string pickMsg,
+			                    Func<Element, Element> flip, Action<Element> strategy)
+			{
+				if (multiSelect)
+				{
+					var walls = new List<Element>();
+					foreach (var r in uidoc.Selection.PickObjects(ObjectType.Element, pickMsg))
+					    walls.Add(flip(doc.GetElement(r)));
+					foreach (var w in walls)
+					    strategy(w);
+				}
+				else
+				{
+					strategy(flip(doc.GetElement(uidoc.Selection.PickObject(ObjectType.Element))));
+				}
+			}
+
 			void Revision6_Button_2_OBS_TODO_WALL(int anchopanel_UI, Element _wall_)
 			{
 				//UIDocument uidoc = this.ActiveUIDocument;
