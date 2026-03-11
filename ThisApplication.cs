@@ -144,7 +144,7 @@ namespace SplitWalls
 
 
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
@@ -343,7 +343,7 @@ namespace SplitWalls
 					}
 
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
@@ -546,7 +546,7 @@ namespace SplitWalls
 					}
 
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
@@ -5622,7 +5622,7 @@ namespace SplitWalls
 					}
 
 				}
-				catch (Exception e)
+				catch (Exception)
 				{
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
