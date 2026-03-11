@@ -1089,7 +1089,7 @@ namespace SplitWalls
 
 							}
 
-							if (anchoventanas.First() > 1220 / 304.8)
+							if (anchoventanas.First() > 1220 / RevitUnitHelper.MmToFeet)
 							{
 								foreach (Wall wall_ii in elements_dVFo) // Elementos que contienen el punto dVFo
 								{
@@ -1171,7 +1171,7 @@ namespace SplitWalls
 
 							}
 
-							if (anchoventanas.First() > 1220 / 304.8)
+							if (anchoventanas.First() > 1220 / RevitUnitHelper.MmToFeet)
 							{
 								foreach (Wall wall_ii in elements_dVFo) // Elementos que contienen el punto dVFo
 								{
@@ -1283,9 +1283,9 @@ namespace SplitWalls
 
 					double distanta_total_wall = endParam - stParam;
 
-					double alpha = distanta_total_wall % (_anchopanel_ / 304.8); // 3.38 * 304.8 =
+					double alpha = distanta_total_wall % (_anchopanel_ / RevitUnitHelper.MmToFeet); // 3.38 * RevitUnitHelper.MmToFeet =
 
-					double numero_paneles_total = (distanta_total_wall - alpha) / (_anchopanel_ / 304.8); // 7
+					double numero_paneles_total = (distanta_total_wall - alpha) / (_anchopanel_ / RevitUnitHelper.MmToFeet); // 7
 					int numero_paneles_total_int = (int)numero_paneles_total; // 7
 
 					List<double> lista_d = new List<double>();
@@ -1294,11 +1294,11 @@ namespace SplitWalls
 
 					for (int i = 0; i < numero_paneles_total_int; i++)
 					{
-						lista_d.Add(stParam + ((_anchopanel_ / 304.8) * (i + 1) + (4 / 304.8) * i));
+						lista_d.Add(stParam + ((_anchopanel_ / RevitUnitHelper.MmToFeet) * (i + 1) + (4 / RevitUnitHelper.MmToFeet) * i));
 					}
 					for (int i = 0; i < numero_paneles_total_int; i++)
 					{
-						lista_d_muro4.Add(stParam + ((_anchopanel_ / 304.8) * (i + 1) + (4 / 304.8) * (i + 1)));
+						lista_d_muro4.Add(stParam + ((_anchopanel_ / RevitUnitHelper.MmToFeet) * (i + 1) + (4 / RevitUnitHelper.MmToFeet) * (i + 1)));
 					}
 
 
@@ -1372,9 +1372,9 @@ namespace SplitWalls
 
 							#region INFO PHs
 
-							double alpho = anchoventanas.First() % (_anchopanel_ / 304.8);
+							double alpho = anchoventanas.First() % (_anchopanel_ / RevitUnitHelper.MmToFeet);
 
-							double numero = (anchoventanas.First() - alpho) / (_anchopanel_ / 304.8);
+							double numero = (anchoventanas.First() - alpho) / (_anchopanel_ / RevitUnitHelper.MmToFeet);
 							int numero_int = (int)numero;
 
 							double mitad = Ventada_dPH;
@@ -1446,7 +1446,7 @@ namespace SplitWalls
 								double VFo = Math.Round(lista_dPH.First() + anchoventanas.First() / 2, 0);
 								double n_paneles_VF = Math.Round((VFo * n_paneles) / lenght_double, 0);
 
-								double lenght_double_VF = Math.Round(n_paneles_VF * _anchopanel_ + (n_paneles_VF - 1) * (4 / 304.8), 0);
+								double lenght_double_VF = Math.Round(n_paneles_VF * _anchopanel_ + (n_paneles_VF - 1) * (4 / RevitUnitHelper.MmToFeet), 0);
 								double diff = lenght_double_VF - VIo;
 
 								Curve wallCurve_actual = ((LocationCurve)elements_dVIo.First().Location).Curve;
@@ -1462,7 +1462,7 @@ namespace SplitWalls
 								}
 								else
 								{
-									if ((anchoventanas.First() == _anchopanel_ / 304.8) || (anchoventanas.First() > _anchopanel_ / 304.8))
+									if ((anchoventanas.First() == _anchopanel_ / RevitUnitHelper.MmToFeet) || (anchoventanas.First() > _anchopanel_ / RevitUnitHelper.MmToFeet))
 									{
 										//TaskDialog.Show("ALERTA", "VENTANA EXACTA activador" + Environment.NewLine + (  anchoventanas[i] > _anchopanel_ ).ToString());
 										activador = true; // VENTANA EXACTA
@@ -1538,11 +1538,7 @@ namespace SplitWalls
 
 													Opening openin = targetWall.Document.Create.NewOpening(targetWall, abajo_dVIo, arriba_dVFo);
 
-													if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 1))
-														WallUtils.DisallowWallJoinAtEnd(targetWall, 1);
-
-													if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 0))
-														WallUtils.DisallowWallJoinAtEnd(targetWall, 0);
+													WallJoinHelper.DisableJoins(targetWall);
 													trans.Commit();
 
 													lista_walls.Add(targetWall);
@@ -1617,11 +1613,7 @@ namespace SplitWalls
 
 												Opening openin = targetWall.Document.Create.NewOpening(targetWall, abajo_dVIo, arriba_dVFo);
 
-												if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 1))
-													WallUtils.DisallowWallJoinAtEnd(targetWall, 1);
-
-												if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 0))
-													WallUtils.DisallowWallJoinAtEnd(targetWall, 0);
+												WallJoinHelper.DisableJoins(targetWall);
 												trans.Commit();
 
 												lista_walls.Add(targetWall);
@@ -2048,9 +2040,9 @@ namespace SplitWalls
 
 								#region INFO PHs
 
-								double alpho = anchoventanas[i] % (_anchopanel_ / 304.8);
+								double alpho = anchoventanas[i] % (_anchopanel_ / RevitUnitHelper.MmToFeet);
 
-								double numero = (anchoventanas[i] - alpho) / (_anchopanel_ / 304.8);
+								double numero = (anchoventanas[i] - alpho) / (_anchopanel_ / RevitUnitHelper.MmToFeet);
 								int numero_int = (int)numero;
 
 								double mitad = Ventada_dPH;
@@ -2124,7 +2116,7 @@ namespace SplitWalls
 									double VFo = Math.Round(lista_dPH[i] + anchoventanas[i] / 2, 0);
 									double n_paneles_VF = Math.Round((VFo * n_paneles) / lenght_double, 0);
 
-									double lenght_double_VF = Math.Round(n_paneles_VF * _anchopanel_ + (n_paneles_VF - 1) * (4 / 304.8), 0);
+									double lenght_double_VF = Math.Round(n_paneles_VF * _anchopanel_ + (n_paneles_VF - 1) * (4 / RevitUnitHelper.MmToFeet), 0);
 									double diff = lenght_double_VF - VIo;
 
 									Curve wallCurve_actual = ((LocationCurve)elements_dVIo.First().Location).Curve;
@@ -2140,7 +2132,7 @@ namespace SplitWalls
 									}
 									else
 									{
-										if ((anchoventanas[i] == _anchopanel_ / 304.8) || (anchoventanas[i] > _anchopanel_ / 304.8))
+										if ((anchoventanas[i] == _anchopanel_ / RevitUnitHelper.MmToFeet) || (anchoventanas[i] > _anchopanel_ / RevitUnitHelper.MmToFeet))
 										{
 											//TaskDialog.Show("ALERTA", "VENTANA EXACTA activador" + Environment.NewLine + (  anchoventanas[i] > _anchopanel_ ).ToString());
 											activador = true; // VENTANA EXACTA
@@ -2295,11 +2287,7 @@ namespace SplitWalls
 
 															Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
+															WallJoinHelper.DisableJoins(wall_recibida);
 															trans.Commit();
 
 
@@ -2322,11 +2310,7 @@ namespace SplitWalls
 
 															Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
+															WallJoinHelper.DisableJoins(wall_recibida);
 															trans.Commit();
 
 
@@ -2350,11 +2334,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
+																WallJoinHelper.DisableJoins(wall_recibida);
 																trans.Commit();
 
 
@@ -2402,11 +2382,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
+																WallJoinHelper.DisableJoins(wall_recibida);
 																trans.Commit();
 
 
@@ -2430,11 +2406,7 @@ namespace SplitWalls
 
 															Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
+															WallJoinHelper.DisableJoins(wall_recibida);
 															trans.Commit();
 
 
@@ -2458,11 +2430,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
+																WallJoinHelper.DisableJoins(wall_recibida);
 																trans.Commit();
 
 
@@ -2502,11 +2470,7 @@ namespace SplitWalls
 
 															Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
+															WallJoinHelper.DisableJoins(wall_recibida);
 															trans.Commit();
 
 
@@ -2530,11 +2494,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
+																WallJoinHelper.DisableJoins(wall_recibida);
 																trans.Commit();
 
 
@@ -2562,11 +2522,7 @@ namespace SplitWalls
 
 														Opening openin = aaaaaa.Document.Create.NewOpening(aaaaaa, abajo_dVIo, arriba_dVFo);
 
-														if (WallUtils.IsWallJoinAllowedAtEnd(aaaaaa, 1))
-															WallUtils.DisallowWallJoinAtEnd(aaaaaa, 1);
-
-														if (WallUtils.IsWallJoinAllowedAtEnd(aaaaaa, 0))
-															WallUtils.DisallowWallJoinAtEnd(aaaaaa, 0);
+														WallJoinHelper.DisableJoins(aaaaaa);
 														trans.Commit();
 
 
@@ -2580,11 +2536,7 @@ namespace SplitWalls
 
 														Opening openin = aaaaaa.Document.Create.NewOpening(aaaaaa, abajo_dVIo, arriba_dVFo);
 
-														if (WallUtils.IsWallJoinAllowedAtEnd(aaaaaa, 1))
-															WallUtils.DisallowWallJoinAtEnd(aaaaaa, 1);
-
-														if (WallUtils.IsWallJoinAllowedAtEnd(aaaaaa, 0))
-															WallUtils.DisallowWallJoinAtEnd(aaaaaa, 0);
+														WallJoinHelper.DisableJoins(aaaaaa);
 														trans.Commit();
 
 
@@ -2617,11 +2569,7 @@ namespace SplitWalls
 
 														Opening openin = wall_recibida_dVIo.Document.Create.NewOpening(wall_recibida_dVIo, abajo_dVIo, arriba_dVFo);
 
-														if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 1))
-															WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 1);
-
-														if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 0))
-															WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 0);
+														WallJoinHelper.DisableJoins(wall_recibida_dVIo);
 														trans.Commit();
 
 
@@ -2647,11 +2595,7 @@ namespace SplitWalls
 
 														Opening openin = wall_recibida_dVIo.Document.Create.NewOpening(wall_recibida_dVIo, abajo_dVIo, arriba_dVFo);
 
-														if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 1))
-															WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 1);
-
-														if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 0))
-															WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 0);
+														WallJoinHelper.DisableJoins(wall_recibida_dVIo);
 														trans.Commit();
 
 
@@ -2803,11 +2747,7 @@ namespace SplitWalls
 
 																	Opening openin = targetWall.Document.Create.NewOpening(targetWall, abajo_dVIo, arriba_dVFo);
 
-																	if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 1))
-																		WallUtils.DisallowWallJoinAtEnd(targetWall, 1);
-
-																	if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 0))
-																		WallUtils.DisallowWallJoinAtEnd(targetWall, 0);
+																	WallJoinHelper.DisableJoins(targetWall);
 																	trans.Commit();
 
 																	lista_walls.Add(targetWall);
@@ -2886,11 +2826,7 @@ namespace SplitWalls
 
 																Opening openin = targetWall.Document.Create.NewOpening(targetWall, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 1))
-																	WallUtils.DisallowWallJoinAtEnd(targetWall, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 0))
-																	WallUtils.DisallowWallJoinAtEnd(targetWall, 0);
+																WallJoinHelper.DisableJoins(targetWall);
 																trans.Commit();
 
 																lista_walls.Add(targetWall);
@@ -2973,11 +2909,7 @@ namespace SplitWalls
 
 															Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
+															WallJoinHelper.DisableJoins(wall_recibida);
 															trans.Commit();
 
 
@@ -3000,11 +2932,7 @@ namespace SplitWalls
 
 															Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
+															WallJoinHelper.DisableJoins(wall_recibida);
 															trans.Commit();
 
 
@@ -3028,11 +2956,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
+																WallJoinHelper.DisableJoins(wall_recibida);
 																trans.Commit();
 
 
@@ -3081,11 +3005,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
+																WallJoinHelper.DisableJoins(wall_recibida);
 																trans.Commit();
 
 
@@ -3109,11 +3029,7 @@ namespace SplitWalls
 
 															Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
+															WallJoinHelper.DisableJoins(wall_recibida);
 															trans.Commit();
 
 
@@ -3137,11 +3053,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
+																WallJoinHelper.DisableJoins(wall_recibida);
 																trans.Commit();
 
 
@@ -3181,11 +3093,7 @@ namespace SplitWalls
 
 															Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
+															WallJoinHelper.DisableJoins(wall_recibida);
 															trans.Commit();
 
 
@@ -3209,11 +3117,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida.Document.Create.NewOpening(wall_recibida, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida, 0);
+																WallJoinHelper.DisableJoins(wall_recibida);
 																trans.Commit();
 
 
@@ -3241,11 +3145,7 @@ namespace SplitWalls
 
 														Opening openin = aaaaaa.Document.Create.NewOpening(aaaaaa, abajo_dVIo, arriba_dVFo);
 
-														if (WallUtils.IsWallJoinAllowedAtEnd(aaaaaa, 1))
-															WallUtils.DisallowWallJoinAtEnd(aaaaaa, 1);
-
-														if (WallUtils.IsWallJoinAllowedAtEnd(aaaaaa, 0))
-															WallUtils.DisallowWallJoinAtEnd(aaaaaa, 0);
+														WallJoinHelper.DisableJoins(aaaaaa);
 														trans.Commit();
 
 
@@ -3259,11 +3159,7 @@ namespace SplitWalls
 
 														Opening openin = aaaaaa.Document.Create.NewOpening(aaaaaa, abajo_dVIo, arriba_dVFo);
 
-														if (WallUtils.IsWallJoinAllowedAtEnd(aaaaaa, 1))
-															WallUtils.DisallowWallJoinAtEnd(aaaaaa, 1);
-
-														if (WallUtils.IsWallJoinAllowedAtEnd(aaaaaa, 0))
-															WallUtils.DisallowWallJoinAtEnd(aaaaaa, 0);
+														WallJoinHelper.DisableJoins(aaaaaa);
 														trans.Commit();
 
 
@@ -3296,11 +3192,7 @@ namespace SplitWalls
 
 														Opening openin = wall_recibida_dVIo.Document.Create.NewOpening(wall_recibida_dVIo, abajo_dVIo, arriba_dVFo);
 
-														if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 1))
-															WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 1);
-
-														if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 0))
-															WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 0);
+														WallJoinHelper.DisableJoins(wall_recibida_dVIo);
 														trans.Commit();
 
 
@@ -3326,11 +3218,7 @@ namespace SplitWalls
 
 														Opening openin = wall_recibida_dVIo.Document.Create.NewOpening(wall_recibida_dVIo, abajo_dVIo, arriba_dVFo);
 
-														if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 1))
-															WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 1);
-
-														if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 0))
-															WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 0);
+														WallJoinHelper.DisableJoins(wall_recibida_dVIo);
 														trans.Commit();
 
 
@@ -3476,11 +3364,7 @@ namespace SplitWalls
 
 																	Opening openin = targetWall.Document.Create.NewOpening(targetWall, abajo_dVIo, arriba_dVFo);
 
-																	if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 1))
-																		WallUtils.DisallowWallJoinAtEnd(targetWall, 1);
-
-																	if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 0))
-																		WallUtils.DisallowWallJoinAtEnd(targetWall, 0);
+																	WallJoinHelper.DisableJoins(targetWall);
 																	trans.Commit();
 
 																	lista_walls.Add(targetWall);
@@ -3557,11 +3441,7 @@ namespace SplitWalls
 
 																Opening openin = targetWall.Document.Create.NewOpening(targetWall, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 1))
-																	WallUtils.DisallowWallJoinAtEnd(targetWall, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 0))
-																	WallUtils.DisallowWallJoinAtEnd(targetWall, 0);
+																WallJoinHelper.DisableJoins(targetWall);
 																trans.Commit();
 
 																lista_walls.Add(targetWall);
@@ -3638,11 +3518,7 @@ namespace SplitWalls
 
 																Opening openin = targetWall.Document.Create.NewOpening(targetWall, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 1))
-																	WallUtils.DisallowWallJoinAtEnd(targetWall, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 0))
-																	WallUtils.DisallowWallJoinAtEnd(targetWall, 0);
+																WallJoinHelper.DisableJoins(targetWall);
 																trans.Commit();
 
 																lista_walls.Add(targetWall);
@@ -3723,11 +3599,7 @@ namespace SplitWalls
 
 															Opening openin = targetWall.Document.Create.NewOpening(targetWall, abajo_dVIo, arriba_dVFo);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 1))
-																WallUtils.DisallowWallJoinAtEnd(targetWall, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 0))
-																WallUtils.DisallowWallJoinAtEnd(targetWall, 0);
+															WallJoinHelper.DisableJoins(targetWall);
 															trans.Commit();
 
 															lista_walls.Add(targetWall);
@@ -3904,11 +3776,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida_dVIo.Document.Create.NewOpening(wall_recibida_dVIo, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 0);
+																WallJoinHelper.DisableJoins(wall_recibida_dVIo);
 																trans.Commit();
 
 
@@ -3936,11 +3804,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida_dVIo.Document.Create.NewOpening(wall_recibida_dVIo, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 0);
+																WallJoinHelper.DisableJoins(wall_recibida_dVIo);
 																trans.Commit();
 
 
@@ -3969,11 +3833,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida_dVIo.Document.Create.NewOpening(wall_recibida_dVIo, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 0);
+																WallJoinHelper.DisableJoins(wall_recibida_dVIo);
 																trans.Commit();
 
 
@@ -4001,11 +3861,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida_dVIo.Document.Create.NewOpening(wall_recibida_dVIo, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 0);
+																WallJoinHelper.DisableJoins(wall_recibida_dVIo);
 																trans.Commit();
 
 
@@ -4122,11 +3978,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida_dVFo.Document.Create.NewOpening(wall_recibida_dVFo, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 0);
+																WallJoinHelper.DisableJoins(wall_recibida_dVFo);
 																trans.Commit();
 
 
@@ -4153,11 +4005,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida_dVFo.Document.Create.NewOpening(wall_recibida_dVFo, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 0);
+																WallJoinHelper.DisableJoins(wall_recibida_dVFo);
 																trans.Commit();
 
 
@@ -4553,11 +4401,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida_dVFo.Document.Create.NewOpening(wall_recibida_dVFo, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 0);
+																WallJoinHelper.DisableJoins(wall_recibida_dVFo);
 																trans.Commit();
 
 
@@ -4584,11 +4428,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida_dVFo.Document.Create.NewOpening(wall_recibida_dVFo, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 0);
+																WallJoinHelper.DisableJoins(wall_recibida_dVFo);
 																trans.Commit();
 
 
@@ -5111,11 +4951,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida_dVIo.Document.Create.NewOpening(wall_recibida_dVIo, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 0);
+																WallJoinHelper.DisableJoins(wall_recibida_dVIo);
 																trans.Commit();
 
 
@@ -5143,11 +4979,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida_dVIo.Document.Create.NewOpening(wall_recibida_dVIo, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 0);
+																WallJoinHelper.DisableJoins(wall_recibida_dVIo);
 																trans.Commit();
 
 
@@ -5176,11 +5008,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida_dVIo.Document.Create.NewOpening(wall_recibida_dVIo, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 0);
+																WallJoinHelper.DisableJoins(wall_recibida_dVIo);
 																trans.Commit();
 
 
@@ -5208,11 +5036,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida_dVIo.Document.Create.NewOpening(wall_recibida_dVIo, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 0);
+																WallJoinHelper.DisableJoins(wall_recibida_dVIo);
 																trans.Commit();
 
 
@@ -5321,11 +5145,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida_dVFo.Document.Create.NewOpening(wall_recibida_dVFo, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 0);
+																WallJoinHelper.DisableJoins(wall_recibida_dVFo);
 																trans.Commit();
 
 
@@ -5352,11 +5172,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida_dVFo.Document.Create.NewOpening(wall_recibida_dVFo, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 0);
+																WallJoinHelper.DisableJoins(wall_recibida_dVFo);
 																trans.Commit();
 
 
@@ -5727,11 +5543,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida_dVFo.Document.Create.NewOpening(wall_recibida_dVFo, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 0);
+																WallJoinHelper.DisableJoins(wall_recibida_dVFo);
 																trans.Commit();
 
 
@@ -5758,11 +5570,7 @@ namespace SplitWalls
 
 																Opening openin = wall_recibida_dVFo.Document.Create.NewOpening(wall_recibida_dVFo, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 1))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 1);
-
-																if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 0))
-																	WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 0);
+																WallJoinHelper.DisableJoins(wall_recibida_dVFo);
 																trans.Commit();
 
 
@@ -6262,11 +6070,7 @@ namespace SplitWalls
 
 															Opening openin = wall_recibida_dVIo.Document.Create.NewOpening(wall_recibida_dVIo, abajo_dVIo, arriba_dVFo);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 1))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 0))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 0);
+															WallJoinHelper.DisableJoins(wall_recibida_dVIo);
 															trans.Commit();
 
 
@@ -6294,11 +6098,7 @@ namespace SplitWalls
 
 															Opening openin = wall_recibida_dVIo.Document.Create.NewOpening(wall_recibida_dVIo, abajo_dVIo, arriba_dVFo);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 1))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 0))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 0);
+															WallJoinHelper.DisableJoins(wall_recibida_dVIo);
 															trans.Commit();
 
 
@@ -6327,11 +6127,7 @@ namespace SplitWalls
 
 															Opening openin = wall_recibida_dVIo.Document.Create.NewOpening(wall_recibida_dVIo, abajo_dVIo, arriba_dVFo);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 1))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 0))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 0);
+															WallJoinHelper.DisableJoins(wall_recibida_dVIo);
 															trans.Commit();
 
 
@@ -6359,11 +6155,7 @@ namespace SplitWalls
 
 															Opening openin = wall_recibida_dVIo.Document.Create.NewOpening(wall_recibida_dVIo, abajo_dVIo, arriba_dVFo);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 1))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVIo, 0))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVIo, 0);
+															WallJoinHelper.DisableJoins(wall_recibida_dVIo);
 															trans.Commit();
 
 
@@ -6472,11 +6264,7 @@ namespace SplitWalls
 
 															Opening openin = wall_recibida_dVFo.Document.Create.NewOpening(wall_recibida_dVFo, abajo_dVIo, arriba_dVFo);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 1))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 0))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 0);
+															WallJoinHelper.DisableJoins(wall_recibida_dVFo);
 															trans.Commit();
 
 
@@ -6503,11 +6291,7 @@ namespace SplitWalls
 
 															Opening openin = wall_recibida_dVFo.Document.Create.NewOpening(wall_recibida_dVFo, abajo_dVIo, arriba_dVFo);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 1))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 0))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 0);
+															WallJoinHelper.DisableJoins(wall_recibida_dVFo);
 															trans.Commit();
 
 
@@ -6878,11 +6662,7 @@ namespace SplitWalls
 
 															Opening openin = wall_recibida_dVFo.Document.Create.NewOpening(wall_recibida_dVFo, abajo_dVIo, arriba_dVFo);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 1))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 0))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 0);
+															WallJoinHelper.DisableJoins(wall_recibida_dVFo);
 															trans.Commit();
 
 
@@ -6909,11 +6689,7 @@ namespace SplitWalls
 
 															Opening openin = wall_recibida_dVFo.Document.Create.NewOpening(wall_recibida_dVFo, abajo_dVIo, arriba_dVFo);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 1))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 1);
-
-															if (WallUtils.IsWallJoinAllowedAtEnd(wall_recibida_dVFo, 0))
-																WallUtils.DisallowWallJoinAtEnd(wall_recibida_dVFo, 0);
+															WallJoinHelper.DisableJoins(wall_recibida_dVFo);
 															trans.Commit();
 
 
@@ -7494,9 +7270,9 @@ namespace SplitWalls
 
 				double distanta_total_wall = endParam - stParam;
 
-				double alpha = distanta_total_wall % (anchopanel / 304.8); // 3.38 * 304.8 =
+				double alpha = distanta_total_wall % (anchopanel / RevitUnitHelper.MmToFeet); // 3.38 * RevitUnitHelper.MmToFeet =
 
-				double numero_paneles_total = (distanta_total_wall - alpha) / (anchopanel / 304.8); // 7
+				double numero_paneles_total = (distanta_total_wall - alpha) / (anchopanel / RevitUnitHelper.MmToFeet); // 7
 				int numero_paneles_total_int = (int)numero_paneles_total; // 7
 
 				List<double> lista_d = new List<double>();
@@ -7506,11 +7282,11 @@ namespace SplitWalls
 
 				for (int i = 0; i < numero_paneles_total_int; i++)
 				{
-					lista_d.Add(stParam + ((anchopanel / 304.8) * (i + 1) + (4 / 304.8) * i));
+					lista_d.Add(stParam + ((anchopanel / RevitUnitHelper.MmToFeet) * (i + 1) + (4 / RevitUnitHelper.MmToFeet) * i));
 				}
 				for (int i = 0; i < numero_paneles_total_int; i++)
 				{
-					lista_d_muro4.Add(stParam + ((anchopanel / 304.8) * (i + 1) + (4 / 304.8) * (i + 1)));
+					lista_d_muro4.Add(stParam + ((anchopanel / RevitUnitHelper.MmToFeet) * (i + 1) + (4 / RevitUnitHelper.MmToFeet) * (i + 1)));
 				}
 
 
@@ -7536,12 +7312,12 @@ namespace SplitWalls
 				#endregion
 
 
-				//	        if (longitud_double < anchopanel/304.8) 
+				//	        if (longitud_double < anchopanel/RevitUnitHelper.MmToFeet) 
 				//			{
 				//	           	//TaskDialog.Show("Dynoscript", "El Muro tiene una longitud actual menor al valor ingresado para la longitud");
 				//	           	return null;
 				//			}
-				//	        else if (longitud_double == anchopanel/304.8)
+				//	        else if (longitud_double == anchopanel/RevitUnitHelper.MmToFeet)
 				//	        {
 				//	           	//TaskDialog.Show("Dynoscript", "El Muro tiene una longitud actual igual al valor ingresado para la longitud");
 				//	           	return null;
@@ -7569,8 +7345,8 @@ namespace SplitWalls
 
 
 
-				double d1 = stParam + (anchopanel / 304.8);
-				double d1_4 = d1 + 4 / 304.8;
+				double d1 = stParam + (anchopanel / RevitUnitHelper.MmToFeet);
+				double d1_4 = d1 + 4 / RevitUnitHelper.MmToFeet;
 
 				XYZ Point_d1 = wallCurve.Evaluate(d1, false);
 				XYZ Point_d1_4 = wallCurve.Evaluate(d1_4, false);
@@ -7585,14 +7361,14 @@ namespace SplitWalls
 					double dVIo_0 = lista_dVIo.First();
 
 					List<double> sacar = new List<double>();
-					if (lista_width1.First() <= 1220 / 304.8)
+					if (lista_width1.First() <= 1220 / RevitUnitHelper.MmToFeet)
 					{
 						double dVIo_1220 = dVIo_0 + lista_width1.First();
 						sacar.Add(dVIo_1220);
 					}
-					else if (lista_width1.First() > 1220 / 304.8)
+					else if (lista_width1.First() > 1220 / RevitUnitHelper.MmToFeet)
 					{
-						double dVIo_1220 = dVIo_0 + 1220 / 304.8;
+						double dVIo_1220 = dVIo_0 + 1220 / RevitUnitHelper.MmToFeet;
 						sacar.Add(dVIo_1220);
 					}
 
@@ -7611,11 +7387,7 @@ namespace SplitWalls
 
 						listaWalls_Final_siCambia.Add(wall_F1);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_F1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_F1, 0);
+						WallJoinHelper.DisableJoins(wall_F1);
 
 						Parameter WALL_USER_HEIGHT_PARAMF1 = wall_F1.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 						if (!WALL_USER_HEIGHT_PARAMF1.IsReadOnly)
@@ -7632,11 +7404,7 @@ namespace SplitWalls
 					//						
 					//			            listaWalls_Final_siCambia.Add(wall_F1_arriba);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1_arriba, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_F1_arriba, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1_arriba, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_F1_arriba, 0);
+					WallJoinHelper.DisableJoins(wall_F1_arriba);
 
 					Parameter WALL_USER_HEIGHT_PARAMF1_arriba = wall_F1_arriba.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 					if (!WALL_USER_HEIGHT_PARAMF1_arriba.IsReadOnly)
@@ -7662,11 +7430,7 @@ namespace SplitWalls
 						#region Crear Wall Primer
 						Line newLine01 = Line.CreateBound(stPoint, Point_d1);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+						WallJoinHelper.DisableJoins(wall_1);
 
 						((LocationCurve)wall_1.Location).Curve = newLine01;
 						listaWalls_Final_siCambia.Add(wall_1);
@@ -7682,8 +7446,8 @@ namespace SplitWalls
 						// Crear Walls Antes al dVIo
 						for (int i = 0; i < lista_d_2.Count() - 1; i++) // antes dVIo
 						{
-							double di = lista_d_muro4_2[i] + (anchopanel / 304.8); // d2
-							double di_4 = di + 4 / 304.8; // d2_4
+							double di = lista_d_muro4_2[i] + (anchopanel / RevitUnitHelper.MmToFeet); // d2
+							double di_4 = di + 4 / RevitUnitHelper.MmToFeet; // d2_4
 
 							//TaskDialog.Show("dynoscript", lista_d_3.Count().ToString());
 							XYZ PointA = wallCurve.Evaluate(lista_d_muro4_2[i], false);
@@ -7693,11 +7457,7 @@ namespace SplitWalls
 							Wall wall_N = Wall.Create(doc, newLineN, wall_1.LevelId, false);
 							listaWalls_Final_siCambia.Add(wall_N);
 
-							if (WallUtils.IsWallJoinAllowedAtEnd(wall_N, 1))
-								WallUtils.DisallowWallJoinAtEnd(wall_N, 1);
-
-							if (WallUtils.IsWallJoinAllowedAtEnd(wall_N, 0))
-								WallUtils.DisallowWallJoinAtEnd(wall_N, 0);
+							WallJoinHelper.DisableJoins(wall_N);
 
 							Parameter WALL_USER_HEIGHT_PARAM12 = wall_N.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 							if (!WALL_USER_HEIGHT_PARAM12.IsReadOnly)
@@ -7718,18 +7478,14 @@ namespace SplitWalls
 						// Crear Wall Primer (stPoint, Pto_dVIo)
 						#region Crear Wall Primer cuando la Ventana esta muy cerca a la esquina
 
-						double ultima_dVIo = lista_dVIo.First() - 4 / 304.8;
+						double ultima_dVIo = lista_dVIo.First() - 4 / RevitUnitHelper.MmToFeet;
 						XYZ pto_ultima_dVIo = wallCurve.Evaluate(ultima_dVIo, false);
 
 
 						// Crear Wall Primer (stPoint, Pto_dVIo)
 						Line newLine01 = Line.CreateBound(stPoint, pto_ultima_dVIo);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+						WallJoinHelper.DisableJoins(wall_1);
 
 						((LocationCurve)wall_1.Location).Curve = newLine01;
 
@@ -7741,18 +7497,14 @@ namespace SplitWalls
 						// Crear Wall Primer (stPoint, Pto_dVIo)
 						#region Crear Wall Primer cuando la Ventana esta muy cerca a la esquina
 
-						double ultima_dVIo = lista_dVIo.First() - 4 / 304.8;
+						double ultima_dVIo = lista_dVIo.First() - 4 / RevitUnitHelper.MmToFeet;
 						XYZ pto_ultima_dVIo = wallCurve.Evaluate(ultima_dVIo, false);
 
 
 						// Crear Wall Primer (stPoint, Pto_dVIo)
 						Line newLine01 = Line.CreateBound(stPoint, pto_ultima_dVIo);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+						WallJoinHelper.DisableJoins(wall_1);
 
 						((LocationCurve)wall_1.Location).Curve = newLine01;
 
@@ -7774,7 +7526,7 @@ namespace SplitWalls
 						XYZ Point_ultimo_d = wallCurve.Evaluate(ultimo_d, false);
 
 						double dVIo = lista_dVIo.First();
-						double dVIo_4 = dVIo - 4 / 304.8;
+						double dVIo_4 = dVIo - 4 / RevitUnitHelper.MmToFeet;
 						XYZ Point_dVIo_4 = wallCurve.Evaluate(dVIo_4, false);
 
 						Line newLine_peq = Line.CreateBound(Point_ultimo_d, Point_dVIo_4);
@@ -7782,11 +7534,7 @@ namespace SplitWalls
 						Wall wall_peq = Wall.Create(doc, newLine_peq, wall_1.LevelId, false);
 						listaWalls_Final_siCambia.Add(wall_peq);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_peq, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_peq, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_peq, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_peq, 0);
+						WallJoinHelper.DisableJoins(wall_peq);
 
 						Parameter WALL_USER_HEIGHT_PARAM_peq = wall_peq.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 						if (!WALL_USER_HEIGHT_PARAM_peq.IsReadOnly)
@@ -7805,7 +7553,7 @@ namespace SplitWalls
 						XYZ Point_ultimo_d = wallCurve.Evaluate(ultimo_d, false);
 
 						double dVIo = lista_dVIo.First();
-						double dVIo_4 = dVIo - 4 / 304.8;
+						double dVIo_4 = dVIo - 4 / RevitUnitHelper.MmToFeet;
 						XYZ Point_dVIo_4 = wallCurve.Evaluate(dVIo_4, false);
 
 						Line newLine_peq = Line.CreateBound(Point_ultimo_d, Point_dVIo_4);
@@ -7814,11 +7562,7 @@ namespace SplitWalls
 						listaWalls_Final_siCambia.Add(wall_1);
 
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+						WallJoinHelper.DisableJoins(wall_1);
 
 						Parameter WALL_USER_HEIGHT_PARAM_peq = wall_1.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 						if (!WALL_USER_HEIGHT_PARAM_peq.IsReadOnly)
@@ -7836,7 +7580,7 @@ namespace SplitWalls
 						XYZ Point_ultimo_d = wallCurve.Evaluate(ultimo_d, false);
 
 						double dVIo = lista_dVIo.First();
-						double dVIo_4 = dVIo - 4 / 304.8;
+						double dVIo_4 = dVIo - 4 / RevitUnitHelper.MmToFeet;
 						XYZ Point_dVIo_4 = wallCurve.Evaluate(dVIo_4, false);
 
 						Line newLine_peq = Line.CreateBound(Point_ultimo_d, Point_dVIo_4);
@@ -7845,11 +7589,7 @@ namespace SplitWalls
 						listaWalls_Final_siCambia.Add(wall_1);
 
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+						WallJoinHelper.DisableJoins(wall_1);
 
 						Parameter WALL_USER_HEIGHT_PARAM_peq = wall_1.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 						if (!WALL_USER_HEIGHT_PARAM_peq.IsReadOnly)
@@ -7869,14 +7609,14 @@ namespace SplitWalls
 					double dVIo_0 = lista_dVIo.First();
 
 					List<double> sacar = new List<double>();
-					if (lista_width1.First() <= 1220 / 304.8)
+					if (lista_width1.First() <= 1220 / RevitUnitHelper.MmToFeet)
 					{
 						double dVIo_1220 = dVIo_0 + lista_width1.First();
 						sacar.Add(dVIo_1220);
 					}
-					else if (lista_width1.First() > 1220 / 304.8)
+					else if (lista_width1.First() > 1220 / RevitUnitHelper.MmToFeet)
 					{
-						double dVIo_1220 = dVIo_0 + 1220 / 304.8;
+						double dVIo_1220 = dVIo_0 + 1220 / RevitUnitHelper.MmToFeet;
 						sacar.Add(dVIo_1220);
 					}
 
@@ -7894,11 +7634,7 @@ namespace SplitWalls
 
 						listaWalls_Final_siCambia.Add(wall_F1);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_F1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_F1, 0);
+						WallJoinHelper.DisableJoins(wall_F1);
 
 						Parameter WALL_USER_HEIGHT_PARAMF1 = wall_F1.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 						if (!WALL_USER_HEIGHT_PARAMF1.IsReadOnly)
@@ -7913,11 +7649,7 @@ namespace SplitWalls
 
 					listaWalls_Final_siCambia.Add(wall_F1_arriba);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1_arriba, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_F1_arriba, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1_arriba, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_F1_arriba, 0);
+					WallJoinHelper.DisableJoins(wall_F1_arriba);
 
 					Parameter WALL_USER_HEIGHT_PARAMF1_arriba = wall_F1_arriba.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 					if (!WALL_USER_HEIGHT_PARAMF1_arriba.IsReadOnly)
@@ -7935,14 +7667,14 @@ namespace SplitWalls
 				}
 
 				// AnchoVentana <= 1220
-				if (lista_width1.First() <= 1220 / 304.8)
+				if (lista_width1.First() <= 1220 / RevitUnitHelper.MmToFeet)
 				{
 					#region wall final final agregarle las ventanas que falta en el ubicación dPH respectiva.
 
 					// wall final final agregarle las ventanas que falta en el ubicación dPH respectiva.
 
 					double ultima_dVFo = lista_dVFo.First();
-					double ultima_dVFo_4 = ultima_dVFo + 4 / 304.8;
+					double ultima_dVFo_4 = ultima_dVFo + 4 / RevitUnitHelper.MmToFeet;
 
 					XYZ Point_ultima_dVFo_4 = wallCurve.Evaluate(ultima_dVFo_4, false);
 
@@ -7951,11 +7683,7 @@ namespace SplitWalls
 					Wall wall_F3 = Wall.Create(doc, newLineF3, wall_1.LevelId, false);
 					listaWalls_Final_siCambia.Add(wall_F3);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F3, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_F3, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F3, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_F3, 0);
+					WallJoinHelper.DisableJoins(wall_F3);
 
 					Parameter WALL_USER_HEIGHT_PARAMF3 = wall_F3.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 					if (!WALL_USER_HEIGHT_PARAMF3.IsReadOnly)
@@ -7999,7 +7727,7 @@ namespace SplitWalls
 				}
 
 				// AnchoVentana > 1220
-				else if (lista_width1.First() > 1220 / 304.8)
+				else if (lista_width1.First() > 1220 / RevitUnitHelper.MmToFeet)
 				{
 					#region wall pequeño ultimo SOLO Cuando Ventana es Mayor a 1220
 
@@ -8011,10 +7739,10 @@ namespace SplitWalls
 					XYZ Point_ultimo_dVIo = wallCurve.Evaluate(ultimo_dVIo, false);
 
 
-					double ultimo_dVIo_1224 = ultimo_dVIo + 1224 / 304.8;
+					double ultimo_dVIo_1224 = ultimo_dVIo + 1224 / RevitUnitHelper.MmToFeet;
 					XYZ Point_ultimo_dVIo_1224 = wallCurve.Evaluate(ultimo_dVIo_1224, false);
 
-					double extra_ventana = lista_width1.First() - 1220 / 304.8;
+					double extra_ventana = lista_width1.First() - 1220 / RevitUnitHelper.MmToFeet;
 
 					double d_panel_ventana = ultimo_dVFo - extra_ventana;
 
@@ -8029,11 +7757,7 @@ namespace SplitWalls
 
 						listaWalls_Final_siCambia.Add(wall_F2);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_F2, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_F2, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_F2, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_F2, 0);
+						WallJoinHelper.DisableJoins(wall_F2);
 
 						Parameter WALL_USER_HEIGHT_PARAMF2 = wall_F2.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 						if (!WALL_USER_HEIGHT_PARAMF2.IsReadOnly)
@@ -8047,11 +7771,7 @@ namespace SplitWalls
 
 					listaWalls_Final_siCambia.Add(wall_F2_arriba);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F2_arriba, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_F2_arriba, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F2_arriba, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_F2_arriba, 0);
+					WallJoinHelper.DisableJoins(wall_F2_arriba);
 
 					Parameter WALL_USER_HEIGHT_PARAMF2_arriba = wall_F2_arriba.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 					if (!WALL_USER_HEIGHT_PARAMF2_arriba.IsReadOnly)
@@ -8072,7 +7792,7 @@ namespace SplitWalls
 					// wall final final agregarle las ventanas que falta en el ubicación dPH respectiva.
 
 					double ultima_dVFo = lista_dVFo.First();
-					double ultima_dVFo_4 = ultima_dVFo + 4 / 304.8;
+					double ultima_dVFo_4 = ultima_dVFo + 4 / RevitUnitHelper.MmToFeet;
 
 					XYZ Point_ultima_dVFo_4 = wallCurve.Evaluate(ultima_dVFo_4, false);
 
@@ -8082,11 +7802,7 @@ namespace SplitWalls
 
 					listaWalls_Final_siCambia.Add(wall_F3);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F3, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_F3, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F3, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_F3, 0);
+					WallJoinHelper.DisableJoins(wall_F3);
 
 					Parameter WALL_USER_HEIGHT_PARAMF3 = wall_F3.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 					if (!WALL_USER_HEIGHT_PARAMF3.IsReadOnly)
@@ -8336,9 +8052,9 @@ namespace SplitWalls
 
 				double distanta_total_wall = endParam - stParam;
 
-				double alpha = distanta_total_wall % (anchopanel / 304.8); // 3.38 * 304.8 =
+				double alpha = distanta_total_wall % (anchopanel / RevitUnitHelper.MmToFeet); // 3.38 * RevitUnitHelper.MmToFeet =
 
-				double numero_paneles_total = (distanta_total_wall - alpha) / (anchopanel / 304.8); // 7
+				double numero_paneles_total = (distanta_total_wall - alpha) / (anchopanel / RevitUnitHelper.MmToFeet); // 7
 				int numero_paneles_total_int = (int)numero_paneles_total; // 7
 
 				List<double> lista_d = new List<double>();
@@ -8348,11 +8064,11 @@ namespace SplitWalls
 
 				for (int i = 0; i < numero_paneles_total_int; i++)
 				{
-					lista_d.Add(stParam + ((anchopanel / 304.8) * (i + 1) + (4 / 304.8) * i));
+					lista_d.Add(stParam + ((anchopanel / RevitUnitHelper.MmToFeet) * (i + 1) + (4 / RevitUnitHelper.MmToFeet) * i));
 				}
 				for (int i = 0; i < numero_paneles_total_int; i++)
 				{
-					lista_d_muro4.Add(stParam + ((anchopanel / 304.8) * (i + 1) + (4 / 304.8) * (i + 1)));
+					lista_d_muro4.Add(stParam + ((anchopanel / RevitUnitHelper.MmToFeet) * (i + 1) + (4 / RevitUnitHelper.MmToFeet) * (i + 1)));
 				}
 
 
@@ -8378,12 +8094,12 @@ namespace SplitWalls
 				#endregion
 
 
-				//	        if (longitud_double < anchopanel/304.8) 
+				//	        if (longitud_double < anchopanel/RevitUnitHelper.MmToFeet) 
 				//			{
 				//
 				//
 				//			}
-				//	        else if (longitud_double == anchopanel/304.8)
+				//	        else if (longitud_double == anchopanel/RevitUnitHelper.MmToFeet)
 				//	        {
 				//	           	//TaskDialog.Show("Dynoscript", "El Muro tiene una longitud actual igual al valor ingresado para la longitud");
 				//	           	return null;
@@ -8409,8 +8125,8 @@ namespace SplitWalls
 				}
 
 
-				double d1 = stParam + (anchopanel / 304.8);
-				double d1_4 = d1 + 4 / 304.8;
+				double d1 = stParam + (anchopanel / RevitUnitHelper.MmToFeet);
+				double d1_4 = d1 + 4 / RevitUnitHelper.MmToFeet;
 
 				XYZ Point_d1 = wallCurve.Evaluate(d1, false);
 				XYZ Point_d1_4 = wallCurve.Evaluate(d1_4, false);
@@ -8425,14 +8141,14 @@ namespace SplitWalls
 					double dVIo_0 = lista_dVIo.First();
 
 					List<double> sacar = new List<double>();
-					if (lista_width1.First() <= 1220 / 304.8)
+					if (lista_width1.First() <= 1220 / RevitUnitHelper.MmToFeet)
 					{
 						double dVIo_1220 = dVIo_0 + lista_width1.First();
 						sacar.Add(dVIo_1220);
 					}
-					else if (lista_width1.First() > 1220 / 304.8)
+					else if (lista_width1.First() > 1220 / RevitUnitHelper.MmToFeet)
 					{
-						double dVIo_1220 = dVIo_0 + 1220 / 304.8;
+						double dVIo_1220 = dVIo_0 + 1220 / RevitUnitHelper.MmToFeet;
 						sacar.Add(dVIo_1220);
 					}
 
@@ -8451,11 +8167,7 @@ namespace SplitWalls
 
 						listaWalls_Final_siCambia.Add(wall_F1);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_F1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_F1, 0);
+						WallJoinHelper.DisableJoins(wall_F1);
 
 						Parameter WALL_USER_HEIGHT_PARAMF1 = wall_F1.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 						if (!WALL_USER_HEIGHT_PARAMF1.IsReadOnly)
@@ -8472,11 +8184,7 @@ namespace SplitWalls
 					//						
 					//			            listaWalls_Final_siCambia.Add(wall_F1_arriba);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1_arriba, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_F1_arriba, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1_arriba, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_F1_arriba, 0);
+					WallJoinHelper.DisableJoins(wall_F1_arriba);
 
 					Parameter WALL_USER_HEIGHT_PARAMF1_arriba = wall_F1_arriba.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 					if (!WALL_USER_HEIGHT_PARAMF1_arriba.IsReadOnly)
@@ -8501,11 +8209,7 @@ namespace SplitWalls
 						#region Crear Wall Primer
 						Line newLine01 = Line.CreateBound(stPoint, Point_d1);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+						WallJoinHelper.DisableJoins(wall_1);
 
 						((LocationCurve)wall_1.Location).Curve = newLine01;
 						listaWalls_Final_siCambia.Add(wall_1);
@@ -8521,8 +8225,8 @@ namespace SplitWalls
 						// Crear Walls Antes al dVIo
 						for (int i = 0; i < lista_d_2.Count() - 1; i++) // antes dVIo
 						{
-							double di = lista_d_muro4_2[i] + (anchopanel / 304.8); // d2
-							double di_4 = di + 4 / 304.8; // d2_4
+							double di = lista_d_muro4_2[i] + (anchopanel / RevitUnitHelper.MmToFeet); // d2
+							double di_4 = di + 4 / RevitUnitHelper.MmToFeet; // d2_4
 
 							//TaskDialog.Show("dynoscript", lista_d_3.Count().ToString());
 							XYZ PointA = wallCurve.Evaluate(lista_d_muro4_2[i], false);
@@ -8532,11 +8236,7 @@ namespace SplitWalls
 							Wall wall_N = Wall.Create(doc, newLineN, wall_1.LevelId, false);
 							listaWalls_Final_siCambia.Add(wall_N);
 
-							if (WallUtils.IsWallJoinAllowedAtEnd(wall_N, 1))
-								WallUtils.DisallowWallJoinAtEnd(wall_N, 1);
-
-							if (WallUtils.IsWallJoinAllowedAtEnd(wall_N, 0))
-								WallUtils.DisallowWallJoinAtEnd(wall_N, 0);
+							WallJoinHelper.DisableJoins(wall_N);
 
 							Parameter WALL_USER_HEIGHT_PARAM12 = wall_N.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 							if (!WALL_USER_HEIGHT_PARAM12.IsReadOnly)
@@ -8557,18 +8257,14 @@ namespace SplitWalls
 						// Crear Wall Primer (stPoint, Pto_dVIo)
 						#region Crear Wall Primer cuando la Ventana esta muy cerca a la esquina
 
-						double ultima_dVIo = lista_dVIo.First() - 4 / 304.8;
+						double ultima_dVIo = lista_dVIo.First() - 4 / RevitUnitHelper.MmToFeet;
 						XYZ pto_ultima_dVIo = wallCurve.Evaluate(ultima_dVIo, false);
 
 
 						// Crear Wall Primer (stPoint, Pto_dVIo)
 						Line newLine01 = Line.CreateBound(stPoint, pto_ultima_dVIo);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+						WallJoinHelper.DisableJoins(wall_1);
 
 						((LocationCurve)wall_1.Location).Curve = newLine01;
 
@@ -8580,18 +8276,14 @@ namespace SplitWalls
 						// Crear Wall Primer (stPoint, Pto_dVIo)
 						#region Crear Wall Primer cuando la Ventana esta muy cerca a la esquina
 
-						double ultima_dVIo = lista_dVIo.First() - 4 / 304.8;
+						double ultima_dVIo = lista_dVIo.First() - 4 / RevitUnitHelper.MmToFeet;
 						XYZ pto_ultima_dVIo = wallCurve.Evaluate(ultima_dVIo, false);
 
 
 						// Crear Wall Primer (stPoint, Pto_dVIo)
 						Line newLine01 = Line.CreateBound(stPoint, pto_ultima_dVIo);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+						WallJoinHelper.DisableJoins(wall_1);
 
 						((LocationCurve)wall_1.Location).Curve = newLine01;
 
@@ -8612,7 +8304,7 @@ namespace SplitWalls
 						XYZ Point_ultimo_d = wallCurve.Evaluate(ultimo_d, false);
 
 						double dVIo = lista_dVIo.First();
-						double dVIo_4 = dVIo - 4 / 304.8;
+						double dVIo_4 = dVIo - 4 / RevitUnitHelper.MmToFeet;
 						XYZ Point_dVIo_4 = wallCurve.Evaluate(dVIo_4, false);
 
 						Line newLine_peq = Line.CreateBound(Point_ultimo_d, Point_dVIo_4);
@@ -8620,11 +8312,7 @@ namespace SplitWalls
 						Wall wall_peq = Wall.Create(doc, newLine_peq, wall_1.LevelId, false);
 						listaWalls_Final_siCambia.Add(wall_peq);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_peq, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_peq, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_peq, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_peq, 0);
+						WallJoinHelper.DisableJoins(wall_peq);
 
 						Parameter WALL_USER_HEIGHT_PARAM_peq = wall_peq.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 						if (!WALL_USER_HEIGHT_PARAM_peq.IsReadOnly)
@@ -8643,7 +8331,7 @@ namespace SplitWalls
 						XYZ Point_ultimo_d = wallCurve.Evaluate(ultimo_d, false);
 
 						double dVIo = lista_dVIo.First();
-						double dVIo_4 = dVIo - 4 / 304.8;
+						double dVIo_4 = dVIo - 4 / RevitUnitHelper.MmToFeet;
 						XYZ Point_dVIo_4 = wallCurve.Evaluate(dVIo_4, false);
 
 						Line newLine_peq = Line.CreateBound(Point_ultimo_d, Point_dVIo_4);
@@ -8652,11 +8340,7 @@ namespace SplitWalls
 						listaWalls_Final_siCambia.Add(wall_1);
 
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+						WallJoinHelper.DisableJoins(wall_1);
 
 						Parameter WALL_USER_HEIGHT_PARAM_peq = wall_1.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 						if (!WALL_USER_HEIGHT_PARAM_peq.IsReadOnly)
@@ -8674,7 +8358,7 @@ namespace SplitWalls
 						XYZ Point_ultimo_d = wallCurve.Evaluate(ultimo_d, false);
 
 						double dVIo = lista_dVIo.First();
-						double dVIo_4 = dVIo - 4 / 304.8;
+						double dVIo_4 = dVIo - 4 / RevitUnitHelper.MmToFeet;
 						XYZ Point_dVIo_4 = wallCurve.Evaluate(dVIo_4, false);
 
 						Line newLine_peq = Line.CreateBound(Point_ultimo_d, Point_dVIo_4);
@@ -8683,11 +8367,7 @@ namespace SplitWalls
 						listaWalls_Final_siCambia.Add(wall_1);
 
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+						WallJoinHelper.DisableJoins(wall_1);
 
 						Parameter WALL_USER_HEIGHT_PARAM_peq = wall_1.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 						if (!WALL_USER_HEIGHT_PARAM_peq.IsReadOnly)
@@ -8708,14 +8388,14 @@ namespace SplitWalls
 					double dVIo_0 = lista_dVIo.First();
 
 					List<double> sacar = new List<double>();
-					if (lista_width1.First() <= 1220 / 304.8)
+					if (lista_width1.First() <= 1220 / RevitUnitHelper.MmToFeet)
 					{
 						double dVIo_1220 = dVIo_0 + lista_width1.First();
 						sacar.Add(dVIo_1220);
 					}
-					else if (lista_width1.First() > 1220 / 304.8)
+					else if (lista_width1.First() > 1220 / RevitUnitHelper.MmToFeet)
 					{
-						double dVIo_1220 = dVIo_0 + 1220 / 304.8;
+						double dVIo_1220 = dVIo_0 + 1220 / RevitUnitHelper.MmToFeet;
 						sacar.Add(dVIo_1220);
 					}
 
@@ -8731,11 +8411,7 @@ namespace SplitWalls
 
 						listaWalls_Final_siCambia.Add(wall_F1);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_F1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_F1, 0);
+						WallJoinHelper.DisableJoins(wall_F1);
 
 						Parameter WALL_USER_HEIGHT_PARAMF1 = wall_F1.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 						if (!WALL_USER_HEIGHT_PARAMF1.IsReadOnly)
@@ -8750,11 +8426,7 @@ namespace SplitWalls
 
 					listaWalls_Final_siCambia.Add(wall_F1_arriba);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1_arriba, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_F1_arriba, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1_arriba, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_F1_arriba, 0);
+					WallJoinHelper.DisableJoins(wall_F1_arriba);
 
 					Parameter WALL_USER_HEIGHT_PARAMF1_arriba = wall_F1_arriba.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 					if (!WALL_USER_HEIGHT_PARAMF1_arriba.IsReadOnly)
@@ -8775,14 +8447,14 @@ namespace SplitWalls
 
 
 				// AnchoVentana <= 1220
-				if (lista_width1.First() <= 1220 / 304.8)
+				if (lista_width1.First() <= 1220 / RevitUnitHelper.MmToFeet)
 				{
 					#region wall final final agregarle las ventanas que falta en el ubicación dPH respectiva.
 
 					// wall final final agregarle las ventanas que falta en el ubicación dPH respectiva.
 
 					double ultima_dVFo = lista_dVFo.First();
-					double ultima_dVFo_4 = ultima_dVFo + 4 / 304.8;
+					double ultima_dVFo_4 = ultima_dVFo + 4 / RevitUnitHelper.MmToFeet;
 
 					XYZ Point_ultima_dVFo_4 = wallCurve.Evaluate(ultima_dVFo_4, false);
 
@@ -8791,11 +8463,7 @@ namespace SplitWalls
 					Wall wall_F3 = Wall.Create(doc, newLineF3, wall_1.LevelId, false);
 					listaWalls_Final_siCambia.Add(wall_F3);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F3, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_F3, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F3, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_F3, 0);
+					WallJoinHelper.DisableJoins(wall_F3);
 
 					Parameter WALL_USER_HEIGHT_PARAMF3 = wall_F3.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 					if (!WALL_USER_HEIGHT_PARAMF3.IsReadOnly)
@@ -8807,7 +8475,7 @@ namespace SplitWalls
 				}
 
 				// AnchoVentana > 1220
-				else if (lista_width1.First() > 1220 / 304.8)
+				else if (lista_width1.First() > 1220 / RevitUnitHelper.MmToFeet)
 				{
 
 					#region wall pequeño ultimo SOLO Cuando Ventana es Mayor a 1220
@@ -8820,10 +8488,10 @@ namespace SplitWalls
 					XYZ Point_ultimo_dVIo = wallCurve.Evaluate(ultimo_dVIo, false);
 
 
-					double ultimo_dVIo_1224 = ultimo_dVIo + 1224 / 304.8;
+					double ultimo_dVIo_1224 = ultimo_dVIo + 1224 / RevitUnitHelper.MmToFeet;
 					XYZ Point_ultimo_dVIo_1224 = wallCurve.Evaluate(ultimo_dVIo_1224, false);
 
-					double extra_ventana = lista_width1.First() - 1220 / 304.8;
+					double extra_ventana = lista_width1.First() - 1220 / RevitUnitHelper.MmToFeet;
 
 					double d_panel_ventana = ultimo_dVFo - extra_ventana;
 
@@ -8838,11 +8506,7 @@ namespace SplitWalls
 
 						listaWalls_Final_siCambia.Add(wall_F2);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_F2, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_F2, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_F2, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_F2, 0);
+						WallJoinHelper.DisableJoins(wall_F2);
 
 						Parameter WALL_USER_HEIGHT_PARAMF2 = wall_F2.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 						if (!WALL_USER_HEIGHT_PARAMF2.IsReadOnly)
@@ -8855,11 +8519,7 @@ namespace SplitWalls
 
 					listaWalls_Final_siCambia.Add(wall_F2_arriba);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F2_arriba, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_F2_arriba, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F2_arriba, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_F2_arriba, 0);
+					WallJoinHelper.DisableJoins(wall_F2_arriba);
 
 					Parameter WALL_USER_HEIGHT_PARAMF2_arriba = wall_F2_arriba.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 					if (!WALL_USER_HEIGHT_PARAMF2_arriba.IsReadOnly)
@@ -8882,7 +8542,7 @@ namespace SplitWalls
 					// wall final final agregarle las ventanas que falta en el ubicación dPH respectiva.
 
 					double ultima_dVFo = lista_dVFo.First();
-					double ultima_dVFo_4 = ultima_dVFo + 4 / 304.8;
+					double ultima_dVFo_4 = ultima_dVFo + 4 / RevitUnitHelper.MmToFeet;
 
 					XYZ Point_ultima_dVFo_4 = wallCurve.Evaluate(ultima_dVFo_4, false);
 
@@ -8892,11 +8552,7 @@ namespace SplitWalls
 
 					listaWalls_Final_siCambia.Add(wall_F3);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F3, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_F3, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F3, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_F3, 0);
+					WallJoinHelper.DisableJoins(wall_F3);
 
 					Parameter WALL_USER_HEIGHT_PARAMF3 = wall_F3.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 					if (!WALL_USER_HEIGHT_PARAMF3.IsReadOnly)
@@ -9140,9 +8796,9 @@ namespace SplitWalls
 
 				double distanta_total_wall = endParam - stParam;
 
-				double alpha = distanta_total_wall % (anchopanel / 304.8); // 3.38 * 304.8 =
+				double alpha = distanta_total_wall % (anchopanel / RevitUnitHelper.MmToFeet); // 3.38 * RevitUnitHelper.MmToFeet =
 
-				double numero_paneles_total = (distanta_total_wall - alpha) / (anchopanel / 304.8); // 7
+				double numero_paneles_total = (distanta_total_wall - alpha) / (anchopanel / RevitUnitHelper.MmToFeet); // 7
 				int numero_paneles_total_int = (int)numero_paneles_total; // 7
 
 				List<double> lista_d = new List<double>();
@@ -9152,23 +8808,23 @@ namespace SplitWalls
 
 				for (int i = 0; i < numero_paneles_total_int; i++)
 				{
-					lista_d.Add(stParam + ((anchopanel / 304.8) * (i + 1) + (4 / 304.8) * i));
+					lista_d.Add(stParam + ((anchopanel / RevitUnitHelper.MmToFeet) * (i + 1) + (4 / RevitUnitHelper.MmToFeet) * i));
 				}
 				for (int i = 0; i < numero_paneles_total_int; i++)
 				{
-					lista_d_muro4.Add(stParam + ((anchopanel / 304.8) * (i + 1) + (4 / 304.8) * (i + 1)));
+					lista_d_muro4.Add(stParam + ((anchopanel / RevitUnitHelper.MmToFeet) * (i + 1) + (4 / RevitUnitHelper.MmToFeet) * (i + 1)));
 				}
 
 
 				#endregion
 
 
-				if (longitud_double < anchopanel / 304.8)
+				if (longitud_double < anchopanel / RevitUnitHelper.MmToFeet)
 				{
 					TaskDialog.Show("Dynoscript", "El Muro tiene una longitud actual menor al valor ingresado para la longitud");
 					return null;
 				}
-				else if (longitud_double == anchopanel / 304.8)
+				else if (longitud_double == anchopanel / RevitUnitHelper.MmToFeet)
 				{
 					TaskDialog.Show("Dynoscript", "El Muro tiene una longitud actual igual al valor ingresado para la longitud");
 					return null;
@@ -9193,8 +8849,8 @@ namespace SplitWalls
 					}
 
 
-					double d1 = stParam + (anchopanel / 304.8);
-					double d1_4 = d1 + 4 / 304.8;
+					double d1 = stParam + (anchopanel / RevitUnitHelper.MmToFeet);
+					double d1_4 = d1 + 4 / RevitUnitHelper.MmToFeet;
 
 					XYZ Point_d1 = wallCurve.Evaluate(d1, false);
 					XYZ Point_d1_4 = wallCurve.Evaluate(d1_4, false);
@@ -9206,11 +8862,7 @@ namespace SplitWalls
 						#region Crear Wall Primer
 						Line newLine01 = Line.CreateBound(stPoint, Point_d1);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+						WallJoinHelper.DisableJoins(wall_1);
 
 						((LocationCurve)wall_1.Location).Curve = newLine01;
 
@@ -9225,8 +8877,8 @@ namespace SplitWalls
 						// Crear Walls Antes al dVIo
 						for (int i = 0; i < lista_d.Count() - 1; i++) // antes dVIo
 						{
-							double di = lista_d_muro4[i] + (anchopanel / 304.8); // d2
-							double di_4 = di + 4 / 304.8; // d2_4
+							double di = lista_d_muro4[i] + (anchopanel / RevitUnitHelper.MmToFeet); // d2
+							double di_4 = di + 4 / RevitUnitHelper.MmToFeet; // d2_4
 
 							//TaskDialog.Show("dynoscript", lista_d_3.Count().ToString());
 							XYZ PointA = wallCurve.Evaluate(lista_d_muro4[i], false);
@@ -9237,11 +8889,7 @@ namespace SplitWalls
 
 							listaWalls_Final_siCambia.Add(wall_N);
 
-							if (WallUtils.IsWallJoinAllowedAtEnd(wall_N, 1))
-								WallUtils.DisallowWallJoinAtEnd(wall_N, 1);
-
-							if (WallUtils.IsWallJoinAllowedAtEnd(wall_N, 0))
-								WallUtils.DisallowWallJoinAtEnd(wall_N, 0);
+							WallJoinHelper.DisableJoins(wall_N);
 
 							Parameter WALL_USER_HEIGHT_PARAM12 = wall_N.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 							if (!WALL_USER_HEIGHT_PARAM12.IsReadOnly)
@@ -9266,11 +8914,7 @@ namespace SplitWalls
 
 						listaWalls_Final_siCambia.Add(wall_F3_ultimo);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_F3_ultimo, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_F3_ultimo, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_F3_ultimo, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_F3_ultimo, 0);
+						WallJoinHelper.DisableJoins(wall_F3_ultimo);
 
 						Parameter WALL_USER_HEIGHT_PARAMF3_ultimo = wall_F3_ultimo.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 						if (!WALL_USER_HEIGHT_PARAMF3_ultimo.IsReadOnly)
@@ -9289,11 +8933,7 @@ namespace SplitWalls
 						#region Crear Wall Primer
 						Line newLine01 = Line.CreateBound(stPoint, Point_d1);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+						WallJoinHelper.DisableJoins(wall_1);
 
 						((LocationCurve)wall_1.Location).Curve = newLine01;
 
@@ -9308,8 +8948,8 @@ namespace SplitWalls
 						// Crear Walls Antes al dVIo
 						for (int i = 0; i < lista_d.Count() - 1; i++) // antes dVIo
 						{
-							double di = lista_d_muro4[i] + (anchopanel / 304.8); // d2
-							double di_4 = di + 4 / 304.8; // d2_4
+							double di = lista_d_muro4[i] + (anchopanel / RevitUnitHelper.MmToFeet); // d2
+							double di_4 = di + 4 / RevitUnitHelper.MmToFeet; // d2_4
 
 							//TaskDialog.Show("dynoscript", lista_d_3.Count().ToString());
 							XYZ PointA = wallCurve.Evaluate(lista_d_muro4[i], false);
@@ -9320,11 +8960,7 @@ namespace SplitWalls
 
 							listaWalls_Final_siCambia.Add(wall_N);
 
-							if (WallUtils.IsWallJoinAllowedAtEnd(wall_N, 1))
-								WallUtils.DisallowWallJoinAtEnd(wall_N, 1);
-
-							if (WallUtils.IsWallJoinAllowedAtEnd(wall_N, 0))
-								WallUtils.DisallowWallJoinAtEnd(wall_N, 0);
+							WallJoinHelper.DisableJoins(wall_N);
 
 							Parameter WALL_USER_HEIGHT_PARAM12 = wall_N.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 							if (!WALL_USER_HEIGHT_PARAM12.IsReadOnly)
@@ -9349,11 +8985,7 @@ namespace SplitWalls
 
 						listaWalls_Final_siCambia.Add(wall_F3_ultimo);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_F3_ultimo, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_F3_ultimo, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_F3_ultimo, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_F3_ultimo, 0);
+						WallJoinHelper.DisableJoins(wall_F3_ultimo);
 
 						Parameter WALL_USER_HEIGHT_PARAMF3_ultimo = wall_F3_ultimo.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 						if (!WALL_USER_HEIGHT_PARAMF3_ultimo.IsReadOnly)
@@ -9372,11 +9004,7 @@ namespace SplitWalls
 						#region Crear Wall Primer
 						Line newLine01 = Line.CreateBound(stPoint, Point_d1);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+						WallJoinHelper.DisableJoins(wall_1);
 
 						((LocationCurve)wall_1.Location).Curve = newLine01;
 
@@ -9391,8 +9019,8 @@ namespace SplitWalls
 						// Crear Walls Antes al dVIo
 						for (int i = 0; i < lista_d.Count() - 1; i++) // antes dVIo
 						{
-							double di = lista_d_muro4[i] + (anchopanel / 304.8); // d2
-							double di_4 = di + 4 / 304.8; // d2_4
+							double di = lista_d_muro4[i] + (anchopanel / RevitUnitHelper.MmToFeet); // d2
+							double di_4 = di + 4 / RevitUnitHelper.MmToFeet; // d2_4
 
 							//TaskDialog.Show("dynoscript", lista_d_3.Count().ToString());
 							XYZ PointA = wallCurve.Evaluate(lista_d_muro4[i], false);
@@ -9403,11 +9031,7 @@ namespace SplitWalls
 
 							listaWalls_Final_siCambia.Add(wall_N);
 
-							if (WallUtils.IsWallJoinAllowedAtEnd(wall_N, 1))
-								WallUtils.DisallowWallJoinAtEnd(wall_N, 1);
-
-							if (WallUtils.IsWallJoinAllowedAtEnd(wall_N, 0))
-								WallUtils.DisallowWallJoinAtEnd(wall_N, 0);
+							WallJoinHelper.DisableJoins(wall_N);
 
 							Parameter WALL_USER_HEIGHT_PARAM12 = wall_N.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 							if (!WALL_USER_HEIGHT_PARAM12.IsReadOnly)
@@ -9432,11 +9056,7 @@ namespace SplitWalls
 
 						listaWalls_Final_siCambia.Add(wall_F3_ultimo);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_F3_ultimo, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_F3_ultimo, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_F3_ultimo, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_F3_ultimo, 0);
+						WallJoinHelper.DisableJoins(wall_F3_ultimo);
 
 						Parameter WALL_USER_HEIGHT_PARAMF3_ultimo = wall_F3_ultimo.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 						if (!WALL_USER_HEIGHT_PARAMF3_ultimo.IsReadOnly)
@@ -9658,9 +9278,9 @@ namespace SplitWalls
 
 				double distanta_total_wall = endParam - stParam;
 
-				double alpha = distanta_total_wall % (anchopanel / 304.8); // 3.38 * 304.8 =
+				double alpha = distanta_total_wall % (anchopanel / RevitUnitHelper.MmToFeet); // 3.38 * RevitUnitHelper.MmToFeet =
 
-				double numero_paneles_total = (distanta_total_wall - alpha) / (anchopanel / 304.8); // 7
+				double numero_paneles_total = (distanta_total_wall - alpha) / (anchopanel / RevitUnitHelper.MmToFeet); // 7
 				int numero_paneles_total_int = (int)numero_paneles_total; // 7
 
 				List<double> lista_d = new List<double>();
@@ -9670,11 +9290,11 @@ namespace SplitWalls
 
 				for (int i = 0; i < numero_paneles_total_int; i++)
 				{
-					lista_d.Add(stParam + ((anchopanel / 304.8) * (i + 1) + (4 / 304.8) * i));
+					lista_d.Add(stParam + ((anchopanel / RevitUnitHelper.MmToFeet) * (i + 1) + (4 / RevitUnitHelper.MmToFeet) * i));
 				}
 				for (int i = 0; i < numero_paneles_total_int; i++)
 				{
-					lista_d_muro4.Add(stParam + ((anchopanel / 304.8) * (i + 1) + (4 / 304.8) * (i + 1)));
+					lista_d_muro4.Add(stParam + ((anchopanel / RevitUnitHelper.MmToFeet) * (i + 1) + (4 / RevitUnitHelper.MmToFeet) * (i + 1)));
 				}
 
 
@@ -9716,12 +9336,12 @@ namespace SplitWalls
 				#endregion
 
 
-				if (longitud_double < anchopanel / 304.8)
+				if (longitud_double < anchopanel / RevitUnitHelper.MmToFeet)
 				{
 					TaskDialog.Show("Dynoscript", "El Muro tiene una longitud actual menor al valor ingresado para la longitud");
 					return null;
 				}
-				else if (longitud_double == anchopanel / 304.8)
+				else if (longitud_double == anchopanel / RevitUnitHelper.MmToFeet)
 				{
 					TaskDialog.Show("Dynoscript", "El Muro tiene una longitud actual igual al valor ingresado para la longitud");
 					return null;
@@ -9745,8 +9365,8 @@ namespace SplitWalls
 
 
 
-					double d1 = stParam + (anchopanel / 304.8);
-					double d1_4 = d1 + 4 / 304.8;
+					double d1 = stParam + (anchopanel / RevitUnitHelper.MmToFeet);
+					double d1_4 = d1 + 4 / RevitUnitHelper.MmToFeet;
 
 					XYZ Point_d1 = wallCurve.Evaluate(d1, false);
 					XYZ Point_d1_4 = wallCurve.Evaluate(d1_4, false);
@@ -9758,11 +9378,7 @@ namespace SplitWalls
 						#region Crear Wall Primer
 						Line newLine01 = Line.CreateBound(stPoint, Point_d1);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+						WallJoinHelper.DisableJoins(wall_1);
 
 						((LocationCurve)wall_1.Location).Curve = newLine01;
 
@@ -9777,8 +9393,8 @@ namespace SplitWalls
 						// Crear Walls Antes al dVIo
 						for (int i = 0; i < lista_d.Count() - 1; i++) // antes dVIo
 						{
-							double di = lista_d_muro4[i] + (anchopanel / 304.8); // d2
-							double di_4 = di + 4 / 304.8; // d2_4
+							double di = lista_d_muro4[i] + (anchopanel / RevitUnitHelper.MmToFeet); // d2
+							double di_4 = di + 4 / RevitUnitHelper.MmToFeet; // d2_4
 
 							//TaskDialog.Show("dynoscript", lista_d_3.Count().ToString());
 							XYZ PointA = wallCurve.Evaluate(lista_d_muro4[i], false);
@@ -9789,11 +9405,7 @@ namespace SplitWalls
 
 							listaWalls_Final_siCambia.Add(wall_N);
 
-							if (WallUtils.IsWallJoinAllowedAtEnd(wall_N, 1))
-								WallUtils.DisallowWallJoinAtEnd(wall_N, 1);
-
-							if (WallUtils.IsWallJoinAllowedAtEnd(wall_N, 0))
-								WallUtils.DisallowWallJoinAtEnd(wall_N, 0);
+							WallJoinHelper.DisableJoins(wall_N);
 
 							Parameter WALL_USER_HEIGHT_PARAM12 = wall_N.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 							if (!WALL_USER_HEIGHT_PARAM12.IsReadOnly)
@@ -9815,11 +9427,7 @@ namespace SplitWalls
 						#region Crear Wall Primer
 						Line newLine01 = Line.CreateBound(stPoint, Point_d1);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+						WallJoinHelper.DisableJoins(wall_1);
 
 						((LocationCurve)wall_1.Location).Curve = newLine01;
 
@@ -9834,8 +9442,8 @@ namespace SplitWalls
 						// Crear Walls Antes al dVIo
 						for (int i = 0; i < lista_d.Count() - 1; i++) // antes dVIo
 						{
-							double di = lista_d_muro4[i] + (anchopanel / 304.8); // d2
-							double di_4 = di + 4 / 304.8; // d2_4
+							double di = lista_d_muro4[i] + (anchopanel / RevitUnitHelper.MmToFeet); // d2
+							double di_4 = di + 4 / RevitUnitHelper.MmToFeet; // d2_4
 
 							//TaskDialog.Show("dynoscript", lista_d_3.Count().ToString());
 							XYZ PointA = wallCurve.Evaluate(lista_d_muro4[i], false);
@@ -9846,11 +9454,7 @@ namespace SplitWalls
 
 							listaWalls_Final_siCambia.Add(wall_N);
 
-							if (WallUtils.IsWallJoinAllowedAtEnd(wall_N, 1))
-								WallUtils.DisallowWallJoinAtEnd(wall_N, 1);
-
-							if (WallUtils.IsWallJoinAllowedAtEnd(wall_N, 0))
-								WallUtils.DisallowWallJoinAtEnd(wall_N, 0);
+							WallJoinHelper.DisableJoins(wall_N);
 
 							Parameter WALL_USER_HEIGHT_PARAM12 = wall_N.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 							if (!WALL_USER_HEIGHT_PARAM12.IsReadOnly)
@@ -9870,11 +9474,7 @@ namespace SplitWalls
 						#region Crear Wall Primer
 						Line newLine01 = Line.CreateBound(stPoint, Point_d1);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+						WallJoinHelper.DisableJoins(wall_1);
 
 						((LocationCurve)wall_1.Location).Curve = newLine01;
 
@@ -9889,8 +9489,8 @@ namespace SplitWalls
 						// Crear Walls Antes al dVIo
 						for (int i = 0; i < lista_d.Count() - 1; i++) // antes dVIo
 						{
-							double di = lista_d_muro4[i] + (anchopanel / 304.8); // d2
-							double di_4 = di + 4 / 304.8; // d2_4
+							double di = lista_d_muro4[i] + (anchopanel / RevitUnitHelper.MmToFeet); // d2
+							double di_4 = di + 4 / RevitUnitHelper.MmToFeet; // d2_4
 
 							//TaskDialog.Show("dynoscript", lista_d_3.Count().ToString());
 							XYZ PointA = wallCurve.Evaluate(lista_d_muro4[i], false);
@@ -9901,11 +9501,7 @@ namespace SplitWalls
 
 							listaWalls_Final_siCambia.Add(wall_N);
 
-							if (WallUtils.IsWallJoinAllowedAtEnd(wall_N, 1))
-								WallUtils.DisallowWallJoinAtEnd(wall_N, 1);
-
-							if (WallUtils.IsWallJoinAllowedAtEnd(wall_N, 0))
-								WallUtils.DisallowWallJoinAtEnd(wall_N, 0);
+							WallJoinHelper.DisableJoins(wall_N);
 
 							Parameter WALL_USER_HEIGHT_PARAM12 = wall_N.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 							if (!WALL_USER_HEIGHT_PARAM12.IsReadOnly)
@@ -9931,11 +9527,7 @@ namespace SplitWalls
 
 					listaWalls_Final_siCambia.Add(wall_F3_ultimo);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F3_ultimo, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_F3_ultimo, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F3_ultimo, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_F3_ultimo, 0);
+					WallJoinHelper.DisableJoins(wall_F3_ultimo);
 
 					Parameter WALL_USER_HEIGHT_PARAMF3_ultimo = wall_F3_ultimo.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 					if (!WALL_USER_HEIGHT_PARAMF3_ultimo.IsReadOnly)
@@ -10154,9 +9746,9 @@ namespace SplitWalls
 
 				double distanta_total_wall = endParam - stParam;
 
-				double alpha = distanta_total_wall % (anchopanel / 304.8); // 3.38 * 304.8 =
+				double alpha = distanta_total_wall % (anchopanel / RevitUnitHelper.MmToFeet); // 3.38 * RevitUnitHelper.MmToFeet =
 
-				double numero_paneles_total = (distanta_total_wall - alpha) / (anchopanel / 304.8); // 7
+				double numero_paneles_total = (distanta_total_wall - alpha) / (anchopanel / RevitUnitHelper.MmToFeet); // 7
 				int numero_paneles_total_int = (int)numero_paneles_total; // 7
 
 				List<double> lista_d = new List<double>();
@@ -10166,11 +9758,11 @@ namespace SplitWalls
 
 				for (int i = 0; i < numero_paneles_total_int; i++)
 				{
-					lista_d.Add(stParam + ((anchopanel / 304.8) * (i + 1) + (4 / 304.8) * i));
+					lista_d.Add(stParam + ((anchopanel / RevitUnitHelper.MmToFeet) * (i + 1) + (4 / RevitUnitHelper.MmToFeet) * i));
 				}
 				for (int i = 0; i < numero_paneles_total_int; i++)
 				{
-					lista_d_muro4.Add(stParam + ((anchopanel / 304.8) * (i + 1) + (4 / 304.8) * (i + 1)));
+					lista_d_muro4.Add(stParam + ((anchopanel / RevitUnitHelper.MmToFeet) * (i + 1) + (4 / RevitUnitHelper.MmToFeet) * (i + 1)));
 				}
 
 
@@ -10212,12 +9804,12 @@ namespace SplitWalls
 				#endregion
 
 
-				if (longitud_double < anchopanel / 304.8)
+				if (longitud_double < anchopanel / RevitUnitHelper.MmToFeet)
 				{
 					//TaskDialog.Show("Mensaje", "El Muro tiene una longitud actual menor al valor ingresado para el ancho de Panel");
 					//	           	return null;
 				}
-				else if (longitud_double == anchopanel / 304.8)
+				else if (longitud_double == anchopanel / RevitUnitHelper.MmToFeet)
 				{
 					//TaskDialog.Show("Mensaje", "El Muro tiene una longitud actual igual al valor ingresado para el ancho de Panel");
 					//	           	return null;
@@ -10241,8 +9833,8 @@ namespace SplitWalls
 
 
 
-					double d1 = stParam + (anchopanel / 304.8);
-					double d1_4 = d1 + 4 / 304.8;
+					double d1 = stParam + (anchopanel / RevitUnitHelper.MmToFeet);
+					double d1_4 = d1 + 4 / RevitUnitHelper.MmToFeet;
 
 					XYZ Point_d1 = wallCurve.Evaluate(d1, false);
 					XYZ Point_d1_4 = wallCurve.Evaluate(d1_4, false);
@@ -10253,11 +9845,7 @@ namespace SplitWalls
 					#region Crear Wall Primer
 					Line newLine01 = Line.CreateBound(stPoint, Point_d1);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+					WallJoinHelper.DisableJoins(wall_1);
 
 					((LocationCurve)wall_1.Location).Curve = newLine01;
 
@@ -10272,8 +9860,8 @@ namespace SplitWalls
 					// Crear Walls Antes al dVIo
 					for (int i = 0; i < lista_d.Count() - 1; i++) // antes dVIo
 					{
-						double di = lista_d_muro4[i] + (anchopanel / 304.8); // d2
-						double di_4 = di + 4 / 304.8; // d2_4
+						double di = lista_d_muro4[i] + (anchopanel / RevitUnitHelper.MmToFeet); // d2
+						double di_4 = di + 4 / RevitUnitHelper.MmToFeet; // d2_4
 
 						//TaskDialog.Show("dynoscript", lista_d_3.Count().ToString());
 						XYZ PointA = wallCurve.Evaluate(lista_d_muro4[i], false);
@@ -10284,11 +9872,7 @@ namespace SplitWalls
 
 						listaWalls_Final_siCambia.Add(wall_N);
 
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_N, 1))
-							WallUtils.DisallowWallJoinAtEnd(wall_N, 1);
-
-						if (WallUtils.IsWallJoinAllowedAtEnd(wall_N, 0))
-							WallUtils.DisallowWallJoinAtEnd(wall_N, 0);
+						WallJoinHelper.DisableJoins(wall_N);
 
 						Parameter WALL_USER_HEIGHT_PARAM12 = wall_N.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 						if (!WALL_USER_HEIGHT_PARAM12.IsReadOnly)
@@ -10316,11 +9900,7 @@ namespace SplitWalls
 
 					listaWalls_Final_siCambia.Add(wall_F3_ultimo);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F3_ultimo, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_F3_ultimo, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F3_ultimo, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_F3_ultimo, 0);
+					WallJoinHelper.DisableJoins(wall_F3_ultimo);
 
 					Parameter WALL_USER_HEIGHT_PARAMF3_ultimo = wall_F3_ultimo.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 					if (!WALL_USER_HEIGHT_PARAMF3_ultimo.IsReadOnly)
@@ -10510,11 +10090,7 @@ namespace SplitWalls
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
 					lista_wall_return.Add(wall);
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -10691,11 +10267,7 @@ namespace SplitWalls
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
 					lista_wall_return.Add(wall);
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -10833,11 +10405,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -10973,11 +10541,7 @@ namespace SplitWalls
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
 					lista_wall_return.Add(wall);
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -11112,11 +10676,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -11252,11 +10812,7 @@ namespace SplitWalls
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
 					lista_wall_return.Add(wall);
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -11420,11 +10976,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -11584,11 +11136,7 @@ namespace SplitWalls
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 					lista_wall_return.Add(wall);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -11753,11 +11301,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -11915,11 +11459,7 @@ namespace SplitWalls
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 					lista_wall_return.Add(wall);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -12084,11 +11624,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -12247,11 +11783,7 @@ namespace SplitWalls
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
 					lista_wall_return.Add(wall);
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -12411,11 +11943,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -12574,11 +12102,7 @@ namespace SplitWalls
 					lista_wall_return.Add(wall);
 
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -12705,11 +12229,7 @@ namespace SplitWalls
 
 					lista_wall_return.Add(wall);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					//lista_wall_return.Add(wall);
 
@@ -12829,11 +12349,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					//lista_wall_return.Add(wall);
 
@@ -12955,11 +12471,7 @@ namespace SplitWalls
 
 					lista_wall_return.Add(wall);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					//lista_wall_return.Add(wall);
 
@@ -13078,11 +12590,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					//lista_wall_return.Add(wall);
 
@@ -13242,11 +12750,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -13398,11 +12902,7 @@ namespace SplitWalls
 
 
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -13528,11 +13028,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					//lista_wall_return.Add(wall);
 
@@ -13659,11 +13155,7 @@ namespace SplitWalls
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 					lista_wall_return.Add(wall);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					//lista_wall_return.Add(wall);
 
@@ -13796,11 +13288,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					//lista_wall_return.Add(wall);
 
@@ -13934,11 +13422,7 @@ namespace SplitWalls
 
 
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					//lista_wall_return.Add(wall);
 
@@ -14070,11 +13554,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					//lista_wall_return.Add(wall);
 
@@ -14206,11 +13686,7 @@ namespace SplitWalls
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 					lista_wall_return.Add(wall);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					//lista_wall_return.Add(wall);
 
@@ -14344,11 +13820,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					//lista_wall_return.Add(wall);
 
@@ -14483,11 +13955,7 @@ namespace SplitWalls
 
 
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					//lista_wall_return.Add(wall);
 
@@ -14593,11 +14061,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					lista_wall_return.Add(wall);
 
@@ -14699,11 +14163,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					lista_wall_return.Add(wall);
 
@@ -14811,11 +14271,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -14919,11 +14375,7 @@ namespace SplitWalls
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 					lista_wall_return.Add(wall);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -15014,11 +14466,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -15110,11 +14558,7 @@ namespace SplitWalls
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 					lista_wall_return.Add(wall);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -15214,11 +14658,7 @@ namespace SplitWalls
 
 
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 
 					Line linea1_casoEspecial = Line.CreateBound(stPoint, Nuevo_Point_dVIo);
@@ -15324,11 +14764,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -15423,11 +14859,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -15531,11 +14963,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -15627,11 +15055,7 @@ namespace SplitWalls
 
 					Line linea1 = Line.CreateBound(stPoint, endPoint);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_I, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_I, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_I, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_I, 0);
+					WallJoinHelper.DisableJoins(wall_I);
 
 					((LocationCurve)wall_I.Location).Curve = linea1;
 
@@ -15645,11 +15069,7 @@ namespace SplitWalls
 
 					Wall wall_F1_arriba = Wall.Create(doc, linea1, wall_I.LevelId, false);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1_arriba, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_F1_arriba, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1_arriba, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_F1_arriba, 0);
+					WallJoinHelper.DisableJoins(wall_F1_arriba);
 
 					Parameter WALL_USER_HEIGHT_PARAMF1_arriba = wall_F1_arriba.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 					if (!WALL_USER_HEIGHT_PARAMF1_arriba.IsReadOnly)
@@ -15764,11 +15184,7 @@ namespace SplitWalls
 					Line linea1 = Line.CreateBound(stPoint, endPoint);
 					Wall wall_F1_abajo = Wall.Create(doc, linea1, wall_I.LevelId, false);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1_abajo, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_F1_abajo, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1_abajo, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_F1_abajo, 0);
+					WallJoinHelper.DisableJoins(wall_F1_abajo);
 
 					//				((LocationCurve)wall_I.Location).Curve = linea1;
 
@@ -15782,11 +15198,7 @@ namespace SplitWalls
 
 					Wall wall_F1_arriba = Wall.Create(doc, linea1, wall_I.LevelId, false);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1_arriba, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_F1_arriba, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_F1_arriba, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_F1_arriba, 0);
+					WallJoinHelper.DisableJoins(wall_F1_arriba);
 
 					Parameter WALL_USER_HEIGHT_PARAMF1_arriba = wall_F1_arriba.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM);
 					if (!WALL_USER_HEIGHT_PARAMF1_arriba.IsReadOnly)
@@ -15870,11 +15282,7 @@ namespace SplitWalls
 
 					Line linea1 = Line.CreateBound(stPoint, endPoint);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_I, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_I, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_I, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_I, 0);
+					WallJoinHelper.DisableJoins(wall_I);
 
 					((LocationCurve)wall_I.Location).Curve = linea1;
 
@@ -15961,11 +15369,7 @@ namespace SplitWalls
 
 					Line linea1_casoEspecial = Line.CreateBound(Nuevo_Point_dVFo, endPoint);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_I, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_I, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_I, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_I, 0);
+					WallJoinHelper.DisableJoins(wall_I);
 
 					((LocationCurve)wall_I.Location).Curve = linea1;
 
@@ -16063,11 +15467,7 @@ namespace SplitWalls
 
 					Line linea1_casoEspecial = Line.CreateBound(Nuevo_Point_dVFo, endPoint);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_I, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_I, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_I, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_I, 0);
+					WallJoinHelper.DisableJoins(wall_I);
 
 					((LocationCurve)wall_I.Location).Curve = linea1;
 
@@ -16173,11 +15573,7 @@ namespace SplitWalls
 
 					Line linea1_casoEspecial = Line.CreateBound(stPoint, Nuevo_Point_dVI1);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_I, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_I, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_I, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_I, 0);
+					WallJoinHelper.DisableJoins(wall_I);
 
 					((LocationCurve)wall_I.Location).Curve = linea1;
 
@@ -16283,11 +15679,7 @@ namespace SplitWalls
 
 					Line linea1_casoEspecial = Line.CreateBound(Nuevo_Point_dVI1, endPoint);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_I, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_I, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_I, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_I, 0);
+					WallJoinHelper.DisableJoins(wall_I);
 
 					((LocationCurve)wall_I.Location).Curve = linea1;
 
@@ -16431,11 +15823,7 @@ namespace SplitWalls
 					//
 					//		        Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_I, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_I, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_I, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_I, 0);
+					WallJoinHelper.DisableJoins(wall_I);
 
 					//doc.Delete(wall_I.Id);
 
@@ -16544,11 +15932,7 @@ namespace SplitWalls
 
 					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
 
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall, 0);
+					WallJoinHelper.DisableJoins(wall);
 
 					doc.Delete(wall_I.Id);
 
@@ -16771,11 +16155,7 @@ namespace SplitWalls
 				}
 
 				Line newLine01 = Line.CreateBound(endPoint, stPoint);
-				if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-					WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-				if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-					WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+				WallJoinHelper.DisableJoins(wall_1);
 
 				((LocationCurve)wall_1.Location).Curve = newLine01;
 
@@ -17030,20 +16410,20 @@ namespace SplitWalls
 				double stParam = wallCurve.GetEndParameter(0);
 				double endParam = wallCurve.GetEndParameter(1);
 
-				double Param1 = stParam + anchopanel / 304.8;
+				double Param1 = stParam + anchopanel / RevitUnitHelper.MmToFeet;
 
 				double distanta_total_wall = endParam - stParam;
 
-				double alpha = distanta_total_wall % (anchopanel / 304.8); // 3.38 * 304.8 =
+				double alpha = distanta_total_wall % (anchopanel / RevitUnitHelper.MmToFeet); // 3.38 * RevitUnitHelper.MmToFeet =
 
-				double numero_paneles_total = (distanta_total_wall - alpha) / (anchopanel / 304.8); // 7
+				double numero_paneles_total = (distanta_total_wall - alpha) / (anchopanel / RevitUnitHelper.MmToFeet); // 7
 				int numero_paneles_total_int = (int)numero_paneles_total; // 7
 
 				List<double> lista_d = new List<double>();
 
 				for (int i = 0; i < numero_paneles_total_int; i++)
 				{
-					lista_d.Add(stParam + (i + 1) * (anchopanel / 304.8));
+					lista_d.Add(stParam + (i + 1) * (anchopanel / RevitUnitHelper.MmToFeet));
 				}
 
 
@@ -17085,12 +16465,12 @@ namespace SplitWalls
 
 				#endregion
 
-				if (longitud_double < anchopanel / 304.8)
+				if (longitud_double < anchopanel / RevitUnitHelper.MmToFeet)
 				{
 					//TaskDialog.Show("Dynoscript", "El Muro tiene una longitud actual menor al valor ingresado para la longitud");
 					return;
 				}
-				else if (longitud_double == anchopanel / 304.8)
+				else if (longitud_double == anchopanel / RevitUnitHelper.MmToFeet)
 				{
 					//TaskDialog.Show("Dynoscript", "El Muro tiene una longitud actual igual al valor ingresado para la longitud");
 					return;
@@ -17110,11 +16490,7 @@ namespace SplitWalls
 					// CORREGIR WALL 1 EXISTENTE
 
 					Line newLine01 = Line.CreateBound(stPoint, Point1);
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-						WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-					if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-						WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+					WallJoinHelper.DisableJoins(wall_1);
 
 					((LocationCurve)wall_1.Location).Curve = newLine01;
 
@@ -17192,11 +16568,7 @@ namespace SplitWalls
 				// CORREGIR WALL 1 EXISTENTE
 
 				Line newLine01 = Line.CreateBound(endPoint, stPoint);
-				if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-					WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-				if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-					WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+				WallJoinHelper.DisableJoins(wall_1);
 
 				((LocationCurve)wall_1.Location).Curve = newLine01;
 
@@ -17230,7 +16602,7 @@ namespace SplitWalls
 				XYZ endPoint = wallCurve.Evaluate(endParam, false);
 
 
-				double p40 = endParam - 4 / 304.8;
+				double p40 = endParam - 4 / RevitUnitHelper.MmToFeet;
 				XYZ p40Point = wallCurve.Evaluate(p40, false);
 
 				Transaction trans = new Transaction(doc);
@@ -17240,11 +16612,7 @@ namespace SplitWalls
 				// CORREGIR WALL 1 EXISTENTE
 
 				Line newLine01 = Line.CreateBound(stPoint, p40Point); // stPoint, (endPoint - 40)
-				if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 1))
-					WallUtils.DisallowWallJoinAtEnd(wall_1, 1);
-
-				if (WallUtils.IsWallJoinAllowedAtEnd(wall_1, 0))
-					WallUtils.DisallowWallJoinAtEnd(wall_1, 0);
+				WallJoinHelper.DisableJoins(wall_1);
 
 				((LocationCurve)wall_1.Location).Curve = newLine01;
 
