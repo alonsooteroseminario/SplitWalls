@@ -525,58 +525,6 @@ namespace SplitWalls
 
 			#endregion
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-			/* DEAD_BLOCK_TO_REMOVE */
-			// ANCHOR_LINE
-				}
-				catch (Exception e2_DEAD)
-				{
-					throw;
-				}
-
-
-
-
-
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-
-
-			} // OK ! Panelizar antes del vano . Pick Objects Selection .
-
-
-
-
-			#endregion
-
-
-
 			#region 6ta Revision
 
 			void Revision6_BUTTON_2_OBS_TODO_WALL_INPUT(int anchopanel_UI, Element _wall_)
