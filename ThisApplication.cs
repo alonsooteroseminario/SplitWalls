@@ -164,7 +164,6 @@ namespace SplitWalls
 
 			#region 6ta Revision
 
-			  // ESTE FUNCIONA ACTUALMENTE
 			/// <summary>
 			/// Unified button dispatcher: pick one or many walls, optionally flip each,
 			/// then call <paramref name="strategy"/> on each.
@@ -188,8 +187,6 @@ namespace SplitWalls
 
 			void Revision6_Button_2_OBS_TODO_WALL(int anchopanel_UI, Element _wall_)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
 				//// Get Active View
 				//View activeView = this.ActiveUIDocument.ActiveView;
@@ -300,15 +297,12 @@ namespace SplitWalls
 
 
 			}
-			// ESTE FUNCIONA ACTUALMENTE
 			List<Wall> Revision6_Button_2_OBS_INPUT(int anchopanel_UI, Element _wall_)
 			{
 				List<Wall> lista_wall_final_retirada = new List<Wall>();
 
 				try
 				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
 
 					//// Get Active View
 					//View activeView = this.ActiveUIDocument.ActiveView;
@@ -469,14 +463,10 @@ namespace SplitWalls
 				return lista_wall_final_retirada;
 
 			}
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			void Revision6_Button_2_OBS(int anchopanel_UI, Element _wall_)
 			{
 				try
 				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
 
 					//// Get Active View
 					//View activeView = this.ActiveUIDocument.ActiveView;
@@ -691,15 +681,12 @@ namespace SplitWalls
 				}
 
 			}
-			// ESTE FUNCIONA ACTUALMENTE
 
 
 			void Revision6_Button_2_SMARTPANEL(int anchopanel_UI, Element _wall_)
 			{
 				try
 				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
 
 					//// Get Active View
 					//View activeView = this.ActiveUIDocument.ActiveView;
@@ -6531,14 +6518,11 @@ namespace SplitWalls
 
 
 			} //OKKKKKKKKKKKKKKKKKKKK!
-			  // ESTE FUNCIONA ACTUALMENTE
 			Tuple<List<List<Wall>>, List<List<XYZ>>, List<List<double>>> Revision6_DYNO_PanelizarMuroInicial_OSB(Wall e, int _anchopanel_)
 			{
 
 				#region inicio
 
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
 				//// Get Active View
 				//View activeView = this.ActiveUIDocument.ActiveView;
@@ -7295,15 +7279,11 @@ namespace SplitWalls
 				Tuple<List<List<Wall>>, List<List<XYZ>>, List<List<double>>> tupla = new Tuple<List<List<Wall>>, List<List<XYZ>>, List<List<double>>>(listadelistasWalls_Final, Puntos_Ventana, lista_delistas_conDatosVentanas);
 				return tupla;
 			}
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			Tuple<List<List<Wall>>, List<List<XYZ>>, List<List<double>>> Revision6_DYNO_PanelizarMuroInicial_OSB_1_VENTANA(Wall e, int _anchopanel_)
 			{
 
 				#region inicio
 
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
 				//// Get Active View
 				//View activeView = this.ActiveUIDocument.ActiveView;
@@ -7984,15 +7964,11 @@ namespace SplitWalls
 				Tuple<List<List<Wall>>, List<List<XYZ>>, List<List<double>>> tupla = new Tuple<List<List<Wall>>, List<List<XYZ>>, List<List<double>>>(listadelistasWalls_Final, Puntos_Ventana, lista_delistas_conDatosVentanas);
 				return tupla;
 			}
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			Tuple<List<List<Wall>>, List<List<XYZ>>, List<List<double>>, List<BoundingBoxXYZ>> Revision6_DYNO_PanelizarMuroInicial_SMARTPANEL(Wall e, int _anchopanel_)
 			{
 
 				#region inicio
 
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
 				//// Get Active View
 				//View activeView = this.ActiveUIDocument.ActiveView;
@@ -8462,14 +8438,11 @@ namespace SplitWalls
 				Tuple<List<List<Wall>>, List<List<XYZ>>, List<List<double>>, List<BoundingBoxXYZ>> tupla = new Tuple<List<List<Wall>>, List<List<XYZ>>, List<List<double>>, List<BoundingBoxXYZ>>(listadelistasWalls_Final, Puntos_Ventana, lista_delistas_conDatosVentanas, lista_bb);
 				return tupla;
 			}
-			// ESTE FUNCIONA ACTUALMENTE
 			Tuple<List<List<Wall>>, List<List<XYZ>>, List<List<double>>> Revision6_DYNO_PanelizarMuroInicial_SMARTPANEL_1_VENTANA(Wall e, int _anchopanel_)
 			{
 
 				#region inicio
 
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
 				//// Get Active View
 				//View activeView = this.ActiveUIDocument.ActiveView;
@@ -8900,15 +8873,11 @@ namespace SplitWalls
 				Tuple<List<List<Wall>>, List<List<XYZ>>, List<List<double>>> tupla = new Tuple<List<List<Wall>>, List<List<XYZ>>, List<List<double>>>(listadelistasWalls_Final, Puntos_Ventana, lista_delistas_conDatosVentanas);
 				return tupla;
 			} // okkkkkkkkkkkkkkkkkkkkk!
-			  // ESTE FUNCIONA ACTUALMENTE
-			  // ESTE FUNCIONA ACTUALMENTE
 			void Revision6_DYNO_PanelizarMuroInicial_SMARTPANEL_0_VENTANA(Wall e, int _anchopanel_)
 			{
 
 				#region inicio
 
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
 				//// Get Active View
 				//View activeView = this.ActiveUIDocument.ActiveView;
@@ -9273,12 +9242,29 @@ namespace SplitWalls
 				//			Tuple< List<List<Wall>>, List<List<XYZ>>, List<List<double>> > tupla = new Tuple< List<List<Wall>>, List<List<XYZ>>, List<List<double>> >(listadelistasWalls_Final, Puntos_Ventana, lista_delistas_conDatosVentanas);
 				//	        return tupla;
 			} // okkkkkkkkkkkkkkkkkkkkk!
-			  // ESTE FUNCIONA ACTUALMENTE
 
 
 
 
-			Wall Revision6_DYNO_Wall_EditProfile_U_PUERTA_VENTANA_derecha_return(Wall _wall_,
+						/// <summary>
+			/// Replace <paramref name="source"/> wall with a new wall built from
+			/// <paramref name="profile"/>. Handles transaction, Wall.Create,
+			/// DisableJoins, and deletion of the original wall.
+			/// </summary>
+			Wall ReplaceWallWithProfile(Wall source, IList<Curve> profile)
+			{
+				using (Transaction t = new Transaction(doc, "wall"))
+				{
+					t.Start();
+					Wall w = Wall.Create(doc, profile, source.WallType.Id, source.LevelId, true);
+					WallJoinHelper.DisableJoins(w);
+					doc.Delete(source.Id);
+					t.Commit();
+					return w;
+				}
+			}
+
+Wall Revision6_DYNO_Wall_EditProfile_U_PUERTA_VENTANA_derecha_return(Wall _wall_,
 																	  double _alturaventana_1,
 																	  double _sillventanda_1,
 																	  double _alturaventana_2,
@@ -9287,10 +9273,7 @@ namespace SplitWalls
 																	  XYZ _Point_dVFo_1,
 																	  XYZ _Point_dVIo_2)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 				// INPUTS
 				Wall wall_I = _wall_;
@@ -9329,7 +9312,6 @@ namespace SplitWalls
 				double sillventanda2 = _sillventanda_2;
 				// INPUTS
 
-				List<Wall> lista_wall_return = new List<Wall>();
 
 
 				XYZ Nuevo_Point_dVFo1 = new XYZ(Point_dVFo1.X, Point_dVFo1.Y, stPoint.Z);
@@ -9358,13 +9340,7 @@ namespace SplitWalls
 				XYZ Point_dVI2_abajo = new XYZ(Nuevo_Point_dVIo2.X, Nuevo_Point_dVIo2.Y, Nuevo_Point_dVIo2.Z + sillventanda2);
 				XYZ Point_dVI2_arriba = new XYZ(Nuevo_Point_dVIo2.X, Nuevo_Point_dVIo2.Y, Nuevo_Point_dVIo2.Z + sillventanda2 + alturaventana2);
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 
 					//		        CurveArrArray arrcurve = new CurveArrArray();
 					//		        CurveArray curve = new CurveArray();
@@ -9438,24 +9414,11 @@ namespace SplitWalls
 					//		        	
 					//		        }
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-
-					lista_wall_return.Add(wall);
-					WallJoinHelper.DisableJoins(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 
 			}
-			// ESTE FUNCIONA ACTUALMENTE
 
 
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Wall_EditProfile_U_PUERTA_PUERTA_derecha_return(Wall _wall_,
 																	  double _alturaventana_1,
 																	  double _sillventanda_1,
@@ -9465,10 +9428,7 @@ namespace SplitWalls
 																	  XYZ _Point_dVFo_1,
 																	  XYZ _Point_dVIo_2)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 				// INPUTS
 				Wall wall_I = _wall_;
@@ -9507,7 +9467,6 @@ namespace SplitWalls
 				double sillventanda2 = _sillventanda_2;
 				// INPUTS
 
-				List<Wall> lista_wall_return = new List<Wall>();
 
 
 				XYZ Nuevo_Point_dVFo1 = new XYZ(Point_dVFo1.X, Point_dVFo1.Y, stPoint.Z);
@@ -9536,13 +9495,7 @@ namespace SplitWalls
 				XYZ Point_dVI2_abajo = new XYZ(Nuevo_Point_dVIo2.X, Nuevo_Point_dVIo2.Y, Nuevo_Point_dVIo2.Z + sillventanda2);
 				XYZ Point_dVI2_arriba = new XYZ(Nuevo_Point_dVIo2.X, Nuevo_Point_dVIo2.Y, Nuevo_Point_dVIo2.Z + sillventanda2 + alturaventana2);
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 
 					//		        CurveArrArray arrcurve = new CurveArrArray();
 					//		        CurveArray curve = new CurveArray();
@@ -9615,24 +9568,11 @@ namespace SplitWalls
 					//		        	
 					//		        }
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-
-					lista_wall_return.Add(wall);
-					WallJoinHelper.DisableJoins(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 
 			}
 
 
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Wall_EditProfile_U_PUERTA_VENTANA_izquierda_return(Wall _wall_,
 																	  double _alturaventana_1,
 																	  double _sillventanda_1,
@@ -9642,10 +9582,7 @@ namespace SplitWalls
 																	  XYZ _Point_dVIo_2,
 																	  XYZ _Point_dVFo_2)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 				// INPUTS
 				Wall wall_I = _wall_;
@@ -9688,7 +9625,6 @@ namespace SplitWalls
 				double sillventanda2 = _sillventanda_2;
 				// INPUTS
 
-				List<Wall> lista_wall_return = new List<Wall>();
 
 
 				//	        XYZ Nuevo_Point_dVFo1 = new XYZ(Point_dVFo1.X, Point_dVFo1.Y, stPoint.Z);
@@ -9716,13 +9652,7 @@ namespace SplitWalls
 				XYZ Point_dVF1_arriba = new XYZ(Nuevo_Point_dVFo1.X, Nuevo_Point_dVFo1.Y, Nuevo_Point_dVFo1.Z + sillventanda1 + alturaventana1);
 				XYZ Point_dVF1_abajo = new XYZ(Nuevo_Point_dVFo1.X, Nuevo_Point_dVFo1.Y, Nuevo_Point_dVFo1.Z + sillventanda1);
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 
 					//		        CurveArrArray arrcurve = new CurveArrArray();
 					//		        CurveArray curve = new CurveArray();
@@ -9754,26 +9684,12 @@ namespace SplitWalls
 					profile.Add(linea12);
 
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-
-					lista_wall_return.Add(wall);
-					WallJoinHelper.DisableJoins(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-				//List<Wall> lista_wall_return = new List<Wall>();
-				//lista_wall_return.Add(wall);    
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 
 			}
 
 
 
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Wall_EditProfile_U_PUERTA_PUERTA_izquierda_return(Wall _wall_,
 																	  double _alturaventana_1,
 																	  double _sillventanda_1,
@@ -9783,10 +9699,7 @@ namespace SplitWalls
 																	  XYZ _Point_dVIo_2,
 																	  XYZ _Point_dVFo_2)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 				// INPUTS
 				Wall wall_I = _wall_;
@@ -9795,7 +9708,6 @@ namespace SplitWalls
 
 				WallType wallType = wall_I.WallType as WallType;
 
-				List<Wall> lista_wall_return = new List<Wall>();
 
 				Parameter height = wall_I.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM); // altura primer Wall o  Wall_I
 				double height_double = height.AsDouble(); // altura primer Wall o  Wall_I = 2440
@@ -9859,13 +9771,7 @@ namespace SplitWalls
 				XYZ Point_dVF1_arriba = new XYZ(Nuevo_Point_dVFo1.X, Nuevo_Point_dVFo1.Y, Nuevo_Point_dVFo1.Z + sillventanda1 + alturaventana1);
 				XYZ Point_dVF1_abajo = new XYZ(Nuevo_Point_dVFo1.X, Nuevo_Point_dVFo1.Y, Nuevo_Point_dVFo1.Z + sillventanda1);
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 
 					Line linea1 = Line.CreateBound(Nuevo_Point_dVFo1, Nuevo_Point_dVIo2); // 1 Linea
 					Line linea2 = Line.CreateBound(Nuevo_Point_dVIo2, Point_dVI2_arriba); // 1 Linea
@@ -9893,19 +9799,7 @@ namespace SplitWalls
 
 
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-
-					lista_wall_return.Add(wall);
-					WallJoinHelper.DisableJoins(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-				//List<Wall> lista_wall_return = new List<Wall>();
-				//lista_wall_return.Add(wall);    
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 
 			}
 
@@ -9913,8 +9807,6 @@ namespace SplitWalls
 
 
 			// 3 ventanas en 1 muro
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Wall_EditProfile_3VENT_V_P_V_return(Wall _wall_,
 																	  double _alturaventana_1,
 																	  double _sillventanda_1,
@@ -9929,10 +9821,7 @@ namespace SplitWalls
 																	 XYZ _Point_dVIo_3,
 																	XYZ _Point_dVFo_3)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 				// INPUTS
 				Wall wall_I = _wall_;
@@ -9972,7 +9861,6 @@ namespace SplitWalls
 				XYZ Point_dVIo3 = _Point_dVIo_3;
 				XYZ Nuevo_Point_dVIo3 = new XYZ(Point_dVIo3.X, Point_dVIo3.Y, endPoint.Z);
 
-				List<Wall> lista_wall_return = new List<Wall>();
 
 				double alturaventana1 = _alturaventana_1;
 				double sillventanda1 = _sillventanda_1;
@@ -10019,12 +9907,7 @@ namespace SplitWalls
 				XYZ Point_dVIo3_abajo = new XYZ(Nuevo_Point_dVIo3.X, Nuevo_Point_dVIo3.Y, stPoint.Z + sillventanda3);
 
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 					Line linea1 = Line.CreateBound(stPoint, Nuevo_Point_dVIo2); // 1 Linea
 					Line linea2 = Line.CreateBound(Nuevo_Point_dVIo2, Point_dVI2_arriba); // 1 Linea
 					Line linea3 = Line.CreateBound(Point_dVI2_arriba, Point_dVF2_arriba); // 1 Linea
@@ -10060,19 +9943,7 @@ namespace SplitWalls
 					profile.Add(linea15);
 					profile.Add(linea16);
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-					lista_wall_return.Add(wall);
-
-					WallJoinHelper.DisableJoins(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-				//List<Wall> lista_wall_return = new List<Wall>();
-				//lista_wall_return.Add(wall);    
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 
 			}
 
@@ -10083,8 +9954,6 @@ namespace SplitWalls
 
 
 
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Wall_EditProfile_3VENT_V_P_P_return(Wall _wall_,
 																	  double _alturaventana_1,
 																	  double _sillventanda_1,
@@ -10099,10 +9968,7 @@ namespace SplitWalls
 																	 XYZ _Point_dVIo_3,
 																	XYZ _Point_dVFo_3)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 				// INPUTS
 				Wall wall_I = _wall_;
@@ -10153,7 +10019,6 @@ namespace SplitWalls
 				double sillventanda3 = _sillventanda_3;
 				// INPUTS
 
-				List<Wall> lista_wall_return = new List<Wall>();
 
 				//	        double dis = Nuevo_Point_dVFo.DistanceTo(endPoint);
 				//	           
@@ -10189,12 +10054,7 @@ namespace SplitWalls
 				XYZ Point_dVIo3_abajo = new XYZ(Nuevo_Point_dVIo3.X, Nuevo_Point_dVIo3.Y, stPoint.Z + sillventanda3);
 
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 
 					Line linea1 = Line.CreateBound(stPoint, Nuevo_Point_dVIo2); // 1 Linea
 					Line linea2 = Line.CreateBound(Nuevo_Point_dVIo2, Point_dVI2_arriba); // 1 Linea
@@ -10228,20 +10088,7 @@ namespace SplitWalls
 					profile.Add(linea14);
 
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-					lista_wall_return.Add(wall);
-
-					WallJoinHelper.DisableJoins(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-
-				//List<Wall> lista_wall_return = new List<Wall>();
-				//lista_wall_return.Add(wall);    
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 			}
 
 
@@ -10251,8 +10098,6 @@ namespace SplitWalls
 
 
 
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Wall_EditProfile_3VENT_P_P_V_return(Wall _wall_,
 																	  double _alturaventana_1,
 																	  double _sillventanda_1,
@@ -10267,10 +10112,7 @@ namespace SplitWalls
 																	 XYZ _Point_dVIo_3,
 																	XYZ _Point_dVFo_3)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 				// INPUTS
 				Wall wall_I = _wall_;
@@ -10321,7 +10163,6 @@ namespace SplitWalls
 				double sillventanda3 = _sillventanda_3;
 				// INPUTS
 
-				List<Wall> lista_wall_return = new List<Wall>();
 
 				//	        double dis = Nuevo_Point_dVFo.DistanceTo(endPoint);
 				//	           
@@ -10357,12 +10198,7 @@ namespace SplitWalls
 				XYZ Point_dVIo3_abajo = new XYZ(Nuevo_Point_dVIo3.X, Nuevo_Point_dVIo3.Y, stPoint.Z + sillventanda3);
 
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 
 					Line linea1 = Line.CreateBound(Nuevo_Point_dVFo1, Nuevo_Point_dVIo2); // 1 Linea
 					Line linea2 = Line.CreateBound(Nuevo_Point_dVIo2, Point_dVI2_arriba); // 1 Linea
@@ -10396,26 +10232,12 @@ namespace SplitWalls
 					profile.Add(linea14);
 
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-
-					lista_wall_return.Add(wall);
-					WallJoinHelper.DisableJoins(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-				//List<Wall> lista_wall_return = new List<Wall>();
-				//lista_wall_return.Add(wall);    
-				//return lista_wall_return.First();			   
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 
 			}
 
 
 
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Wall_EditProfile_3VENT_P_P_P_return(Wall _wall_,
 																	  double _alturaventana_1,
 																	  double _sillventanda_1,
@@ -10430,10 +10252,7 @@ namespace SplitWalls
 																	 XYZ _Point_dVIo_3,
 																	XYZ _Point_dVFo_3)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 				// INPUTS
 				Wall wall_I = _wall_;
@@ -10455,7 +10274,6 @@ namespace SplitWalls
 				double distanta_total_wall = endParam - stParam; // deberia ser 1220 == anchopanel
 
 
-				List<Wall> lista_wall_return = new List<Wall>();
 
 				XYZ Point_dVFo1 = _Point_dVFo_1;
 				XYZ Nuevo_Point_dVFo1 = new XYZ(Point_dVFo1.X, Point_dVFo1.Y, endPoint.Z);
@@ -10521,12 +10339,7 @@ namespace SplitWalls
 				XYZ Point_dVIo3_abajo = new XYZ(Nuevo_Point_dVIo3.X, Nuevo_Point_dVIo3.Y, stPoint.Z + sillventanda3);
 
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 
 					Line linea1 = Line.CreateBound(Nuevo_Point_dVFo1, Nuevo_Point_dVIo2); // 1 Linea
 					Line linea2 = Line.CreateBound(Nuevo_Point_dVIo2, Point_dVI2_arriba); // 1 Linea
@@ -10559,21 +10372,7 @@ namespace SplitWalls
 
 
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-
-					lista_wall_return.Add(wall);
-
-
-					WallJoinHelper.DisableJoins(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-
-
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 			}
 
 
@@ -10583,7 +10382,6 @@ namespace SplitWalls
 
 
 
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(Wall _wall_, double _alturaventana_1,
 																				 double _anchoventana_1,
 																				double _sillventanda_1,
@@ -10591,10 +10389,7 @@ namespace SplitWalls
 																				 XYZ _Point_dVFo_1,
 																				 double height_double)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 
 				// INPUTS
@@ -10616,7 +10411,6 @@ namespace SplitWalls
 				double stParam = wallCurve.GetEndParameter(0);
 				double endParam = wallCurve.GetEndParameter(1);
 
-				List<Wall> lista_wall_return = new List<Wall>();
 
 
 
@@ -10660,13 +10454,7 @@ namespace SplitWalls
 
 
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 
 					Line linea1 = Line.CreateBound(stPoint, Nuevo_Point_dVIo); // 1 Linea
 					Line linea2 = Line.CreateBound(Nuevo_Point_dVIo, Point_arriba_DVIo); // 2 Linea
@@ -10687,26 +10475,9 @@ namespace SplitWalls
 
 
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-
-					lista_wall_return.Add(wall);
-
-					WallJoinHelper.DisableJoins(wall);
-
-					//lista_wall_return.Add(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-				//List<Wall> lista_wall_return = new List<Wall>();
-				//lista_wall_return.Add(wall);    
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 
 			}
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(Wall _wall_, double _alturaventana_1,
 																				 double _anchoventana_1,
 																				double _sillventanda_1,
@@ -10714,10 +10485,7 @@ namespace SplitWalls
 																				 XYZ _Point_dVFo_1,
 																				 double height_double)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 
 				// INPUTS
@@ -10740,7 +10508,6 @@ namespace SplitWalls
 				double endParam = wallCurve.GetEndParameter(1);
 
 
-				List<Wall> lista_wall_return = new List<Wall>();
 
 
 				// Crear linea y corregir primero Wall no crear nada.
@@ -10783,13 +10550,7 @@ namespace SplitWalls
 
 
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 
 					Line linea1 = Line.CreateBound(Nuevo_Point_dVFo, endPoint); // 1 Linea
 					Line linea2 = Line.CreateBound(endPoint, endPoint_arriba); // 2 Linea
@@ -10810,32 +10571,12 @@ namespace SplitWalls
 
 
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-
-					lista_wall_return.Add(wall);
-
-					WallJoinHelper.DisableJoins(wall);
-
-					//lista_wall_return.Add(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 			}
 
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Wall_EditProfile_U_PUERTA_return(Wall _wall_, double _anchoventana_, double _alturaventana_, double _sillventanda_, XYZ _Point_dVIo_, XYZ _Point_dVFo_, XYZ _Point_dPH_)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 				// INPUTS
 				Wall wall_I = _wall_;
@@ -10869,7 +10610,6 @@ namespace SplitWalls
 				double anchoventana = _anchoventana_;
 				// INPUTS
 
-				List<Wall> lista_wall_return = new List<Wall>();
 
 
 				double distacia_centerToLeft = Nueva_Point_dPH.DistanceTo(stPoint);
@@ -10896,13 +10636,7 @@ namespace SplitWalls
 				XYZ Point_dVIo_arriba = new XYZ(Nuevo_Point_dVIo.X, Nuevo_Point_dVIo.Y, stPoint.Z + sill_v + hv);
 
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 
 					//		        CurveArrArray arrcurve = new CurveArrArray();
 					//		        CurveArray curve = new CurveArray();
@@ -10966,25 +10700,10 @@ namespace SplitWalls
 					//		        	
 					//		        }
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-					lista_wall_return.Add(wall);
-
-
-
-					WallJoinHelper.DisableJoins(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 
 			}
-			// ESTE FUNCIONA ACTUALMENTE
 
-			// ESTE FUNCIONA ACTUALMENTE
-			  // ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Create_New_Wall_EditProfile_T_PUERTA_return(Wall _wall_, double _alturaventana_1,
 																				 double _alturaventana_2,
 																				 double _sillventanda_1,
@@ -10993,10 +10712,7 @@ namespace SplitWalls
 																				XYZ _Point_dVIo_2,
 																				 double height_double)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 
 				// INPUTS
@@ -11021,7 +10737,6 @@ namespace SplitWalls
 				double endParam = wallCurve.GetEndParameter(1);
 
 
-				List<Wall> lista_wall_return = new List<Wall>();
 
 
 
@@ -11067,13 +10782,7 @@ namespace SplitWalls
 				XYZ Point_arriba_Esquina1 = new XYZ(endPoint.X, endPoint.Y, stPoint.Z + sill_v2 + hv2);
 
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 
 					Line linea1 = Line.CreateBound(Nuevo_Point_dVFo, Nuevo_Point_dVIo); // 1 Linea
 					Line linea2 = Line.CreateBound(Nuevo_Point_dVIo, Point_arriba_DVIo); // 2 Linea
@@ -11097,27 +10806,11 @@ namespace SplitWalls
 					profile.Add(linea8);
 
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-					lista_wall_return.Add(wall);
-
-					WallJoinHelper.DisableJoins(wall);
-
-					//lista_wall_return.Add(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-				//		   	List<Wall> lista_wall_return = new List<Wall>();
-				//		   	lista_wall_return.Add(wall);
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 			} // forma T
 
 
 
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Create_New_Wall_EditProfile_I_PUERTA_dVIo_return(Wall _wall_, double _alturaventana_1,
 																				 double _alturaventana_2,
 																				 double _sillventanda_1,
@@ -11126,10 +10819,7 @@ namespace SplitWalls
 																				 XYZ _Point_dVFo_1,
 																				 double height_double)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 
 				// INPUTS
@@ -11154,7 +10844,6 @@ namespace SplitWalls
 				double endParam = wallCurve.GetEndParameter(1);
 
 
-				List<Wall> lista_wall_return = new List<Wall>();
 
 
 
@@ -11200,13 +10889,7 @@ namespace SplitWalls
 				XYZ Point_arriba_Esquina1 = new XYZ(endPoint.X, endPoint.Y, stPoint.Z + sill_v2 + hv2);
 
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 
 					Line linea1 = Line.CreateBound(stPoint, Nuevo_Point_dVIo); // 1 Linea
 					Line linea2 = Line.CreateBound(Nuevo_Point_dVIo, Point_arriba_DVIo); // 2 Linea
@@ -11233,27 +10916,11 @@ namespace SplitWalls
 					profile.Add(linea10);
 
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-					lista_wall_return.Add(wall);
-
-
-
-					WallJoinHelper.DisableJoins(wall);
-
-					//lista_wall_return.Add(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 
 			} // forma I puerta al lado derecho
 
 
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Create_New_Wall_EditProfile_I_PUERTA_dVFo_return(Wall _wall_, double _alturaventana_1,
 																				 double _alturaventana_2,
 																				 double _sillventanda_1,
@@ -11262,10 +10929,7 @@ namespace SplitWalls
 																				 XYZ _Point_dVFo_1,
 																				 double height_double)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 
 				// INPUTS
@@ -11290,7 +10954,6 @@ namespace SplitWalls
 				double endParam = wallCurve.GetEndParameter(1);
 
 
-				List<Wall> lista_wall_return = new List<Wall>();
 
 
 
@@ -11336,13 +10999,7 @@ namespace SplitWalls
 				XYZ Point_arriba_Esquina1 = new XYZ(endPoint.X, endPoint.Y, stPoint.Z + sill_v2 + hv2);
 
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 
 					Line linea1 = Line.CreateBound(Nuevo_Point_dVFo, endPoint); // 1 Linea
 					Line linea2 = Line.CreateBound(endPoint, Point_bajo_Esquina1); // 2 Linea
@@ -11370,27 +11027,12 @@ namespace SplitWalls
 					profile.Add(linea10);
 
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-					lista_wall_return.Add(wall);
-
-					WallJoinHelper.DisableJoins(wall);
-
-					//lista_wall_return.Add(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 			} // forma I puerta al lado izquierdo		
 
 
 
 
-			// ESTE FUNCIONA ACTUALMENTE
-			  // ESTE FUNCIONA ACTUALMENTE
-			  // ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Create_New_Wall_EditProfile_I_return(Wall _wall_, double _alturaventana_1,
 																				 double _alturaventana_2,
 																				 double _sillventanda_1,
@@ -11399,10 +11041,7 @@ namespace SplitWalls
 																				 XYZ _Point_dVFo_1,
 																				 double height_double)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 
 				// INPUTS
@@ -11426,7 +11065,6 @@ namespace SplitWalls
 				double stParam = wallCurve.GetEndParameter(0);
 				double endParam = wallCurve.GetEndParameter(1);
 
-				List<Wall> lista_wall_return = new List<Wall>();
 
 
 
@@ -11473,13 +11111,7 @@ namespace SplitWalls
 				XYZ Point_arriba_Esquina1 = new XYZ(endPoint.X, endPoint.Y, stPoint.Z + sill_v2 + hv2);
 
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 
 					Line linea1 = Line.CreateBound(stPoint, endPoint); // 1 Linea
 					Line linea2 = Line.CreateBound(endPoint, Point_bajo_Esquina1); // 2 Linea
@@ -11508,21 +11140,7 @@ namespace SplitWalls
 					profile.Add(linea11);
 					profile.Add(linea12);
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-					lista_wall_return.Add(wall);
-
-
-
-					WallJoinHelper.DisableJoins(wall);
-
-					//lista_wall_return.Add(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 			} // forma I
 
 
@@ -11532,15 +11150,10 @@ namespace SplitWalls
 
 
 
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_return(Wall _wall_, double _alturaventana_, double _sillventanda_, XYZ _Point_dVIo_)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
-				List<Wall> ultimos_Walls_para_Agregar_40 = new List<Wall>();
 
 				// INPUTS
 				Wall wall_I = _wall_;
@@ -11591,13 +11204,7 @@ namespace SplitWalls
 
 				List<Wall> lista_wall_return = new List<Wall>();
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 
 					Line linea1 = Line.CreateBound(stPoint, endPoint); // 1 Linea
 					Line linea2 = Line.CreateBound(endPoint, Point_bajo_Esquina1); // 2 Linea
@@ -11617,30 +11224,12 @@ namespace SplitWalls
 					profile.Add(linea7);
 					profile.Add(linea8);
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-
-					WallJoinHelper.DisableJoins(wall);
-
-					lista_wall_return.Add(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 			}
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Create_New_Wall_EditProfile_dVFo_return(Wall _wall_, double _alturaventana_, double _sillventanda_, XYZ _Point_dVFo_)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
-				List<Wall> ultimos_Walls_para_Agregar_40 = new List<Wall>();
 
 				// INPUTS
 				Wall wall_I = _wall_;
@@ -11693,13 +11282,7 @@ namespace SplitWalls
 				List<Wall> lista_wall_return = new List<Wall>();
 
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 
 					Line linea1 = Line.CreateBound(stPoint, endPoint); // 1 Linea
 					Line linea2 = Line.CreateBound(endPoint, endPoint_arriba); // 2 Linea 
@@ -11719,31 +11302,14 @@ namespace SplitWalls
 					profile.Add(linea7);
 					profile.Add(linea8);
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-
-					WallJoinHelper.DisableJoins(wall);
-
-					lista_wall_return.Add(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 			}
-			// ESTE FUNCIONA ACTUALMENTE
 
-			// ESTE FUNCIONA ACTUALMENTE
 			void Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA(Wall _wall_, double _alturaventana_, double _sillventanda_, XYZ _Point_dVIo_)
 			{
 				#region inicio
 
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 				#endregion
 
 
@@ -11838,18 +11404,13 @@ namespace SplitWalls
 				}
 
 			}
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(Wall _wall_, double _alturaventana_, double _sillventanda_, XYZ _Point_dVIo_)
 			{
 				#region inicio
 
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 				#endregion
 
-				List<Wall> lista_wall_return = new List<Wall>();
 				#region INPUTS
 
 				Wall wall_I = _wall_;
@@ -11901,16 +11462,7 @@ namespace SplitWalls
 				XYZ endPoint_arriba = new XYZ(endPoint.X, endPoint.Y, stPoint.Z + height_double); // Point 2 arriba
 				XYZ stPoint_arriba = new XYZ(stPoint.X, stPoint.Y, stPoint.Z + height_double);// Point 1 arriba
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-
-				{
-
-					trans.Start();
-
-					//Revision5_InsertOpening_void(wall_I, alturaventana, dis, (dm + dis/2), alturaventana/2);
-
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 
 
 
@@ -11930,25 +11482,11 @@ namespace SplitWalls
 					profile.Add(linea6);
 
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-					lista_wall_return.Add(wall);
-
-					WallJoinHelper.DisableJoins(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 			}
-			// ESTE FUNCIONA ACTUALMENTE
 			void Revision6_DYNO_Create_New_Wall_EditProfile_dVFo_PUERTA(Wall _wall_, double _alturaventana_, double _sillventanda_, XYZ _Point_dVFo_)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 				// INPUTS
 				Wall wall_I = _wall_;
@@ -12033,13 +11571,9 @@ namespace SplitWalls
 				}
 
 			}
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Create_New_Wall_EditProfile_dVFo_PUERTA_return(Wall _wall_, double _alturaventana_, double _sillventanda_, XYZ _Point_dVFo_)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 				// INPUTS
 				Wall wall_I = _wall_;
@@ -12062,7 +11596,6 @@ namespace SplitWalls
 
 				double distanta_total_wall = endParam - stParam; // deberia ser 1220 == anchopanel
 
-				List<Wall> lista_wall_return = new List<Wall>();
 
 				// Crear linea y corregir primero Wall no crear nada.
 				XYZ stPoint = wallCurve.Evaluate(stParam, false); // Point 1
@@ -12086,13 +11619,7 @@ namespace SplitWalls
 
 				XYZ Nuevo_Point_dVFo_arriba = new XYZ(Nuevo_Point_dVFo_actual.X, Nuevo_Point_dVFo_actual.Y, endPoint.Z + hv);
 
-				using (Transaction trans = new Transaction(doc, "wall"))
-
-				{
-
-					trans.Start();
-
-					IList<Curve> profile = new List<Curve>();
+				IList<Curve> profile = new List<Curve>();
 
 					//		        Revision5_InsertOpening_void(wall_I, alturaventana, dm, dm/2, alturaventana/2);
 
@@ -12113,28 +11640,13 @@ namespace SplitWalls
 					profile.Add(linea6);
 
 
-					Wall wall = Wall.Create(doc, profile, wallType.Id, wall_I.LevelId, true);
-					lista_wall_return.Add(wall);
-
-					WallJoinHelper.DisableJoins(wall);
-
-					doc.Delete(wall_I.Id);
-
-					trans.Commit();
-
-				}
-				return lista_wall_return.First();
+				return ReplaceWallWithProfile(wall_I, profile);
 			}
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Create_New_Wall_EditProfile_dVFo_PUERTA_CasoEspecial_return(Wall _wall_, double _alturaventana_, double sillventanda_0,
 																										   double _sillventanda_, XYZ _Point_dVFo_,
 																										  XYZ _Point_dVIo_)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 				// INPUTS
 				Wall wall_I = _wall_;
@@ -12237,15 +11749,9 @@ namespace SplitWalls
 				return lista_wall_return.First();
 			}
 
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			void Revision6_DYNO_Create_New_Wall_EditProfile_Solitario(Wall _wall_, double _alturaventana_, double _sillventanda_, XYZ _Point_dVFo_)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 				List<Wall> ultimos_Walls_para_Agregar_40 = new List<Wall>();
 
@@ -12343,14 +11849,9 @@ namespace SplitWalls
 				}
 
 			}
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			void Revision6_DYNO_Create_New_Wall_2MUROS_Solitario(Wall _wall_, double _anchoventana_, double _alturaventana_, double _sillventanda_, XYZ _Point_dVFo_)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 				List<Wall> ultimos_Walls_para_Agregar_40 = new List<Wall>();
 
@@ -12491,16 +11992,11 @@ namespace SplitWalls
 				}
 
 			}
-			// ESTE FUNCIONA ACTUALMENTE
 
 
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Create_New_Wall_2MUROS_Solitario_return(Wall _wall_, double _anchoventana_, double _alturaventana_, double _sillventanda_, XYZ _Point_dVFo_)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 				List<Wall> ultimos_Walls_para_Agregar_40 = new List<Wall>();
 				List<Wall> lista_wall_return = new List<Wall>();
@@ -12593,17 +12089,12 @@ namespace SplitWalls
 				}
 				return lista_wall_return.First();
 			}
-			// ESTE FUNCIONA ACTUALMENTE
 
 
 
-			// ESTE FUNCIONA ACTUALMENTE
 			void Revision6_DYNO_Create_New_Wall_1MURO_Solitario(Wall _wall_, double _anchoventana_, double _alturaventana_, double _sillventanda_, XYZ _Point_dVFo_)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 
 
 				// INPUTS
@@ -12677,18 +12168,11 @@ namespace SplitWalls
 				}
 
 			}
-			// ESTE FUNCIONA ACTUALMENTE
 
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Create_New_Wall_1MURO_Solitario_CasoEspecial_return(Wall _wall_, double _anchoventana_, double _alturaventana_, double _sillventanda_,
 																							double sillventanda_2, XYZ _Point_dVFo_)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 				List<Wall> lista_wall_return = new List<Wall>();
 
 				// INPUTS
@@ -12783,15 +12267,10 @@ namespace SplitWalls
 				return lista_wall_return.First();
 
 			}
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Create_New_Wall_1MURO_Solitario_CasoEspecial_FinalMuro_return(Wall _wall_, double _anchoventana_, double _alturaventana_, double alturaventana_2,
 																															 double _sillventanda_, double sillventanda_2, XYZ _Point_dVI1_)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 				List<Wall> lista_wall_return = new List<Wall>();
 
 				// INPUTS
@@ -12889,15 +12368,10 @@ namespace SplitWalls
 				return lista_wall_return.First();
 
 			}
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_Create_New_Wall_1MURO_Solitario_CasoEspecial_InicialMuro_return(Wall _wall_, double _anchoventana_, double _alturaventana_, double alturaventana_2,
 																															 double _sillventanda_, double sillventanda_2, XYZ _Point_dVI1_)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
-				//Application app = this.Application;
 				List<Wall> lista_wall_return = new List<Wall>();
 
 				// INPUTS
@@ -12995,24 +12469,16 @@ namespace SplitWalls
 				return lista_wall_return.First();
 
 			}
-			// ESTE FUNCIONA ACTUALMENTE
-
-
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 
 
 
 
 
 
-			// ESTE FUNCIONA ACTUALMENTE
+
+
 			Wall Revision6_DYNO_DarVuelta_Muro_ConVentanas(Element _e_)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
 				//// Get Active View
 				//View activeView = this.ActiveUIDocument.ActiveView;
@@ -13180,17 +12646,11 @@ namespace SplitWalls
 				return wall_1;
 
 			}
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 
 
 			// SIN VANOS
-			// ESTE FUNCIONA ACTUALMENTE
 			void Revision6_DYNO_DividirMuroSinVentana(Element e, int _anchopanel_)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
 				//// Get Active View
 				//View activeView = this.ActiveUIDocument.ActiveView;
@@ -13341,11 +12801,8 @@ namespace SplitWalls
 
 				}
 			}
-			// ESTE FUNCIONA ACTUALMENTE
 			Wall Revision6_DYNO_DarVuelta_Muro_SinVentanas(Element _e_)
 			{
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
 				List<Wall> listaWalls_Final = new List<Wall>();
 
@@ -13376,14 +12833,10 @@ namespace SplitWalls
 				return wall_1;
 
 			}
-			// ESTE FUNCIONA ACTUALMENTE
-			// ESTE FUNCIONA ACTUALMENTE
 			// Separar con minipanel de 4 mm
 			void Revision6_DYNO_splitWall_agregar_separacion40(Wall _wall_)
 			{
 
-				//UIDocument uidoc = this.ActiveUIDocument;
-				//Document doc = uidoc.Document;
 
 				Wall wall_1 = _wall_ as Wall; //1220
 
@@ -13429,7 +12882,6 @@ namespace SplitWalls
 				trans.Commit();
 
 			} // Wall seleccionado
-			  // ESTE FUNCIONA ACTUALMENTE
 
 
 
