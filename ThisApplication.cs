@@ -183,10 +183,6 @@ namespace SplitWalls
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
 				}
-				finally
-				{
-
-				}
 
 			} // Dividir Muros sin y con Ventanas, Ingresando el Valor del Ancho del Panel Deseado . Pick Object Selection .
 
@@ -229,10 +225,6 @@ namespace SplitWalls
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
 				}
-				finally
-				{
-
-				}
 
 			} // OK! Dividir Muros sin Ventanas, Ingresando el Valor del Ancho del Panel Deseado . Pick Objects Selection .
 
@@ -274,10 +266,6 @@ namespace SplitWalls
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
 				}
-				finally
-				{
-
-				}
 
 			} // OK! Dividir Muros sin Ventanas, Ingresando el Valor del Ancho del Panel Deseado . Pick Objects Selection .
 
@@ -304,10 +292,6 @@ namespace SplitWalls
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
 				}
-				finally
-				{
-
-				}
 
 			} // OK ! Panelizar antes del vano . Pick Object Selection .
 
@@ -332,10 +316,6 @@ namespace SplitWalls
 				{
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
-				}
-				finally
-				{
-
 				}
 
 			} // OK ! Panelizar antes del vano . Pick Object Selection .
@@ -376,10 +356,6 @@ namespace SplitWalls
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
 				}
-				finally
-				{
-
-				}
 
 			} // OK ! Panelizar antes del vano . Pick Objects Selection .
 
@@ -415,10 +391,6 @@ namespace SplitWalls
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
 				}
-				finally
-				{
-
-				}
 
 			} // OK ! Panelizar antes del vano . Pick Objects Selection .
 
@@ -445,10 +417,6 @@ namespace SplitWalls
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
 				}
-				finally
-				{
-
-				}
 
 			} // OKKKKKKKKKKKKKKKKKKKK! ! Panelizar antes del vano . Pick Object Selection .
 
@@ -471,10 +439,6 @@ namespace SplitWalls
 				{
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
-				}
-				finally
-				{
-
 				}
 
 			} // OK ! Panelizar antes del vano . Pick Object Selection .
@@ -512,10 +476,6 @@ namespace SplitWalls
 				{
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
-				}
-				finally
-				{
-
 				}
 
 			} // OK ! Panelizar antes del vano . Pick Objects Selection .
@@ -555,10 +515,6 @@ namespace SplitWalls
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
 				}
-				finally
-				{
-
-				}
 
 
 			} // OK ! Panelizar antes del vano . Pick Objects Selection .
@@ -572,358 +528,33 @@ namespace SplitWalls
 
 
 
-			#region BUTTON 6ta Revision
-
-			void Revision6_BUTTON_1() // Dividir Muros sin Ventanas, Ingresando el Valor del Ancho del Panel Deseado .
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					int anchopanel_UI = 1220;
-
-					int _anchopanel_ = anchopanel_UI;
-
-					List<Wall> lista_walls = new List<Wall>();
-
-					IList<Reference> references = uidoc.Selection.PickObjects(ObjectType.Element, "Para aplicarlo a varios Muros a la vez, seleccióna solo muros que no tienen Ventanas. ");
-
-					foreach (Reference reference in references)
-					{
-						Element e = doc.GetElement(reference);
-						Wall wall = e as Wall;
-						lista_walls.Add(wall);
-					}
-
-					foreach (Wall _wall_ in lista_walls)
-					{
-
-						Revision6_DYNO_PanelizarMuroInicial_SMARTPANEL_0_VENTANA(_wall_, _anchopanel_);
-					}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			/* DEAD_BLOCK_TO_REMOVE */
+			// ANCHOR_LINE
 				}
-				catch (Exception e)
+				catch (Exception e2_DEAD)
 				{
-					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
 				}
-				finally
-				{
-
-				}
-
-			} // OK! Dividir Muros sin Ventanas, Ingresando el Valor del Ancho del Panel Deseado . Pick Objects Selection .
-
-			void Revision6_BUTTON_1_Lado_Opuesto() // Dividir Muros sin Ventanas, Ingresando el Valor del Ancho del Panel Deseado .
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					int anchopanel_UI = 1220;
-
-					int _anchopanel_ = anchopanel_UI;
-
-					List<Wall> lista_walls = new List<Wall>();
-
-					IList<Reference> references = uidoc.Selection.PickObjects(ObjectType.Element, "Para aplicarlo a varios Muros a la vez, seleccióna solo muros que no tienen Ventanas. ");
-
-					foreach (Reference reference in references)
-					{
-						Element e = doc.GetElement(reference);
-						Wall wall = e as Wall;
-						lista_walls.Add(Revision6_DYNO_DarVuelta_Muro_SinVentanas(wall));
-					}
-
-
-
-
-					foreach (Wall _wall_ in lista_walls)
-					{
-
-						Revision6_DYNO_PanelizarMuroInicial_SMARTPANEL_0_VENTANA(_wall_, _anchopanel_);
-					}
-
-
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-				finally
-				{
-
-				}
-
-			} // OK! Dividir Muros sin Ventanas, Ingresando el Valor del Ancho del Panel Deseado . Pick Objects Selection .
-
-
-
-
-
-			void Revision6_BUTTON_2_OBS()
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					int anchopanel_UI = 1220; // 1220
-
-					Element _wall_ = doc.GetElement(uidoc.Selection.PickObject(ObjectType.Element)); // Wall que se elige
-
-					Revision6_Button_2_OBS(anchopanel_UI, _wall_);
-
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-				finally
-				{
-
-				}
-
-			} // OK ! Panelizar antes del vano . Pick Object Selection .
-
-			void Revision6_BUTTON_2_OBS_OtroLado()
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					int anchopanel_UI = 1220; // 1220
-
-					Element _wall_ = doc.GetElement(uidoc.Selection.PickObject(ObjectType.Element)); // Wall que se elige
-
-
-					Element wall_iii = Revision6_DYNO_DarVuelta_Muro_ConVentanas(_wall_);
-
-					Revision6_Button_2_OBS(anchopanel_UI, wall_iii);
-
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-				finally
-				{
-
-				}
-
-			} // OK ! Panelizar antes del vano . Pick Object Selection .
-
-
-			void Revision6_BUTTON_2_OBS_TODO_WALL_OtroLado()
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					int anchopanel_UI = 1220; // 1220
-
-					List<Wall> lista_walls = new List<Wall>();
-
-					IList<Reference> references = uidoc.Selection.PickObjects(ObjectType.Element, "Para aplicarlo a varios Muros a la vez, seleccióna solo muros que no tienen Ventanas. ");
-
-					foreach (Reference reference in references)
-					{
-						Element e = doc.GetElement(reference);
-						Wall wall = e as Wall;
-						lista_walls.Add(wall);
-					}
-
-					foreach (Wall w in lista_walls)
-					{
-						Element wall_iii = Revision6_DYNO_DarVuelta_Muro_ConVentanas(w);
-						Revision6_BUTTON_2_OBS_TODO_WALL_INPUT(anchopanel_UI, wall_iii);
-					}
-
-
-
-
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-				finally
-				{
-
-				}
-
-			} // OK ! Panelizar antes del vano . Pick Objects Selection .
-
-			void Revision6_BUTTON_2_OBS_TODO_WALL()
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					int anchopanel_UI = 1220; // 1220
-
-					List<Wall> lista_walls = new List<Wall>();
-
-					IList<Reference> references = uidoc.Selection.PickObjects(ObjectType.Element, "Para aplicarlo a varios Muros a la vez, seleccióna solo muros que no tienen Ventanas. ");
-
-					foreach (Reference reference in references)
-					{
-						Element e = doc.GetElement(reference);
-						Wall wall = e as Wall;
-						lista_walls.Add(wall);
-					}
-
-					foreach (Wall _wall_ in lista_walls)
-					{
-						Revision6_BUTTON_2_OBS_TODO_WALL_INPUT(anchopanel_UI, _wall_);
-					}
-
-
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-				finally
-				{
-
-				}
-
-			} // OK ! Panelizar antes del vano . Pick Objects Selection .
-
-
-
-
-
-			void Revision6_BUTTON_2_SMARTPANEL() //OKKKKKKKKKKKKKKKKKKKK!
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					int anchopanel_UI = 1220; // 1220
-
-					Element _wall_ = doc.GetElement(uidoc.Selection.PickObject(ObjectType.Element)); // Wall que se elige
-
-					Revision6_Button_2_SMARTPANEL(anchopanel_UI, _wall_);
-
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-				finally
-				{
-
-				}
-
-			} // OKKKKKKKKKKKKKKKKKKKK! ! Panelizar antes del vano . Pick Object Selection .
-
-			void Revision6_BUTTON_2_SMARTPANEL_OtroLado()
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					int anchopanel_UI = 1220; // 1220
-
-					Element _wall_ = doc.GetElement(uidoc.Selection.PickObject(ObjectType.Element)); // Wall que se elige
-
-					Element wall_iii = Revision6_DYNO_DarVuelta_Muro_ConVentanas(_wall_);
-
-					Revision6_Button_2_SMARTPANEL(anchopanel_UI, wall_iii);
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-				finally
-				{
-
-				}
-
-			} // OK ! Panelizar antes del vano . Pick Object Selection .
-
-
-
-			void Revision6_BUTTON_2_SMARTPANEL_TODO_WALL_OtroLado()
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					int anchopanel_UI = 1220; // 1220
-
-					List<Wall> lista_walls = new List<Wall>();
-
-					IList<Reference> references = uidoc.Selection.PickObjects(ObjectType.Element, "Para aplicarlo a varios Muros a la vez, seleccióna solo muros que no tienen Ventanas. ");
-
-					foreach (Reference reference in references)
-					{
-						Element e = doc.GetElement(reference);
-						Wall wall = e as Wall;
-						lista_walls.Add(wall);
-					}
-
-					foreach (Wall w in lista_walls)
-					{
-						Element wall_iii = Revision6_DYNO_DarVuelta_Muro_ConVentanas(w);
-						Revision6_Button_2_SMARTPANEL(anchopanel_UI, wall_iii);
-					}
-
-				}
-				catch (Exception e)
-				{
-					//TaskDialog.Show("Error", e.Message.ToString());
-					throw;
-				}
-				finally
-				{
-
-				}
-
-			} // OK ! Panelizar antes del vano . Pick Objects Selection .
-
-			void Revision6_BUTTON_2_SMARTPANEL_TODO_WALL()
-			{
-				try
-				{
-					//UIDocument uidoc = this.ActiveUIDocument;
-					//Document doc = uidoc.Document;
-
-					int anchopanel_UI = 1220; // 1220
-
-					List<Wall> lista_walls = new List<Wall>();
-
-					IList<Reference> references = uidoc.Selection.PickObjects(ObjectType.Element, "Para aplicarlo a varios Muros a la vez, seleccióna solo muros que tienen Ventanas. ");
-
-					foreach (Reference reference in references)
-					{
-						Element e = doc.GetElement(reference);
-						Wall wall = e as Wall;
-						lista_walls.Add(wall);
-					}
-
-					foreach (Wall _wall_ in lista_walls)
-					{
-						Revision6_Button_2_SMARTPANEL(anchopanel_UI, _wall_);
-					}
 
 
 
@@ -934,10 +565,6 @@ namespace SplitWalls
 				{
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
-				}
-				finally
-				{
-
 				}
 
 
@@ -972,10 +599,6 @@ namespace SplitWalls
 				{
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
-				}
-				finally
-				{
-
 				}
 
 			} // OK ! Panelizar antes del vano . Pick Object Selection .
@@ -1347,10 +970,6 @@ namespace SplitWalls
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
 				}
-				finally
-				{
-
-				}
 				return lista_wall_final_retirada;
 
 			}
@@ -1573,10 +1192,6 @@ namespace SplitWalls
 				{
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
-				}
-				finally
-				{
-
 				}
 
 			}
@@ -1876,7 +1491,7 @@ namespace SplitWalls
 									if (!activador)
 									{
 										#region Ventana o Puerta Dentro de Muro Void
-										Wall mierda = elements_dVIo.First() as Wall;
+										Wall targetWall = elements_dVIo.First() as Wall;
 										if (sillventanas.First() == 0) // Es puerta
 										{
 											#region puerta
@@ -1888,21 +1503,21 @@ namespace SplitWalls
 											{
 												// Transf. BORDE PUERTA a la IZQUIERDA
 												//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
-												Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas.First(), anchoventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First(), Puntos_Ventada_dVFo.First(), height_double);
+												Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(targetWall, alturaventanas.First(), anchoventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First(), Puntos_Ventada_dVFo.First(), height_double);
 												lista_walls.Add(wall_recibida);
 											}
 											else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 											{
 												// Transf. BORDE PUERTA a la DERECHA
 												//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
-												Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(mierda, alturaventanas.First(), anchoventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First(), Puntos_Ventada_dVFo.First(), height_double);
+												Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(targetWall, alturaventanas.First(), anchoventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First(), Puntos_Ventada_dVFo.First(), height_double);
 												lista_walls.Add(wall_recibida);
 											}
 											else
 											{
-												if (!(lista_NO_VIo.Contains(mierda.Id)))
+												if (!(lista_NO_VIo.Contains(targetWall.Id)))
 												{
-													Wall wall_recibida = Revision6_DYNO_Wall_EditProfile_U_PUERTA_return(mierda, anchoventanas.First(), alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First(), Puntos_Ventada_dVFo.First(), Punto_Ventada_dPH);
+													Wall wall_recibida = Revision6_DYNO_Wall_EditProfile_U_PUERTA_return(targetWall, anchoventanas.First(), alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First(), Puntos_Ventada_dVFo.First(), Punto_Ventada_dPH);
 													lista_walls.Add(wall_recibida);
 												}
 											}
@@ -1912,7 +1527,7 @@ namespace SplitWalls
 										else
 										{
 											#region Ventana
-											if (!(lista_NO_VIo.Contains(mierda.Id)))
+											if (!(lista_NO_VIo.Contains(targetWall.Id)))
 											{
 												using (Transaction trans = new Transaction(doc, "wall"))
 												{
@@ -1921,16 +1536,16 @@ namespace SplitWalls
 													XYZ arriba_dVFo = new XYZ(Puntos_Ventada_dVFo.First().X, Puntos_Ventada_dVFo.First().Y, Puntos_Ventada_dVFo.First().Z + alturaventanas.First());
 													XYZ abajo_dVIo = new XYZ(Puntos_Ventada_dVIo.First().X, Puntos_Ventada_dVIo.First().Y, Puntos_Ventada_dVIo.First().Z);
 
-													Opening openin = mierda.Document.Create.NewOpening(mierda, abajo_dVIo, arriba_dVFo);
+													Opening openin = targetWall.Document.Create.NewOpening(targetWall, abajo_dVIo, arriba_dVFo);
 
-													if (WallUtils.IsWallJoinAllowedAtEnd(mierda, 1))
-														WallUtils.DisallowWallJoinAtEnd(mierda, 1);
+													if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 1))
+														WallUtils.DisallowWallJoinAtEnd(targetWall, 1);
 
-													if (WallUtils.IsWallJoinAllowedAtEnd(mierda, 0))
-														WallUtils.DisallowWallJoinAtEnd(mierda, 0);
+													if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 0))
+														WallUtils.DisallowWallJoinAtEnd(targetWall, 0);
 													trans.Commit();
 
-													lista_walls.Add(mierda);
+													lista_walls.Add(targetWall);
 												}
 											}
 											#endregion
@@ -1940,12 +1555,12 @@ namespace SplitWalls
 									}
 									else
 									{
-										Wall mierda = elements_dVIo.First() as Wall;
-										if (!(lista_NO_VIo.Contains(mierda.Id)))
+										Wall targetWall = elements_dVIo.First() as Wall;
+										if (!(lista_NO_VIo.Contains(targetWall.Id)))
 										{
 											#region Ventana Exacta
 
-											Revision6_DYNO_Create_New_Wall_2MUROS_Solitario(mierda, anchoventanas.First(), alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVFo.First());
+											Revision6_DYNO_Create_New_Wall_2MUROS_Solitario(targetWall, anchoventanas.First(), alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVFo.First());
 
 											#endregion
 										}
@@ -1954,7 +1569,7 @@ namespace SplitWalls
 								else
 								{
 									#region Ventana o Puerta Dentro de Muro Void
-									Wall mierda = elements_dVIo.First() as Wall;
+									Wall targetWall = elements_dVIo.First() as Wall;
 									if (sillventanas.First() == 0) // Es puerta
 									{
 										#region puerta
@@ -1966,21 +1581,21 @@ namespace SplitWalls
 										{
 											// Transf. BORDE PUERTA a la IZQUIERDA
 											//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
-											Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas.First(), anchoventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First(), Puntos_Ventada_dVFo.First(), height_double);
+											Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(targetWall, alturaventanas.First(), anchoventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First(), Puntos_Ventada_dVFo.First(), height_double);
 											lista_walls.Add(wall_recibida);
 										}
 										else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 										{
 											// Transf. BORDE PUERTA a la DERECHA
 											//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
-											Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(mierda, alturaventanas.First(), anchoventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First(), Puntos_Ventada_dVFo.First(), height_double);
+											Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(targetWall, alturaventanas.First(), anchoventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First(), Puntos_Ventada_dVFo.First(), height_double);
 											lista_walls.Add(wall_recibida);
 										}
 										else
 										{
-											if (!(lista_NO_VIo.Contains(mierda.Id)))
+											if (!(lista_NO_VIo.Contains(targetWall.Id)))
 											{
-												Wall wall_recibida = Revision6_DYNO_Wall_EditProfile_U_PUERTA_return(mierda, anchoventanas.First(), alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First(), Puntos_Ventada_dVFo.First(), Punto_Ventada_dPH);
+												Wall wall_recibida = Revision6_DYNO_Wall_EditProfile_U_PUERTA_return(targetWall, anchoventanas.First(), alturaventanas.First(), sillventanas.First(), Puntos_Ventada_dVIo.First(), Puntos_Ventada_dVFo.First(), Punto_Ventada_dPH);
 												lista_walls.Add(wall_recibida);
 											}
 										}
@@ -1991,7 +1606,7 @@ namespace SplitWalls
 									else
 									{
 										#region Ventana
-										if (!(lista_NO_VIo.Contains(mierda.Id)))
+										if (!(lista_NO_VIo.Contains(targetWall.Id)))
 										{
 											using (Transaction trans = new Transaction(doc, "wall"))
 											{
@@ -2000,16 +1615,16 @@ namespace SplitWalls
 												XYZ arriba_dVFo = new XYZ(Puntos_Ventada_dVFo.First().X, Puntos_Ventada_dVFo.First().Y, Puntos_Ventada_dVFo.First().Z + alturaventanas.First());
 												XYZ abajo_dVIo = new XYZ(Puntos_Ventada_dVIo.First().X, Puntos_Ventada_dVIo.First().Y, Puntos_Ventada_dVIo.First().Z);
 
-												Opening openin = mierda.Document.Create.NewOpening(mierda, abajo_dVIo, arriba_dVFo);
+												Opening openin = targetWall.Document.Create.NewOpening(targetWall, abajo_dVIo, arriba_dVFo);
 
-												if (WallUtils.IsWallJoinAllowedAtEnd(mierda, 1))
-													WallUtils.DisallowWallJoinAtEnd(mierda, 1);
+												if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 1))
+													WallUtils.DisallowWallJoinAtEnd(targetWall, 1);
 
-												if (WallUtils.IsWallJoinAllowedAtEnd(mierda, 0))
-													WallUtils.DisallowWallJoinAtEnd(mierda, 0);
+												if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 0))
+													WallUtils.DisallowWallJoinAtEnd(targetWall, 0);
 												trans.Commit();
 
-												lista_walls.Add(mierda);
+												lista_walls.Add(targetWall);
 											}
 										}
 										#endregion
@@ -3137,7 +2752,7 @@ namespace SplitWalls
 													if (!activador)
 													{
 														#region Ventana o Puerta Dentro de Muro Void
-														Wall mierda = elements_dVIo.First() as Wall;
+														Wall targetWall = elements_dVIo.First() as Wall;
 														if (sillventanas[i] == 0) // Es puerta
 														{
 															#region puerta
@@ -3149,23 +2764,23 @@ namespace SplitWalls
 															{
 																// Transf. BORDE PUERTA a la IZQUIERDA
 																//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
-																Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
+																Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(targetWall, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
 																lista_walls.Add(wall_recibida);
 															}
 															else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 															{
 																// Transf. BORDE PUERTA a la DERECHA
 																//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
-																//Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-																Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(mierda, alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
+																//Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(targetWall, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
+																Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(targetWall, alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 
 																lista_walls.Add(wall_recibida);
 															}
 															else
 															{
-																if (!(lista_NO_VIo.Contains(mierda.Id)))
+																if (!(lista_NO_VIo.Contains(targetWall.Id)))
 																{
-																	Wall wall_recibida = Revision6_DYNO_Wall_EditProfile_U_PUERTA_return(mierda, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], Punto_Ventada_dPH);
+																	Wall wall_recibida = Revision6_DYNO_Wall_EditProfile_U_PUERTA_return(targetWall, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], Punto_Ventada_dPH);
 																	lista_walls.Add(wall_recibida);
 																}
 															}
@@ -3177,7 +2792,7 @@ namespace SplitWalls
 														{
 															#region Ventana
 
-															if (!(lista_NO_VIo.Contains(mierda.Id)))
+															if (!(lista_NO_VIo.Contains(targetWall.Id)))
 															{
 																using (Transaction trans = new Transaction(doc, "wall"))
 																{
@@ -3186,16 +2801,16 @@ namespace SplitWalls
 																	XYZ arriba_dVFo = new XYZ(Puntos_Ventada_dVFo[i].X, Puntos_Ventada_dVFo[i].Y, Puntos_Ventada_dVFo[i].Z + alturaventanas[i]);
 																	XYZ abajo_dVIo = new XYZ(Puntos_Ventada_dVIo[i].X, Puntos_Ventada_dVIo[i].Y, Puntos_Ventada_dVIo[i].Z);
 
-																	Opening openin = mierda.Document.Create.NewOpening(mierda, abajo_dVIo, arriba_dVFo);
+																	Opening openin = targetWall.Document.Create.NewOpening(targetWall, abajo_dVIo, arriba_dVFo);
 
-																	if (WallUtils.IsWallJoinAllowedAtEnd(mierda, 1))
-																		WallUtils.DisallowWallJoinAtEnd(mierda, 1);
+																	if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 1))
+																		WallUtils.DisallowWallJoinAtEnd(targetWall, 1);
 
-																	if (WallUtils.IsWallJoinAllowedAtEnd(mierda, 0))
-																		WallUtils.DisallowWallJoinAtEnd(mierda, 0);
+																	if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 0))
+																		WallUtils.DisallowWallJoinAtEnd(targetWall, 0);
 																	trans.Commit();
 
-																	lista_walls.Add(mierda);
+																	lista_walls.Add(targetWall);
 																}
 															}
 															#endregion
@@ -3205,12 +2820,12 @@ namespace SplitWalls
 													}
 													else
 													{
-														Wall mierda = elements_dVIo.First() as Wall;
-														if (!(lista_NO_VIo.Contains(mierda.Id)))
+														Wall targetWall = elements_dVIo.First() as Wall;
+														if (!(lista_NO_VIo.Contains(targetWall.Id)))
 														{
 															#region Ventana Exacta
 
-															Revision6_DYNO_Create_New_Wall_2MUROS_Solitario(mierda, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVFo[i]);
+															Revision6_DYNO_Create_New_Wall_2MUROS_Solitario(targetWall, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVFo[i]);
 
 															#endregion
 														}
@@ -3221,7 +2836,7 @@ namespace SplitWalls
 												else
 												{
 													#region Ventana o Puerta Dentro de Muro Void
-													Wall mierda = elements_dVIo.First() as Wall;
+													Wall targetWall = elements_dVIo.First() as Wall;
 													if (sillventanas[i] == 0) // Es puerta
 													{
 														#region puerta
@@ -3233,23 +2848,23 @@ namespace SplitWalls
 														{
 															// Transf. BORDE PUERTA a la IZQUIERDA
 															//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
-															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
+															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(targetWall, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
 															lista_walls.Add(wall_recibida);
 														}
 														else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 														{
 															// Transf. BORDE PUERTA a la DERECHA
 															//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
-															//Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(mierda, alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
+															//Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(targetWall, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
+															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(targetWall, alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 
 															lista_walls.Add(wall_recibida);
 														}
 														else
 														{
-															if (!(lista_NO_VIo.Contains(mierda.Id)))
+															if (!(lista_NO_VIo.Contains(targetWall.Id)))
 															{
-																Wall wall_recibida = Revision6_DYNO_Wall_EditProfile_U_PUERTA_return(mierda, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], Punto_Ventada_dPH);
+																Wall wall_recibida = Revision6_DYNO_Wall_EditProfile_U_PUERTA_return(targetWall, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], Punto_Ventada_dPH);
 																lista_walls.Add(wall_recibida);
 															}
 														}
@@ -3260,7 +2875,7 @@ namespace SplitWalls
 													else
 													{
 														#region Ventana
-														if (!(lista_NO_VIo.Contains(mierda.Id)))
+														if (!(lista_NO_VIo.Contains(targetWall.Id)))
 														{
 															using (Transaction trans = new Transaction(doc, "wall"))
 															{
@@ -3269,16 +2884,16 @@ namespace SplitWalls
 																XYZ arriba_dVFo = new XYZ(Puntos_Ventada_dVFo[i].X, Puntos_Ventada_dVFo[i].Y, Puntos_Ventada_dVFo[i].Z + alturaventanas[i]);
 																XYZ abajo_dVIo = new XYZ(Puntos_Ventada_dVIo[i].X, Puntos_Ventada_dVIo[i].Y, Puntos_Ventada_dVIo[i].Z);
 
-																Opening openin = mierda.Document.Create.NewOpening(mierda, abajo_dVIo, arriba_dVFo);
+																Opening openin = targetWall.Document.Create.NewOpening(targetWall, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(mierda, 1))
-																	WallUtils.DisallowWallJoinAtEnd(mierda, 1);
+																if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 1))
+																	WallUtils.DisallowWallJoinAtEnd(targetWall, 1);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(mierda, 0))
-																	WallUtils.DisallowWallJoinAtEnd(mierda, 0);
+																if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 0))
+																	WallUtils.DisallowWallJoinAtEnd(targetWall, 0);
 																trans.Commit();
 
-																lista_walls.Add(mierda);
+																lista_walls.Add(targetWall);
 															}
 														}
 														#endregion
@@ -3811,7 +3426,7 @@ namespace SplitWalls
 													if (!activador)
 													{
 														#region Ventana o Puerta Dentro de Muro Void
-														Wall mierda = elements_dVIo.First() as Wall;
+														Wall targetWall = elements_dVIo.First() as Wall;
 														if (sillventanas[i] == 0) // Es puerta
 														{
 															#region puerta
@@ -3823,23 +3438,23 @@ namespace SplitWalls
 															{
 																// Transf. BORDE PUERTA a la IZQUIERDA
 																//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
-																Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
+																Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(targetWall, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
 																lista_walls.Add(wall_recibida);
 															}
 															else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 															{
 																// Transf. BORDE PUERTA a la DERECHA
 																//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
-																//Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-																Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(mierda, alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
+																//Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(targetWall, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
+																Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(targetWall, alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 
 																lista_walls.Add(wall_recibida);
 															}
 															else
 															{
-																if (!(lista_NO_VIo.Contains(mierda.Id)))
+																if (!(lista_NO_VIo.Contains(targetWall.Id)))
 																{
-																	Wall wall_recibida = Revision6_DYNO_Wall_EditProfile_U_PUERTA_return(mierda, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], Punto_Ventada_dPH);
+																	Wall wall_recibida = Revision6_DYNO_Wall_EditProfile_U_PUERTA_return(targetWall, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], Punto_Ventada_dPH);
 																	lista_walls.Add(wall_recibida);
 																}
 															}
@@ -3850,7 +3465,7 @@ namespace SplitWalls
 														else
 														{
 															#region Ventana
-															if (!(lista_NO_VIo.Contains(mierda.Id)))
+															if (!(lista_NO_VIo.Contains(targetWall.Id)))
 															{
 																using (Transaction trans = new Transaction(doc, "wall"))
 																{
@@ -3859,16 +3474,16 @@ namespace SplitWalls
 																	XYZ arriba_dVFo = new XYZ(Puntos_Ventada_dVFo[i].X, Puntos_Ventada_dVFo[i].Y, Puntos_Ventada_dVFo[i].Z + alturaventanas[i]);
 																	XYZ abajo_dVIo = new XYZ(Puntos_Ventada_dVIo[i].X, Puntos_Ventada_dVIo[i].Y, Puntos_Ventada_dVIo[i].Z);
 
-																	Opening openin = mierda.Document.Create.NewOpening(mierda, abajo_dVIo, arriba_dVFo);
+																	Opening openin = targetWall.Document.Create.NewOpening(targetWall, abajo_dVIo, arriba_dVFo);
 
-																	if (WallUtils.IsWallJoinAllowedAtEnd(mierda, 1))
-																		WallUtils.DisallowWallJoinAtEnd(mierda, 1);
+																	if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 1))
+																		WallUtils.DisallowWallJoinAtEnd(targetWall, 1);
 
-																	if (WallUtils.IsWallJoinAllowedAtEnd(mierda, 0))
-																		WallUtils.DisallowWallJoinAtEnd(mierda, 0);
+																	if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 0))
+																		WallUtils.DisallowWallJoinAtEnd(targetWall, 0);
 																	trans.Commit();
 
-																	lista_walls.Add(mierda);
+																	lista_walls.Add(targetWall);
 																}
 															}
 															#endregion
@@ -3878,12 +3493,12 @@ namespace SplitWalls
 													}
 													else
 													{
-														Wall mierda = elements_dVIo.First() as Wall;
-														if (!(lista_NO_VIo.Contains(mierda.Id)))
+														Wall targetWall = elements_dVIo.First() as Wall;
+														if (!(lista_NO_VIo.Contains(targetWall.Id)))
 														{
 															#region Ventana Exacta
 
-															Revision6_DYNO_Create_New_Wall_2MUROS_Solitario(mierda, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVFo[i]);
+															Revision6_DYNO_Create_New_Wall_2MUROS_Solitario(targetWall, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVFo[i]);
 
 															#endregion
 														}
@@ -3892,7 +3507,7 @@ namespace SplitWalls
 												else
 												{
 													#region Ventana o Puerta Dentro de Muro Void
-													Wall mierda = elements_dVIo.First() as Wall;
+													Wall targetWall = elements_dVIo.First() as Wall;
 													if (sillventanas[i] == 0) // Es puerta
 													{
 														#region puerta
@@ -3904,23 +3519,23 @@ namespace SplitWalls
 														{
 															// Transf. BORDE PUERTA a la IZQUIERDA
 															//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
-															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
+															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(targetWall, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
 															lista_walls.Add(wall_recibida);
 														}
 														else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 														{
 															// Transf. BORDE PUERTA a la DERECHA
 															//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
-															//Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(mierda, alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
+															//Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(targetWall, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
+															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(targetWall, alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 
 															lista_walls.Add(wall_recibida);
 														}
 														else
 														{
-															if (!(lista_NO_VIo.Contains(mierda.Id)))
+															if (!(lista_NO_VIo.Contains(targetWall.Id)))
 															{
-																Wall wall_recibida = Revision6_DYNO_Wall_EditProfile_U_PUERTA_return(mierda, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], Punto_Ventada_dPH);
+																Wall wall_recibida = Revision6_DYNO_Wall_EditProfile_U_PUERTA_return(targetWall, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], Punto_Ventada_dPH);
 																lista_walls.Add(wall_recibida);
 															}
 														}
@@ -3931,7 +3546,7 @@ namespace SplitWalls
 													else
 													{
 														#region Ventana
-														if (!(lista_NO_VIo.Contains(mierda.Id)))
+														if (!(lista_NO_VIo.Contains(targetWall.Id)))
 														{
 															using (Transaction trans = new Transaction(doc, "wall"))
 															{
@@ -3940,16 +3555,16 @@ namespace SplitWalls
 																XYZ arriba_dVFo = new XYZ(Puntos_Ventada_dVFo[i].X, Puntos_Ventada_dVFo[i].Y, Puntos_Ventada_dVFo[i].Z + alturaventanas[i]);
 																XYZ abajo_dVIo = new XYZ(Puntos_Ventada_dVIo[i].X, Puntos_Ventada_dVIo[i].Y, Puntos_Ventada_dVIo[i].Z);
 
-																Opening openin = mierda.Document.Create.NewOpening(mierda, abajo_dVIo, arriba_dVFo);
+																Opening openin = targetWall.Document.Create.NewOpening(targetWall, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(mierda, 1))
-																	WallUtils.DisallowWallJoinAtEnd(mierda, 1);
+																if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 1))
+																	WallUtils.DisallowWallJoinAtEnd(targetWall, 1);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(mierda, 0))
-																	WallUtils.DisallowWallJoinAtEnd(mierda, 0);
+																if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 0))
+																	WallUtils.DisallowWallJoinAtEnd(targetWall, 0);
 																trans.Commit();
 
-																lista_walls.Add(mierda);
+																lista_walls.Add(targetWall);
 															}
 														}
 														#endregion
@@ -3969,7 +3584,7 @@ namespace SplitWalls
 												if (!activador)
 												{
 													#region Ventana o Puerta Dentro de Muro Void
-													Wall mierda = elements_dVIo.First() as Wall;
+													Wall targetWall = elements_dVIo.First() as Wall;
 													if (sillventanas[i] == 0) // Es puerta
 													{
 														#region puerta
@@ -3981,17 +3596,17 @@ namespace SplitWalls
 														{
 															// Transf. BORDE PUERTA a la IZQUIERDA
 															//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
-															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
+															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(targetWall, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
 															lista_walls.Add(wall_recibida);
 														}
 														else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 														{
-															if (mierda.Id == ultimo_ultimo_wall.Id)
+															if (targetWall.Id == ultimo_ultimo_wall.Id)
 															{
 																// Transf. BORDE PUERTA a la DERECHA
 																//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
-																//Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-																Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(mierda, alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
+																//Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(targetWall, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
+																Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(targetWall, alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 
 																lista_walls.Add(wall_recibida);
 															}
@@ -3999,9 +3614,9 @@ namespace SplitWalls
 														}
 														else
 														{
-															if (!(lista_NO_VIo.Contains(mierda.Id)))
+															if (!(lista_NO_VIo.Contains(targetWall.Id)))
 															{
-																Wall wall_recibida = Revision6_DYNO_Wall_EditProfile_U_PUERTA_return(mierda, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], Punto_Ventada_dPH);
+																Wall wall_recibida = Revision6_DYNO_Wall_EditProfile_U_PUERTA_return(targetWall, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], Punto_Ventada_dPH);
 																lista_walls.Add(wall_recibida);
 															}
 														}
@@ -4012,7 +3627,7 @@ namespace SplitWalls
 													else
 													{
 														#region Ventana
-														if (!(lista_NO_VIo.Contains(mierda.Id)))
+														if (!(lista_NO_VIo.Contains(targetWall.Id)))
 														{
 															using (Transaction trans = new Transaction(doc, "wall"))
 															{
@@ -4021,16 +3636,16 @@ namespace SplitWalls
 																XYZ arriba_dVFo = new XYZ(Puntos_Ventada_dVFo[i].X, Puntos_Ventada_dVFo[i].Y, Puntos_Ventada_dVFo[i].Z + alturaventanas[i]);
 																XYZ abajo_dVIo = new XYZ(Puntos_Ventada_dVIo[i].X, Puntos_Ventada_dVIo[i].Y, Puntos_Ventada_dVIo[i].Z);
 
-																Opening openin = mierda.Document.Create.NewOpening(mierda, abajo_dVIo, arriba_dVFo);
+																Opening openin = targetWall.Document.Create.NewOpening(targetWall, abajo_dVIo, arriba_dVFo);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(mierda, 1))
-																	WallUtils.DisallowWallJoinAtEnd(mierda, 1);
+																if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 1))
+																	WallUtils.DisallowWallJoinAtEnd(targetWall, 1);
 
-																if (WallUtils.IsWallJoinAllowedAtEnd(mierda, 0))
-																	WallUtils.DisallowWallJoinAtEnd(mierda, 0);
+																if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 0))
+																	WallUtils.DisallowWallJoinAtEnd(targetWall, 0);
 																trans.Commit();
 
-																lista_walls.Add(mierda);
+																lista_walls.Add(targetWall);
 															}
 														}
 														#endregion
@@ -4040,12 +3655,12 @@ namespace SplitWalls
 												}
 												else
 												{
-													Wall mierda = elements_dVIo.First() as Wall;
-													if (!(lista_NO_VIo.Contains(mierda.Id)))
+													Wall targetWall = elements_dVIo.First() as Wall;
+													if (!(lista_NO_VIo.Contains(targetWall.Id)))
 													{
 														#region Ventana Exacta
 
-														Revision6_DYNO_Create_New_Wall_2MUROS_Solitario(mierda, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVFo[i]);
+														Revision6_DYNO_Create_New_Wall_2MUROS_Solitario(targetWall, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVFo[i]);
 
 														#endregion
 													}
@@ -4054,7 +3669,7 @@ namespace SplitWalls
 											else
 											{
 												#region Ventana o Puerta Dentro de Muro Void
-												Wall mierda = elements_dVIo.First() as Wall;
+												Wall targetWall = elements_dVIo.First() as Wall;
 												if (sillventanas[i] == 0) // Es puerta
 												{
 													#region puerta
@@ -4066,17 +3681,17 @@ namespace SplitWalls
 													{
 														// Transf. BORDE PUERTA a la IZQUIERDA
 														//TaskDialog.Show("BORDE PUERTA a la IZQUIERDA", VI_nuf.ToString());
-														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
+														Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_IZQUIERDO_return(targetWall, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
 														lista_walls.Add(wall_recibida);
 													}
 													else if ((VF_nuf == Math.Round(lenght_double, 1)) && !(VI_nuf == 0)) // BORDE Final
 													{
-														if (mierda.Id == ultimo_ultimo_wall.Id)
+														if (targetWall.Id == ultimo_ultimo_wall.Id)
 														{
 															// Transf. BORDE PUERTA a la DERECHA
 															//TaskDialog.Show("BORDE PUERTA a la DERECHA", VI_nuf.ToString());
-															//Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(mierda, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
-															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(mierda, alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
+															//Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_BORDE_PUERTA_DERECHA_return(targetWall, alturaventanas[i], anchoventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], height_double);
+															Wall wall_recibida = Revision6_DYNO_Create_New_Wall_EditProfile_dVIo_PUERTA_return(targetWall, alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i]);
 
 															lista_walls.Add(wall_recibida);
 														}
@@ -4084,9 +3699,9 @@ namespace SplitWalls
 													}
 													else
 													{
-														if (!(lista_NO_VIo.Contains(mierda.Id)))
+														if (!(lista_NO_VIo.Contains(targetWall.Id)))
 														{
-															Wall wall_recibida = Revision6_DYNO_Wall_EditProfile_U_PUERTA_return(mierda, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], Punto_Ventada_dPH);
+															Wall wall_recibida = Revision6_DYNO_Wall_EditProfile_U_PUERTA_return(targetWall, anchoventanas[i], alturaventanas[i], sillventanas[i], Puntos_Ventada_dVIo[i], Puntos_Ventada_dVFo[i], Punto_Ventada_dPH);
 															lista_walls.Add(wall_recibida);
 														}
 													}
@@ -4097,7 +3712,7 @@ namespace SplitWalls
 												else
 												{
 													#region Ventana
-													if (!(lista_NO_VIo.Contains(mierda.Id)))
+													if (!(lista_NO_VIo.Contains(targetWall.Id)))
 													{
 														using (Transaction trans = new Transaction(doc, "wall"))
 														{
@@ -4106,16 +3721,16 @@ namespace SplitWalls
 															XYZ arriba_dVFo = new XYZ(Puntos_Ventada_dVFo[i].X, Puntos_Ventada_dVFo[i].Y, Puntos_Ventada_dVFo[i].Z + alturaventanas[i]);
 															XYZ abajo_dVIo = new XYZ(Puntos_Ventada_dVIo[i].X, Puntos_Ventada_dVIo[i].Y, Puntos_Ventada_dVIo[i].Z);
 
-															Opening openin = mierda.Document.Create.NewOpening(mierda, abajo_dVIo, arriba_dVFo);
+															Opening openin = targetWall.Document.Create.NewOpening(targetWall, abajo_dVIo, arriba_dVFo);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(mierda, 1))
-																WallUtils.DisallowWallJoinAtEnd(mierda, 1);
+															if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 1))
+																WallUtils.DisallowWallJoinAtEnd(targetWall, 1);
 
-															if (WallUtils.IsWallJoinAllowedAtEnd(mierda, 0))
-																WallUtils.DisallowWallJoinAtEnd(mierda, 0);
+															if (WallUtils.IsWallJoinAllowedAtEnd(targetWall, 0))
+																WallUtils.DisallowWallJoinAtEnd(targetWall, 0);
 															trans.Commit();
 
-															lista_walls.Add(mierda);
+															lista_walls.Add(targetWall);
 														}
 													}
 													#endregion
@@ -7669,10 +7284,6 @@ namespace SplitWalls
 				{
 					//TaskDialog.Show("Error", e.Message.ToString());
 					throw;
-				}
-				finally
-				{
-
 				}
 
 

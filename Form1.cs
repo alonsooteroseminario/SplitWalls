@@ -28,8 +28,6 @@ namespace SplitWalls
 
         public bool checkBox_7 { get; set; }
 
-        //public bool checkBox_8 { get; set; }
-
 
         public Form1()
         {
@@ -38,9 +36,8 @@ namespace SplitWalls
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            textString = "1220";
-  
-            if (!(textString == "1220"))
+            textString = textBox1.Text;
+            if (checkBox_1 && textString != "1220")
             {
                 checkBox1.Checked = false;
             }
@@ -149,10 +146,6 @@ namespace SplitWalls
             {
                 MessageBox.Show("Por Favor elige las opciones correctas", "No has ingresado los Valores correctos!");
             }
-            //else if (!checkBox_7 && !checkBox_8)
-            //{
-            //    MessageBox.Show("Por Favor elige las opciones correctas", "No has ingresado los Valores correctos!");
-            //}
         }
 
         private void checkBox6_CheckedChanged(object sender, EventArgs e)
@@ -188,28 +181,7 @@ namespace SplitWalls
 
             checkBox_7 = checkBox7.Checked;
             textString = textBox1.Text;
-            //if (checkBox_7)
-            //{
-            //    checkBox8.Checked = false;
-            //}
         }
 
-        //private void checkBox8_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    checkBox_1 = checkBox1.Checked;
-
-        //    if (checkBox_1)
-        //    {
-        //        textBox1.Text = "1220";
-        //    }
-
-
-        //    checkBox_8 = checkBox8.Checked;
-        //    textString = textBox1.Text;
-        //    if (checkBox_8)
-        //    {
-        //        checkBox7.Checked = false;
-        //    }
-        //}
     }
 }
