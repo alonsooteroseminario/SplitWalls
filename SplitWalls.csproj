@@ -82,7 +82,10 @@
     <Compile Include="Models\SegmentDef.cs" />
     <Compile Include="Models\SplitRule.cs" />
     <Compile Include="Models\WallProfileConfig.cs" />
+    <Compile Include="Services\ProfileExecutionService.cs" />
     <Compile Include="Services\ProfileFileService.cs" />
+    <Compile Include="UI\ProfileEditorViewModel.cs" />
+    <Compile Include="UI\RelayCommand.cs" />
     <Compile Include="Services\WallProfileBuilder.cs" />
     <Compile Include="Services\WindowDetectionService.cs" />
     <Compile Include="Form1.cs">
