@@ -62,6 +62,8 @@ namespace SplitWalls.UI
             set { _config.SplitRule.Method = value; OnPropertyChanged(); }
         }
 
+        public WallProfileConfig CurrentConfig => _config;
+
         public ObservableCollection<SegmentDef> Segments { get; private set; }
         public ObservableCollection<OpeningDef> Openings { get; private set; }
 

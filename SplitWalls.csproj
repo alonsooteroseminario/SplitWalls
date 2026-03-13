@@ -47,6 +47,10 @@
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -84,7 +88,11 @@
     <Compile Include="Models\WallProfileConfig.cs" />
     <Compile Include="Services\ProfileExecutionService.cs" />
     <Compile Include="Services\ProfileFileService.cs" />
+    <Compile Include="UI\ProfileCanvasRenderer.cs" />
     <Compile Include="UI\ProfileEditorViewModel.cs" />
+    <Compile Include="UI\ProfileEditorWindow.xaml.cs">
+      <DependentUpon>ProfileEditorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\RelayCommand.cs" />
     <Compile Include="Services\WallProfileBuilder.cs" />
     <Compile Include="Services\WindowDetectionService.cs" />
@@ -112,6 +120,12 @@
     </Compile>
     <Compile Include="ThisApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="UI\ProfileEditorWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
