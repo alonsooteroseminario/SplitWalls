@@ -75,7 +75,12 @@
     <Compile Include="App.cs" />
     <Compile Include="Helpers\RevitUnitHelper.cs" />
     <Compile Include="Helpers\WallJoinHelper.cs" />
+    <Compile Include="Models\OpeningDef.cs" />
     <Compile Include="Models\PanelOptions.cs" />
+    <Compile Include="Models\ProfileDefaults.cs" />
+    <Compile Include="Models\SegmentDef.cs" />
+    <Compile Include="Models\SplitRule.cs" />
+    <Compile Include="Models\WallProfileConfig.cs" />
     <Compile Include="Services\WallProfileBuilder.cs" />
     <Compile Include="Services\WindowDetectionService.cs" />
     <Compile Include="Form1.cs">
