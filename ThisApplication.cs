@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,6 +67,7 @@ namespace SplitWalls
 					bool _todoMuro = false;
 					bool primera_ERA_VENT = false;
 
+					SplitWalls.Models.WallProfileConfig loadedProfile = null;
 
 					using (var form = new Form1())
 					{
@@ -76,7 +77,8 @@ namespace SplitWalls
 
 						if (form.DialogResult == forms.DialogResult.OK)
 						{
-							
+							loadedProfile = form.LoadedProfile;
+
 							string numero = form.Options.AnchoPanel;
 
 							if (numero =="")
@@ -104,6 +106,27 @@ namespace SplitWalls
 					}
 
 					// close form1
+
+					// Profile-driven execution path
+					// If a .txt profile was loaded via Form1, use ProfileExecutionService.
+					if (loadedProfile != null)
+					{
+						var profileWalls = new System.Collections.Generic.List<Wall>();
+						foreach (var r in uidoc.Selection.PickObjects(ObjectType.Element,
+							"Selecciona los muros — perfil: " + loadedProfile.Name))
+							profileWalls.Add(doc.GetElement(r) as Wall);
+
+						if (profileWalls.Count > 0)
+						{
+							using (var profileTx = new Transaction(doc, "SplitWalls - " + loadedProfile.Name))
+							{
+								profileTx.Start();
+								new SplitWalls.Services.ProfileExecutionService(doc).Execute(loadedProfile, profileWalls);
+								profileTx.Commit();
+							}
+						}
+						return;
+					}
 
 					// MURO SIN VENTANAS
 					int anchopanel_UI = (int)numero_final;// 1220 

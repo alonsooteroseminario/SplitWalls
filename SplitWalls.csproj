@@ -47,12 +47,17 @@
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="Xceed.Wpf.AvalonDock, Version=3.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
@@ -73,9 +78,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Commands\OpenProfileEditorCommand.cs" />
     <Compile Include="Helpers\RevitUnitHelper.cs" />
     <Compile Include="Helpers\WallJoinHelper.cs" />
+    <Compile Include="Models\OpeningDef.cs" />
     <Compile Include="Models\PanelOptions.cs" />
+    <Compile Include="Models\ProfileDefaults.cs" />
+    <Compile Include="Models\SegmentDef.cs" />
+    <Compile Include="Models\SplitRule.cs" />
+    <Compile Include="Models\WallProfileConfig.cs" />
+    <Compile Include="Services\ProfileExecutionService.cs" />
+    <Compile Include="Services\ProfileFileService.cs" />
+    <Compile Include="UI\ProfileCanvasRenderer.cs" />
+    <Compile Include="UI\ProfileEditorViewModel.cs" />
+    <Compile Include="UI\ProfileEditorWindow.xaml.cs">
+      <DependentUpon>ProfileEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\RelayCommand.cs" />
     <Compile Include="Services\WallProfileBuilder.cs" />
     <Compile Include="Services\WindowDetectionService.cs" />
     <Compile Include="Form1.cs">
@@ -102,6 +121,12 @@
     </Compile>
     <Compile Include="ThisApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="UI\ProfileEditorWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resx">
