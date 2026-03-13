@@ -7,13 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SplitWalls.Models;
+using SplitWalls.Services;
 
 namespace SplitWalls
 {
     public partial class Form1 : Form
     {
         public PanelOptions Options { get; private set; }
+        public WallProfileConfig LoadedProfile { get; private set; }
 
+        private System.Windows.Forms.Label _lblProfileName;
         private string textString;
         private bool checkBox_1;
         private bool checkBox_2;
@@ -27,6 +31,60 @@ namespace SplitWalls
         public Form1()
         {
             InitializeComponent();
+            AddProfileControls();
+        }
+
+        private void AddProfileControls()
+        {
+            var btn = new System.Windows.Forms.Button
+            {
+                Name = "btnLoadProfile",
+                Text = "Load Profile",
+                Width = 100,
+                Height = 25,
+                Location = new System.Drawing.Point(10, this.ClientSize.Height - 35),
+                Anchor = AnchorStyles.Bottom | AnchorStyles.Left
+            };
+            btn.Click += btnLoadProfile_Click;
+
+            _lblProfileName = new System.Windows.Forms.Label
+            {
+                Name = "lblProfileName",
+                Text = "(no profile loaded)",
+                Width = 220,
+                Height = 20,
+                Location = new System.Drawing.Point(115, this.ClientSize.Height - 31),
+                Anchor = AnchorStyles.Bottom | AnchorStyles.Left
+            };
+
+            this.Controls.Add(btn);
+            this.Controls.Add(_lblProfileName);
+        }
+
+        private void btnLoadProfile_Click(object sender, EventArgs e)
+        {
+            var service = new ProfileFileService();
+            var dlg = new OpenFileDialog
+            {
+                Title = "Load Wall Profile",
+                Filter = "Profile Files (*.txt)|*.txt|All Files (*.*)|*.*",
+                InitialDirectory = service.GetDefaultFolder()
+            };
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    LoadedProfile = service.Load(dlg.FileName);
+                    _lblProfileName.Text = LoadedProfile.Name;
+                    if (LoadedProfile.Defaults != null)
+                        textBox1.Text = LoadedProfile.Defaults.PanelWidthMm.ToString();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error loading profile: " + ex.Message,
+                        "SplitWalls", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
