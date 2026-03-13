@@ -53,6 +53,7 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="Xceed.Wpf.AvalonDock, Version=3.8.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
@@ -81,6 +82,7 @@
     <Compile Include="Models\SegmentDef.cs" />
     <Compile Include="Models\SplitRule.cs" />
     <Compile Include="Models\WallProfileConfig.cs" />
+    <Compile Include="Services\ProfileFileService.cs" />
     <Compile Include="Services\WallProfileBuilder.cs" />
     <Compile Include="Services\WindowDetectionService.cs" />
     <Compile Include="Form1.cs">
