@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
+    <Compile Include="Commands\OpenProfileEditorCommand.cs" />
     <Compile Include="Helpers\RevitUnitHelper.cs" />
     <Compile Include="Helpers\WallJoinHelper.cs" />
     <Compile Include="Models\OpeningDef.cs" />

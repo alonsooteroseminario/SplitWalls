@@ -36,6 +36,15 @@ namespace SplitWalls
             button11.ToolTip = "Dividir Muros para fabricación de Paneles Standarizados";
             button11.LongDescription = "Ingresa el Ancho de los Paneles (mm) que deseas Dividir y después Selecciona qué muro deseas Dividir: ";
 
+            // Profile Editor button
+            PushButton buttonEditor = panel11.AddItem(new PushButtonData(
+                "ProfileEditorButton",
+                "Editor de\nPerfiles",
+                ExecutingAssemblyPath,
+                "SplitWalls.Commands.OpenProfileEditorCommand")) as PushButton;
+            buttonEditor.ToolTip = "Abre el editor visual de perfiles de muro";
+            buttonEditor.LongDescription = "Crea y edita perfiles de division de muros en formato .txt para usar con Dividir Muros.";
+
             return Result.Succeeded;
         }
 
