@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SplitWalls — UI/UX Mockup</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  .page { display: none; }
+  .page.active { display: block; }
+  .tab { cursor: pointer; }
+  .tab.active { border-bottom: 3px solid #2563eb; color: #2563eb; font-weight: 600; }
+  .viewer-placeholder { background: linear-gradient(135deg, #1e293b 0%, #334155 100%); }
+  .glow { box-shadow: 0 0 20px rgba(37, 99, 235, 0.15); }
+  @keyframes pulse-slow { 0%,100%{opacity:1} 50%{opacity:0.7} }
+  .pulse-slow { animation: pulse-slow 2s infinite; }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .status-success { background: #22c55e; }
+  .status-failed { background: #ef4444; }
+  .status-pending { background: #f59e0b; }
+  .status-executing { background: #3b82f6; animation: pulse-slow 1.5s infinite; }
+</style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+
+<!-- Navigation -->
+<nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-14">
+    <div class="flex items-center gap-6">
+      <span class="text-xl font-bold text-blue-600">SplitWalls</span>
+      <div class="flex gap-1 text-sm">
+        <button onclick="showPage('landing')" class="tab px-3 py-4 text-gray-500 hover:text-gray-900" id="tab-landing">Landing</button>
+        <button onclick="showPage('dashboard')" class="tab px-3 py-4 text-gray-500 hover:text-gray-900" id="tab-dashboard">Dashboard</button>
+        <button onclick="showPage('viewer')" class="tab px-3 py-4 text-gray-500 hover:text-gray-900" id="tab-viewer">3D Viewer</button>
+        <button onclick="showPage('configure')" class="tab px-3 py-4 text-gray-500 hover:text-gray-900" id="tab-configure">Design</button>
+        <button onclick="showPage('status')" class="tab px-3 py-4 text-gray-500 hover:text-gray-900" id="tab-status">Status</button>
+        <button onclick="showPage('result')" class="tab px-3 py-4 text-gray-500 hover:text-gray-900" id="tab-result">Result</button>
+        <span class="px-2 py-4 text-gray-300">|</span>
+        <button onclick="showPage('admin-bundles')" class="tab px-3 py-4 text-gray-500 hover:text-gray-900" id="tab-admin-bundles">Admin: Bundles</button>
+        <button onclick="showPage('admin-test')" class="tab px-3 py-4 text-gray-500 hover:text-gray-900" id="tab-admin-test">Admin: Test</button>
+        <button onclick="showPage('admin-logs')" class="tab px-3 py-4 text-gray-500 hover:text-gray-900" id="tab-admin-logs">Admin: Logs</button>
+        <button onclick="showPage('admin-viewer')" class="tab px-3 py-4 text-gray-500 hover:text-gray-900" id="tab-admin-viewer">Admin: Viewer</button>
+        <button onclick="showPage('admin-history')" class="tab px-3 py-4 text-gray-500 hover:text-gray-900" id="tab-admin-history">Admin: History</button>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="text-sm text-gray-500">alonsooteroseminario@gmail.com</span>
+      <span class="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full">admin</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ==================== PAGE: LANDING ==================== -->
+<div id="page-landing" class="page active">
+  <!-- Hero -->
+  <div class="bg-gradient-to-br from-blue-600 to-blue-800 text-white">
+    <div class="max-w-5xl mx-auto px-4 py-24 text-center">
+      <h1 class="text-5xl font-bold mb-4">Split Revit Walls in Seconds</h1>
+      <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+        Upload your .rvt file, configure panel splits, and download the modified result. No Revit desktop needed.
+      </p>
+      <button onclick="showPage('dashboard')" class="bg-white text-blue-700 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-50 transition">
+        Get Started — Free
+      </button>
+    </div>
+  </div>
+
+  <!-- 4-Step Explainer -->
+  <div class="max-w-5xl mx-auto px-4 py-16">
+    <div class="grid grid-cols-4 gap-8 text-center">
+      <div>
+        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+        </div>
+        <h3 class="font-semibold text-lg mb-1">1. Upload</h3>
+        <p class="text-gray-500 text-sm">Drop your .rvt file</p>
+      </div>
+      <div>
+        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+        </div>
+        <h3 class="font-semibold text-lg mb-1">2. View 3D</h3>
+        <p class="text-gray-500 text-sm">See your model in 3D</p>
+      </div>
+      <div>
+        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+        </div>
+        <h3 class="font-semibold text-lg mb-1">3. Design</h3>
+        <p class="text-gray-500 text-sm">Draw splits on 2D canvas</p>
+      </div>
+      <div>
+        <div class="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3 class="font-semibold text-lg mb-1">4. Verify</h3>
+        <p class="text-gray-500 text-sm">See before/after in 3D</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supported Versions -->
+  <div class="bg-gray-100 py-8">
+    <div class="max-w-5xl mx-auto px-4 text-center">
+      <p class="text-gray-500 text-sm mb-3">Supported Revit Versions</p>
+      <div class="flex justify-center gap-4">
+        <span class="bg-white px-4 py-2 rounded-lg shadow-sm text-sm font-medium">Revit 2022</span>
+        <span class="bg-white px-4 py-2 rounded-lg shadow-sm text-sm font-medium">Revit 2023</span>
+        <span class="bg-white px-4 py-2 rounded-lg shadow-sm text-sm font-medium">Revit 2024</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t py-8">
+    <div class="max-w-5xl mx-auto px-4 text-center text-gray-400 text-sm">
+      Built by Alonso Otero Seminario
+    </div>
+  </footer>
+</div>
+
+<!-- ==================== PAGE: DASHBOARD ==================== -->
+<div id="page-dashboard" class="page">
+  <div class="max-w-4xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-6">Dashboard</h1>
+
+    <!-- Upload Area -->
+    <div class="bg-white rounded-xl border-2 border-dashed border-gray-300 p-12 text-center mb-8 hover:border-blue-400 transition cursor-pointer glow">
+      <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+      <p class="text-lg font-medium text-gray-700 mb-1">Drop your .rvt file here</p>
+      <p class="text-sm text-gray-400">or click to browse (max 500MB)</p>
+    </div>
+
+    <!-- Revit Version Selector -->
+    <div class="bg-white rounded-xl border p-6 mb-8">
+      <label class="block text-sm font-medium text-gray-700 mb-3">Revit Version</label>
+      <div class="flex gap-3">
+        <label class="flex items-center gap-2 px-4 py-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+          <input type="radio" name="version" value="2022" class="text-blue-600">
+          <span>Revit 2022</span>
+        </label>
+        <label class="flex items-center gap-2 px-4 py-3 border rounded-lg cursor-pointer hover:bg-gray-50">
+          <input type="radio" name="version" value="2023" class="text-blue-600">
+          <span>Revit 2023</span>
+        </label>
+        <label class="flex items-center gap-2 px-4 py-3 border rounded-lg cursor-pointer bg-blue-50 border-blue-300">
+          <input type="radio" name="version" value="2024" checked class="text-blue-600">
+          <span class="font-medium">Revit 2024</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Job History -->
+    <h2 class="text-lg font-semibold mb-4">Recent Jobs</h2>
+    <div class="bg-white rounded-xl border divide-y">
+      <div class="p-4 flex items-center justify-between hover:bg-gray-50">
+        <div class="flex items-center gap-3">
+          <span class="status-dot status-success"></span>
+          <div>
+            <p class="font-medium text-sm">residential-model-v3.rvt</p>
+            <p class="text-xs text-gray-400">Revit 2024 · 96 panels · 34s</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-gray-400">5 min ago</span>
+          <button class="text-blue-600 text-sm hover:underline">View</button>
+        </div>
+      </div>
+      <div class="p-4 flex items-center justify-between hover:bg-gray-50">
+        <div class="flex items-center gap-3">
+          <span class="status-dot status-failed"></span>
+          <div>
+            <p class="font-medium text-sm">commercial-office.rvt</p>
+            <p class="text-xs text-gray-400">Revit 2023 · Failed · 12s</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-gray-400">2 hours ago</span>
+          <button class="text-blue-600 text-sm hover:underline">View</button>
+        </div>
+      </div>
+      <div class="p-4 flex items-center justify-between hover:bg-gray-50">
+        <div class="flex items-center gap-3">
+          <span class="status-dot status-success"></span>
+          <div>
+            <p class="font-medium text-sm">warehouse-layout.rvt</p>
+            <p class="text-xs text-gray-400">Revit 2024 · 48 panels · 22s</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-gray-400">1 day ago</span>
+          <button class="text-blue-600 text-sm hover:underline">View</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE: 3D VIEWER ==================== -->
+<div id="page-viewer" class="page">
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h1 class="text-2xl font-bold">View Your Model</h1>
+        <p class="text-gray-500 text-sm">residential-model-v3.rvt · Revit 2024</p>
+      </div>
+      <button onclick="showPage('configure')" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+        Continue to Configure &rarr;
+      </button>
+    </div>
+
+    <!-- Viewer -->
+    <div class="viewer-placeholder rounded-xl h-[500px] flex items-center justify-center relative">
+      <div class="text-center">
+        <div class="w-20 h-20 border-2 border-gray-500 rounded mx-auto mb-4 flex items-center justify-center">
+          <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+        </div>
+        <p class="text-gray-400 text-sm">APS Viewer — 3D Model</p>
+        <p class="text-gray-500 text-xs mt-1">(Interactive 3D view loads here)</p>
+      </div>
+      <!-- Model info overlay -->
+      <div class="absolute bottom-4 left-4 bg-black/60 text-white px-4 py-2 rounded-lg text-sm">
+        24 walls &middot; 3 levels &middot; 12.4 MB
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE: CONFIGURE ==================== -->
+<div id="page-configure" class="page">
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-1">Design Wall Splits</h1>
+    <p class="text-gray-500 text-sm mb-6">residential-model-v3.rvt · Revit 2024 · All 24 walls</p>
+
+    <div class="grid grid-cols-3 gap-6">
+      <!-- LEFT: 2D Profile Editor (2/3 width) -->
+      <div class="col-span-2 space-y-4">
+        <!-- Canvas -->
+        <div class="bg-white rounded-xl border p-5">
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="text-sm font-semibold text-gray-700">2D Profile Editor</h2>
+            <div class="flex items-center gap-2">
+              <span id="split-mode-badge" class="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full">Uniform</span>
+              <button onclick="resetToUniform()" class="text-xs text-blue-600 hover:underline hidden" id="reset-btn">Reset to Uniform</button>
+            </div>
+          </div>
+
+          <!-- SVG Canvas -->
+          <div class="bg-gray-50 rounded-lg border border-gray-200 relative" style="height: 320px;" id="canvas-container">
+            <svg id="profile-svg" viewBox="0 0 800 320" class="w-full h-full" style="user-select: none;">
+              <!-- Wall outline -->
+              <rect x="60" y="30" width="680" height="220" fill="#f8fafc" stroke="#94a3b8" stroke-width="2" rx="2"/>
+
+              <!-- Segments (uniform: 4 panels from 5200mm wall / 1220mm panels) -->
+              <!-- Segment 1: 1220mm -->
+              <rect x="62" y="32" width="157" height="216" fill="#e0e7ff" stroke="#6366f1" stroke-width="1" rx="1" class="cursor-pointer hover:fill-blue-200 transition-colors"/>
+              <text x="140" y="145" text-anchor="middle" class="text-xs fill-gray-600" font-size="11">standard</text>
+              <text x="140" y="24" text-anchor="middle" class="text-xs fill-gray-500" font-size="10">1220mm</text>
+
+              <!-- Separator 1 (4mm = ~0.5px at scale) -->
+              <rect x="219" y="32" width="2" height="216" fill="#fbbf24" opacity="0.6"/>
+
+              <!-- Segment 2: 1220mm -->
+              <rect x="221" y="32" width="157" height="216" fill="#e0e7ff" stroke="#6366f1" stroke-width="1" rx="1" class="cursor-pointer hover:fill-blue-200 transition-colors"/>
+              <text x="299" y="145" text-anchor="middle" class="text-xs fill-gray-600" font-size="11">standard</text>
+              <text x="299" y="24" text-anchor="middle" class="text-xs fill-gray-500" font-size="10">1220mm</text>
+
+              <!-- Separator 2 -->
+              <rect x="378" y="32" width="2" height="216" fill="#fbbf24" opacity="0.6"/>
+
+              <!-- Segment 3: 1220mm -->
+              <rect x="380" y="32" width="157" height="216" fill="#e0e7ff" stroke="#6366f1" stroke-width="1" rx="1" class="cursor-pointer hover:fill-blue-200 transition-colors"/>
+              <text x="458" y="145" text-anchor="middle" class="text-xs fill-gray-600" font-size="11">standard</text>
+              <text x="458" y="24" text-anchor="middle" class="text-xs fill-gray-500" font-size="10">1220mm</text>
+
+              <!-- Separator 3 -->
+              <rect x="537" y="32" width="2" height="216" fill="#fbbf24" opacity="0.6"/>
+
+              <!-- Segment 4: 1528mm (remainder) -->
+              <rect x="539" y="32" width="199" height="216" fill="#dbeafe" stroke="#6366f1" stroke-width="1" rx="1" class="cursor-pointer hover:fill-blue-200 transition-colors"/>
+              <text x="638" y="145" text-anchor="middle" class="text-xs fill-gray-600" font-size="11">standard</text>
+              <text x="638" y="24" text-anchor="middle" class="text-xs fill-gray-500" font-size="10">1528mm</text>
+
+              <!-- Draggable split lines (3 split points) -->
+              <line x1="220" y1="28" x2="220" y2="256" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,3" class="cursor-ew-resize" opacity="0.7"/>
+              <circle cx="220" cy="28" r="5" fill="#ef4444" class="cursor-ew-resize" opacity="0.8"/>
+              <circle cx="220" cy="256" r="5" fill="#ef4444" class="cursor-ew-resize" opacity="0.8"/>
+
+              <line x1="379" y1="28" x2="379" y2="256" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,3" class="cursor-ew-resize" opacity="0.7"/>
+              <circle cx="379" cy="28" r="5" fill="#ef4444" class="cursor-ew-resize" opacity="0.8"/>
+              <circle cx="379" cy="256" r="5" fill="#ef4444" class="cursor-ew-resize" opacity="0.8"/>
+
+              <line x1="538" y1="28" x2="538" y2="256" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,3" class="cursor-ew-resize" opacity="0.7"/>
+              <circle cx="538" cy="28" r="5" fill="#ef4444" class="cursor-ew-resize" opacity="0.8"/>
+              <circle cx="538" cy="256" r="5" fill="#ef4444" class="cursor-ew-resize" opacity="0.8"/>
+
+              <!-- Wall height label (right side) -->
+              <text x="750" y="145" text-anchor="middle" class="text-xs fill-gray-400" font-size="10" transform="rotate(90, 750, 145)">2440mm</text>
+              <line x1="745" y1="32" x2="745" y2="248" stroke="#cbd5e1" stroke-width="1" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+
+              <!-- Total length label (bottom) -->
+              <text x="400" y="275" text-anchor="middle" class="text-xs fill-gray-500" font-size="11" font-weight="600">5200mm total</text>
+              <line x1="62" y1="262" x2="738" y2="262" stroke="#cbd5e1" stroke-width="1"/>
+
+              <!-- Drag hint -->
+              <text x="400" y="300" text-anchor="middle" class="text-xs fill-gray-400" font-size="9">Drag red split lines to adjust panel widths</text>
+            </svg>
+          </div>
+
+          <!-- Canvas Controls -->
+          <div class="flex items-center justify-between mt-3">
+            <div class="flex items-center gap-2">
+              <button class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-md transition">+ Add Split</button>
+              <button onclick="resetToUniform()" class="text-xs bg-gray-100 hover:bg-gray-200 px-3 py-1.5 rounded-md transition">Reset Uniform</button>
+            </div>
+            <div class="flex items-center gap-3">
+              <label class="flex items-center gap-1.5 text-xs text-gray-500">
+                <input type="checkbox" checked class="w-3 h-3 text-blue-600 rounded">
+                Snap to grid
+              </label>
+              <select class="text-xs border rounded px-2 py-1">
+                <option>100mm</option>
+                <option>50mm</option>
+                <option>200mm</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Legend -->
+        <div class="bg-white rounded-xl border p-4">
+          <p class="text-xs font-medium text-gray-500 mb-2">Profile Types (click segment to change)</p>
+          <div class="flex flex-wrap gap-3">
+            <span class="flex items-center gap-1.5 text-xs">
+              <span class="w-4 h-4 rounded" style="background: #e0e7ff; border: 1px solid #6366f1;"></span>
+              standard
+            </span>
+            <span class="flex items-center gap-1.5 text-xs">
+              <span class="w-4 h-4 rounded" style="background: #ffe6b4; border: 1px solid #d97706;"></span>
+              U
+            </span>
+            <span class="flex items-center gap-1.5 text-xs">
+              <span class="w-4 h-4 rounded" style="background: #b4d2ff; border: 1px solid #2563eb;"></span>
+              L-left
+            </span>
+            <span class="flex items-center gap-1.5 text-xs">
+              <span class="w-4 h-4 rounded" style="background: #b4ffd2; border: 1px solid #16a34a;"></span>
+              L-right
+            </span>
+            <span class="flex items-center gap-1.5 text-xs">
+              <span class="w-4 h-4 rounded" style="background: #ffc8c8; border: 1px solid #dc2626;"></span>
+              T
+            </span>
+            <span class="flex items-center gap-1.5 text-xs">
+              <span class="w-4 h-4 rounded" style="background: #dcc8ff; border: 1px solid #7c3aed;"></span>
+              I
+            </span>
+            <span class="flex items-center gap-1.5 text-xs">
+              <span class="w-4 h-4 rounded" style="background: #ffffb4; border: 1px solid #ca8a04;"></span>
+              borde
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Configuration Panel (1/3 width) -->
+      <div class="space-y-4">
+        <!-- Wall Dimensions -->
+        <div class="bg-white rounded-xl border p-5">
+          <h3 class="text-sm font-semibold text-gray-700 mb-3">Wall Dimensions</h3>
+          <div class="space-y-3">
+            <div>
+              <label class="block text-xs font-medium text-gray-500 mb-1">Wall Length (mm)</label>
+              <input type="number" value="5200" class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-gray-500 mb-1">Wall Height (mm)</label>
+              <input type="number" value="2440" class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            </div>
+          </div>
+        </div>
+
+        <!-- Split Parameters -->
+        <div class="bg-white rounded-xl border p-5">
+          <h3 class="text-sm font-semibold text-gray-700 mb-3">Split Parameters</h3>
+          <div class="space-y-3">
+            <div>
+              <label class="block text-xs font-medium text-gray-500 mb-1">Panel Width (mm)</label>
+              <input type="number" value="1220" class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+              <p class="text-xs text-gray-400 mt-1">Standard: 1220mm (4 ft)</p>
+            </div>
+            <div>
+              <label class="block text-xs font-medium text-gray-500 mb-1">Separator Width (mm)</label>
+              <input type="number" value="4" class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div class="flex items-center gap-2 pt-1">
+              <input type="checkbox" checked class="w-4 h-4 text-blue-600 rounded">
+              <label class="text-sm text-gray-700">Disable Wall Joins</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Apply To -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+          <p class="text-sm font-medium text-blue-800">Applies to: All 24 walls</p>
+          <p class="text-xs text-blue-600 mt-1">Per-wall selection in Phase 2</p>
+        </div>
+
+        <!-- Estimated Result -->
+        <div class="bg-white rounded-xl border p-5">
+          <h3 class="text-sm font-semibold text-gray-700 mb-3">Estimated Result</h3>
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <div>
+              <p class="text-xl font-bold text-blue-600">24</p>
+              <p class="text-xs text-gray-500">Walls</p>
+            </div>
+            <div>
+              <p class="text-xl font-bold text-blue-600">~96</p>
+              <p class="text-xs text-gray-500">Panels</p>
+            </div>
+            <div>
+              <p class="text-xl font-bold text-blue-600">4mm</p>
+              <p class="text-xs text-gray-500">Gaps</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Execute -->
+        <button onclick="showPage('status')" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+          Execute Split
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE: STATUS ==================== -->
+<div id="page-status" class="page">
+  <div class="max-w-2xl mx-auto px-4 py-16 text-center">
+    <div class="mb-8">
+      <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-blue-600 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+      </div>
+      <h1 class="text-2xl font-bold mb-2">Splitting Walls...</h1>
+      <p class="text-gray-500">residential-model-v3.rvt · Revit 2024</p>
+    </div>
+
+    <!-- Progress -->
+    <div class="bg-white rounded-xl border p-6 mb-6">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-sm font-medium text-gray-700">Processing</span>
+        <span class="text-sm text-blue-600 font-medium">65%</span>
+      </div>
+      <div class="w-full bg-gray-200 rounded-full h-2">
+        <div class="bg-blue-600 h-2 rounded-full transition-all" style="width: 65%"></div>
+      </div>
+      <p class="text-xs text-gray-400 mt-3">Elapsed: 22s · Estimated: ~12s remaining</p>
+    </div>
+
+    <div class="space-y-2 text-sm text-gray-500">
+      <p class="flex items-center justify-center gap-2"><span class="text-green-500">&#10003;</span> Uploaded to cloud</p>
+      <p class="flex items-center justify-center gap-2"><span class="text-green-500">&#10003;</span> Configuration sent</p>
+      <p class="flex items-center justify-center gap-2"><span class="text-blue-500 pulse-slow">&#9679;</span> Revit engine processing...</p>
+      <p class="flex items-center justify-center gap-2 text-gray-300"><span>&#9675;</span> Saving result</p>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE: RESULT ==================== -->
+<div id="page-result" class="page">
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h1 class="text-2xl font-bold">Your Walls Have Been Split!</h1>
+        <p class="text-gray-500 text-sm">96 panels created from 24 walls · 34.2 seconds</p>
+      </div>
+    </div>
+
+    <!-- Before/After Viewer -->
+    <div class="grid grid-cols-2 gap-4 mb-6">
+      <div>
+        <p class="text-sm font-medium text-gray-500 mb-2 text-center">RESULT (96 panels)</p>
+        <div class="viewer-placeholder rounded-xl h-[400px] flex items-center justify-center">
+          <div class="text-center">
+            <p class="text-gray-400 text-sm">APS Viewer — Result Model</p>
+            <p class="text-green-400 text-xs mt-1">96 wall panels</p>
+          </div>
+        </div>
+      </div>
+      <div class="relative">
+        <p class="text-sm font-medium text-gray-500 mb-2 text-center">ORIGINAL (24 walls)</p>
+        <div class="bg-gray-200 rounded-xl h-[400px] flex items-center justify-center">
+          <button class="bg-white text-gray-700 px-4 py-2 rounded-lg shadow hover:shadow-md transition text-sm font-medium">
+            Compare with Original
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Gate -->
+    <div class="bg-white rounded-xl border p-8 text-center">
+      <h2 class="text-xl font-bold mb-2">Share to Download</h2>
+      <p class="text-gray-500 text-sm mb-6">Share your result on social media to unlock the download</p>
+
+      <div class="flex justify-center gap-4 mb-6">
+        <button class="flex items-center gap-2 bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          Share on X
+        </button>
+        <button class="flex items-center gap-2 bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-800 transition">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          Share on LinkedIn
+        </button>
+      </div>
+
+      <div class="border-t pt-4">
+        <button disabled class="bg-gray-200 text-gray-400 px-8 py-3 rounded-lg cursor-not-allowed">
+          Download result.rvt (share first)
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE: ADMIN BUNDLES ==================== -->
+<div id="page-admin-bundles" class="page">
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h1 class="text-2xl font-bold">Bundle Manager</h1>
+        <p class="text-gray-500 text-sm">Upload and register AppBundles on APS Design Automation</p>
+      </div>
+      <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm font-medium">
+        Upload New Bundle
+      </button>
+    </div>
+
+    <!-- Bundle List -->
+    <div class="space-y-4">
+      <div class="bg-white rounded-xl border p-5">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+              <span class="text-green-600 text-lg font-bold">Z</span>
+            </div>
+            <div>
+              <p class="font-semibold">SplitWallsDA_2024.zip</p>
+              <p class="text-sm text-gray-500">Autodesk.Revit+2024 &middot; Version 3 &middot; 245 KB</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full">Registered</span>
+            <span class="text-xs text-gray-400">10 min ago</span>
+            <button class="text-blue-600 text-sm hover:underline">Re-register</button>
+            <button class="text-red-500 text-sm hover:underline">Delete</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl border p-5">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+              <span class="text-green-600 text-lg font-bold">Z</span>
+            </div>
+            <div>
+              <p class="font-semibold">SplitWallsDA_2023.zip</p>
+              <p class="text-sm text-gray-500">Autodesk.Revit+2023 &middot; Version 1 &middot; 243 KB</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full">Registered</span>
+            <span class="text-xs text-gray-400">1 hour ago</span>
+            <button class="text-blue-600 text-sm hover:underline">Re-register</button>
+            <button class="text-red-500 text-sm hover:underline">Delete</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl border p-5">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
+              <span class="text-yellow-600 text-lg font-bold">Z</span>
+            </div>
+            <div>
+              <p class="font-semibold">SplitWallsDA_2022.zip</p>
+              <p class="text-sm text-gray-500">Autodesk.Revit+2022 &middot; Version 1 &middot; 240 KB</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="bg-yellow-100 text-yellow-700 text-xs px-2 py-1 rounded-full">Pending</span>
+            <span class="text-xs text-gray-400">1 hour ago</span>
+            <button class="text-blue-600 text-sm hover:underline">Register</button>
+            <button class="text-red-500 text-sm hover:underline">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE: ADMIN TEST RUNNER ==================== -->
+<div id="page-admin-test" class="page">
+  <div class="max-w-4xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-6">Test Runner</h1>
+
+    <div class="grid grid-cols-2 gap-6">
+      <!-- Left: Config -->
+      <div class="space-y-4">
+        <div class="bg-white rounded-xl border p-5">
+          <label class="block text-sm font-medium text-gray-700 mb-2">Select Bundle</label>
+          <select class="w-full border rounded-lg px-3 py-2 text-sm">
+            <option>SplitWallsDA_2024 v3 (Revit+2024)</option>
+            <option>SplitWallsDA_2023 v1 (Revit+2023)</option>
+            <option>SplitWallsDA_2022 v1 (Revit+2022)</option>
+          </select>
+        </div>
+
+        <div class="bg-white rounded-xl border p-5">
+          <label class="block text-sm font-medium text-gray-700 mb-2">Select Activity</label>
+          <select class="w-full border rounded-lg px-3 py-2 text-sm">
+            <option>SplitWalls2024+test</option>
+            <option>SplitWalls2023+test</option>
+          </select>
+        </div>
+
+        <div class="bg-white rounded-xl border p-5">
+          <label class="block text-sm font-medium text-gray-700 mb-2">Input .rvt</label>
+          <div class="flex gap-2">
+            <button class="flex-1 border rounded-lg px-3 py-2 text-sm text-gray-500 hover:bg-gray-50">Upload file</button>
+            <select class="flex-1 border rounded-lg px-3 py-2 text-sm">
+              <option>Recent: test-house.rvt</option>
+              <option>Recent: warehouse.rvt</option>
+            </select>
+          </div>
+        </div>
+
+        <button onclick="showPage('admin-logs')" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition flex items-center justify-center gap-2">
+          <span>&#9654;</span> Run Test
+        </button>
+      </div>
+
+      <!-- Right: JSON Editor -->
+      <div class="bg-white rounded-xl border p-5">
+        <label class="block text-sm font-medium text-gray-700 mb-2">Input JSON (skill.json)</label>
+        <pre class="bg-gray-900 text-green-400 rounded-lg p-4 text-xs font-mono overflow-auto h-[360px]">{
+  "version": "2.0",
+  "created": "2026-03-13T14:30:00Z",
+  "name": "Test Run #42",
+  "defaults": {
+    "panelWidthMm": 1220,
+    "separatorWidthMm": 4,
+    "disableWallJoins": true
+  },
+  "wallConfigs": [],
+  "globalConfig": {
+    "strategy": "noWindows",
+    "splitRule": {
+      "method": "uniform",
+      "panelWidthMm": 1220
+    }
+  }
+}</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE: ADMIN LOGS ==================== -->
+<div id="page-admin-logs" class="page">
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h1 class="text-2xl font-bold">Test Job #42</h1>
+        <p class="text-gray-500 text-sm">SplitWallsDA_2024 v3 &middot; 34.2s &middot; <span class="text-green-600 font-medium">SUCCESS</span></p>
+      </div>
+      <div class="flex gap-2">
+        <button onclick="showPage('admin-viewer')" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">View in 3D</button>
+        <button class="border px-4 py-2 rounded-lg text-sm hover:bg-gray-50">Re-run</button>
+        <button class="border px-4 py-2 rounded-lg text-sm hover:bg-gray-50">Re-run with Edit</button>
+      </div>
+    </div>
+
+    <!-- Console Output -->
+    <div class="bg-gray-900 rounded-xl p-5 font-mono text-sm mb-6 max-h-[450px] overflow-auto">
+      <p class="text-gray-500">[00:00.0] <span class="text-blue-400">DA Engine</span> Starting Revit 2024...</p>
+      <p class="text-gray-500">[00:01.1] <span class="text-blue-400">DA Engine</span> Loading AppBundle SplitWallsDA v3...</p>
+      <p class="text-gray-500">[00:01.2] <span class="text-green-400">AppBundle</span> SplitWallsApp.OnStartup called</p>
+      <p class="text-gray-500">[00:01.3] <span class="text-green-400">AppBundle</span> ApplicationInitialized event fired</p>
+      <p class="text-gray-500">[00:01.4] <span class="text-green-400">AppBundle</span> Loaded skill.json (v2.0, name: "Test Run #42")</p>
+      <p class="text-gray-500">[00:01.5] <span class="text-green-400">AppBundle</span> Opening input.rvt...</p>
+      <p class="text-gray-500">[00:05.8] <span class="text-green-400">AppBundle</span> Document opened. Found 24 walls.</p>
+      <p class="text-gray-500">[00:06.0] <span class="text-green-400">AppBundle</span> Config: panelWidth=1220mm, separator=4mm, disableJoins=true</p>
+      <p class="text-gray-500">[00:06.1] <span class="text-green-400">AppBundle</span> Splitting wall #1 (ElementId: 382901, length: 5200mm)</p>
+      <p class="text-gray-500">[00:06.3] <span class="text-green-400">AppBundle</span>   Created 4 panels (1220, 1220, 1220, 1540mm)</p>
+      <p class="text-gray-500">[00:06.5] <span class="text-green-400">AppBundle</span> Splitting wall #2 (ElementId: 382956, length: 3100mm)</p>
+      <p class="text-gray-500">[00:06.7] <span class="text-green-400">AppBundle</span>   Created 2 panels (1220, 1880mm)</p>
+      <p class="text-gray-500">[00:06.8] <span class="text-green-400">AppBundle</span> Splitting wall #3 (ElementId: 383012, length: 6400mm)</p>
+      <p class="text-gray-500">[00:07.0] <span class="text-green-400">AppBundle</span>   Created 5 panels (1220, 1220, 1220, 1220, 1520mm)</p>
+      <p class="text-gray-400">... (18 more walls)</p>
+      <p class="text-gray-500">[00:28.1] <span class="text-green-400">AppBundle</span> Splitting wall #24 (ElementId: 385102, length: 2800mm)</p>
+      <p class="text-gray-500">[00:28.3] <span class="text-green-400">AppBundle</span>   Created 2 panels (1220, 1580mm)</p>
+      <p class="text-gray-500">[00:28.4] <span class="text-green-400">AppBundle</span> <span class="text-white font-bold">Total: 96 panels created from 24 walls</span></p>
+      <p class="text-gray-500">[00:28.5] <span class="text-green-400">AppBundle</span> Transaction committed. Saving result.rvt...</p>
+      <p class="text-gray-500">[00:34.2] <span class="text-green-400">AppBundle</span> Done. Report written.</p>
+      <p class="text-gray-500">[00:34.2] <span class="text-blue-400">DA Engine</span> WorkItem completed successfully.</p>
+    </div>
+
+    <!-- Input JSON + Errors -->
+    <div class="grid grid-cols-2 gap-4">
+      <div class="bg-white rounded-xl border p-5">
+        <h3 class="text-sm font-medium text-gray-700 mb-3">Input JSON</h3>
+        <pre class="bg-gray-50 rounded-lg p-3 text-xs font-mono overflow-auto h-40">{
+  "version": "2.0",
+  "defaults": { "panelWidthMm": 1220, "separatorWidthMm": 4 },
+  "globalConfig": { "strategy": "noWindows" }
+}</pre>
+      </div>
+      <div class="bg-white rounded-xl border p-5">
+        <h3 class="text-sm font-medium text-gray-700 mb-3">Errors</h3>
+        <div class="bg-green-50 rounded-lg p-3 h-40 flex items-center justify-center">
+          <p class="text-green-600 text-sm">No errors</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE: ADMIN VIEWER ==================== -->
+<div id="page-admin-viewer" class="page">
+  <div class="max-w-6xl mx-auto px-4 py-8">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h1 class="text-2xl font-bold">Before / After — Test Job #42</h1>
+        <p class="text-gray-500 text-sm">SplitWallsDA_2024 v3 &middot; 24 walls &rarr; 96 panels</p>
+      </div>
+      <div class="flex gap-2">
+        <button class="border px-4 py-2 rounded-lg text-sm hover:bg-gray-50">Sync Cameras</button>
+        <button class="border px-4 py-2 rounded-lg text-sm hover:bg-gray-50">Reset View</button>
+      </div>
+    </div>
+
+    <!-- Split Viewer -->
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <p class="text-sm font-medium text-gray-500">INPUT .rvt (Original)</p>
+          <span class="bg-green-100 text-green-700 text-xs px-2 py-0.5 rounded-full">Cached (hash: abc123)</span>
+        </div>
+        <div class="viewer-placeholder rounded-xl h-[450px] flex items-center justify-center">
+          <div class="text-center">
+            <p class="text-gray-400 text-sm">APS Viewer — Input Model</p>
+            <p class="text-gray-500 text-xs mt-1">24 walls (original)</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <p class="text-sm font-medium text-gray-500">RESULT .rvt (Modified)</p>
+          <span class="bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full">Translated 34s ago</span>
+        </div>
+        <div class="viewer-placeholder rounded-xl h-[450px] flex items-center justify-center">
+          <div class="text-center">
+            <p class="text-gray-400 text-sm">APS Viewer — Result Model</p>
+            <p class="text-green-400 text-xs mt-1">96 panels (modified)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="flex justify-center gap-3 mt-4">
+      <button class="bg-gray-100 px-4 py-2 rounded-lg text-sm hover:bg-gray-200">Orbit</button>
+      <button class="bg-gray-100 px-4 py-2 rounded-lg text-sm hover:bg-gray-200">Pan</button>
+      <button class="bg-gray-100 px-4 py-2 rounded-lg text-sm hover:bg-gray-200">Zoom</button>
+      <button class="bg-gray-100 px-4 py-2 rounded-lg text-sm hover:bg-gray-200">Fit All</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE: ADMIN HISTORY ==================== -->
+<div id="page-admin-history" class="page">
+  <div class="max-w-5xl mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-6">Job History</h1>
+
+    <!-- Filters -->
+    <div class="flex gap-3 mb-6">
+      <select class="border rounded-lg px-3 py-2 text-sm">
+        <option>All Status</option>
+        <option>Success</option>
+        <option>Failed</option>
+      </select>
+      <select class="border rounded-lg px-3 py-2 text-sm">
+        <option>All Engines</option>
+        <option>Revit 2024</option>
+        <option>Revit 2023</option>
+        <option>Revit 2022</option>
+      </select>
+      <input type="text" placeholder="Search..." class="border rounded-lg px-3 py-2 text-sm flex-1">
+    </div>
+
+    <!-- History Table -->
+    <div class="bg-white rounded-xl border overflow-hidden">
+      <table class="w-full text-sm">
+        <thead class="bg-gray-50 border-b">
+          <tr>
+            <th class="text-left px-4 py-3 font-medium text-gray-500">#</th>
+            <th class="text-left px-4 py-3 font-medium text-gray-500">Status</th>
+            <th class="text-left px-4 py-3 font-medium text-gray-500">Bundle</th>
+            <th class="text-left px-4 py-3 font-medium text-gray-500">Engine</th>
+            <th class="text-left px-4 py-3 font-medium text-gray-500">Duration</th>
+            <th class="text-left px-4 py-3 font-medium text-gray-500">When</th>
+            <th class="text-left px-4 py-3 font-medium text-gray-500">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y">
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3 font-mono">#42</td>
+            <td class="px-4 py-3"><span class="flex items-center gap-1.5"><span class="status-dot status-success"></span> Success</span></td>
+            <td class="px-4 py-3">v3</td>
+            <td class="px-4 py-3">2024</td>
+            <td class="px-4 py-3">34.2s</td>
+            <td class="px-4 py-3 text-gray-400">5 min ago</td>
+            <td class="px-4 py-3"><button onclick="showPage('admin-logs')" class="text-blue-600 hover:underline">Logs</button> &middot; <button onclick="showPage('admin-viewer')" class="text-blue-600 hover:underline">3D</button></td>
+          </tr>
+          <tr class="hover:bg-gray-50 bg-red-50/30">
+            <td class="px-4 py-3 font-mono">#41</td>
+            <td class="px-4 py-3"><span class="flex items-center gap-1.5"><span class="status-dot status-failed"></span> Failed</span></td>
+            <td class="px-4 py-3">v3</td>
+            <td class="px-4 py-3">2024</td>
+            <td class="px-4 py-3">12.1s</td>
+            <td class="px-4 py-3 text-gray-400">8 min ago</td>
+            <td class="px-4 py-3"><button class="text-blue-600 hover:underline">Logs</button> &middot; <button class="text-gray-400 cursor-not-allowed">3D</button></td>
+          </tr>
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3 font-mono">#40</td>
+            <td class="px-4 py-3"><span class="flex items-center gap-1.5"><span class="status-dot status-success"></span> Success</span></td>
+            <td class="px-4 py-3">v2</td>
+            <td class="px-4 py-3">2024</td>
+            <td class="px-4 py-3">31.0s</td>
+            <td class="px-4 py-3 text-gray-400">1 hour ago</td>
+            <td class="px-4 py-3"><button class="text-blue-600 hover:underline">Logs</button> &middot; <button class="text-blue-600 hover:underline">3D</button></td>
+          </tr>
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-3 font-mono">#39</td>
+            <td class="px-4 py-3"><span class="flex items-center gap-1.5"><span class="status-dot status-success"></span> Success</span></td>
+            <td class="px-4 py-3">v2</td>
+            <td class="px-4 py-3">2023</td>
+            <td class="px-4 py-3">38.5s</td>
+            <td class="px-4 py-3 text-gray-400">1 hour ago</td>
+            <td class="px-4 py-3"><button class="text-blue-600 hover:underline">Logs</button> &middot; <button class="text-blue-600 hover:underline">3D</button></td>
+          </tr>
+          <tr class="hover:bg-gray-50 bg-red-50/30">
+            <td class="px-4 py-3 font-mono">#38</td>
+            <td class="px-4 py-3"><span class="flex items-center gap-1.5"><span class="status-dot status-failed"></span> Failed</span></td>
+            <td class="px-4 py-3">v1</td>
+            <td class="px-4 py-3">2024</td>
+            <td class="px-4 py-3">5.3s</td>
+            <td class="px-4 py-3 text-gray-400">2 hours ago</td>
+            <td class="px-4 py-3"><button class="text-blue-600 hover:underline">Logs</button> &middot; <button class="text-gray-400 cursor-not-allowed">3D</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  const tab = document.getElementById('tab-' + name);
+  if (tab) tab.classList.add('active');
+}
+function resetToUniform() {
+  document.getElementById('split-mode-badge').textContent = 'Uniform';
+  document.getElementById('split-mode-badge').className = 'bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full';
+  document.getElementById('reset-btn').classList.add('hidden');
+}
+// Show landing by default
+document.getElementById('tab-landing').classList.add('active');
+</script>
+</body>
+</html>
