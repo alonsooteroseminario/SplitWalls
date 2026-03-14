@@ -96,3 +96,41 @@ Items explicitly considered and deferred during plan review. Each has context su
 **Priority:** P3
 **Phase:** 3
 **Depends on:** Phase B (2D Profile Editor), TODO-3 (profile types in AppBundle) for meaningful saved profiles.
+
+---
+
+## TODO-6: Real-Time DA Status — SSE / WebSocket
+
+**What:** Replace 5s polling on `GET /api/jobs/:id/status` with Server-Sent Events (SSE) for real-time DA job status and log streaming.
+
+**Why:** Polling works but is inefficient and adds 0-5s perceived lag. SSE would show status changes (pending → inProgress → success/failed) and DA log lines as they arrive — zero polling overhead. NestJS on Railway enables this natively; impossible on Vercel serverless.
+
+**Pros:** Better user experience (instant feedback). Admin log viewer shows log lines streaming live instead of one big dump at the end. Trivial to add in NestJS (`@Sse()` decorator + `Observable` from `rxjs`). Railway persistent server already maintains long-lived connections.
+
+**Cons:** SSE connections are long-lived — each job poll holds an open HTTP connection for 30-120s. Under high concurrency this could be a Railway memory concern (unlikely for beta). Client-side `EventSource` API has limited error handling. Need reconnect logic.
+
+**Context:** NestJS has native SSE support via `@Sse('jobs/:id/stream')` returning an `Observable<MessageEvent>`. Job status changes are emitted from `JobsService` via `EventEmitter2`. Client: `const es = new EventSource(apiUrl + '/jobs/:id/stream?token=' + clerkToken)`. Note: `EventSource` doesn't support custom headers — token must be sent as query param or via cookie (or use Fetch SSE polyfill for header support).
+
+**Effort:** M (1-2 days)
+**Priority:** P2
+**Phase:** 2
+**Depends on:** Phase A (NestJS scaffold) must be complete. NestJS architecture already chosen — no blocker.
+
+---
+
+## TODO-7: NestJS Swagger / OpenAPI Auto-Docs
+
+**What:** Enable `@nestjs/swagger` to auto-generate interactive API documentation at `GET /api/docs` from NestJS controller decorators.
+
+**Why:** As the API grows (user + admin routes = ~15 endpoints), having self-documenting API is valuable for future collaborators, for onboarding a new LLM session, and for manual testing without curl. `@nestjs/swagger` generates full OpenAPI spec with zero extra work if decorators are added as you write controllers.
+
+**Pros:** Zero effort beyond initial setup (~30 min). Living documentation that can't get stale. Enables Swagger UI at `/api/docs`. Can export OpenAPI JSON for codegen. Standard NestJS pattern.
+
+**Cons:** Decorators add noise to controllers. Must be disabled or secured in production (no sensitive data in docs, but URL should be `/api/docs` = not publicly advertised).
+
+**Context:** Install: `@nestjs/swagger`, `swagger-ui-express`. In `main.ts`: `SwaggerModule.setup('api/docs', app, SwaggerModule.createDocument(app, config))`. Add `@ApiTags()`, `@ApiOperation()`, `@ApiResponse()` decorators to controllers. Restrict to non-production or add basic auth.
+
+**Effort:** S (30 min setup + ~2 hours decorators across all controllers)
+**Priority:** P3
+**Phase:** 2
+**Depends on:** Phase A (NestJS scaffold), all controllers must be written first.

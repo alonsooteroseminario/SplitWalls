@@ -1,7 +1,7 @@
 # SplitWalls Beta MVP — Product & Architecture Plan
 
 **Date:** 2026-03-13
-**Updated:** 2026-03-13 (v4 — added 2D Profile Editor + custom splits)
+**Updated:** 2026-03-14 (v5 — 3-software architecture: Next.js + NestJS + C# DA AppBundle; Turborepo monorepo; Railway hosting)
 **Status:** Approved — Ready for Implementation
 **Mode:** SCOPE REDUCTION (user-facing) + SCOPE EXPANSION (admin workbench)
 **Goal:** Ship a working beta demo where users upload a `.rvt` file, configure uniform wall splits, execute via APS Design Automation, and download the modified result. Free to use; users "pay" by sharing on X/LinkedIn. Includes an admin developer workbench for debugging APS DA AppBundles without a Revit desktop license — designed to become a standalone product for AEC cloud developers.
@@ -70,110 +70,215 @@ Sign in (admin role) → Upload .zip bundle → Register AppBundle + Activity �
 
 ## 2. Tech Stack
 
-| Layer | Technology | Cost |
-|-------|-----------|------|
-| **Frontend + API** | Next.js 14+ (App Router, TypeScript) | Free (Vercel) |
-| **Auth** | Clerk (Google + Microsoft + email) | Free (10K MAU) |
-| **Database** | MongoDB Atlas + Prisma ORM | Free tier |
-| **Hosting** | Vercel (splitwalls.vercel.app) | Free tier |
-| **Styling** | Tailwind CSS + shadcn/ui | Free |
-| **3D Viewer** | APS Viewer SDK v7 | Free |
-| **Model Translation** | APS Model Derivative (SVF2) | Flex tokens |
-| **Cloud Engine** | APS Design Automation v3 | Flex tokens |
-| **File Storage** | APS OSS (24hr auto-expiry) | Free |
-| **Revit Engines** | 2022, 2023, 2024 (3 AppBundles) | — |
+| Layer | Technology | Hosting | Cost |
+|-------|-----------|---------|------|
+| **Frontend** | Next.js 14+ (App Router, TypeScript) — pure UI, zero API routes | Vercel | Free |
+| **Backend API** | NestJS (Node.js + TypeScript) — all business logic, all APS credentials | Railway | Free tier |
+| **Auth** | Clerk (Google + Microsoft + email) | Clerk Cloud | Free (10K MAU) |
+| **Database** | MongoDB Atlas + Prisma ORM (in NestJS only) | MongoDB Atlas | Free tier |
+| **Styling** | Tailwind CSS + shadcn/ui | — | Free |
+| **3D Viewer** | APS Viewer SDK v7 (client-side browser library) | CDN | Free |
+| **Model Translation** | APS Model Derivative (SVF2) | APS Cloud | Flex tokens |
+| **Cloud Engine** | APS Design Automation v3 | APS Cloud | Flex tokens |
+| **File Storage** | APS OSS (24hr auto-expiry) | APS Cloud | Free |
+| **Revit Engines** | 2022, 2023, 2024 (3 AppBundles) | APS DA | — |
+| **Monorepo** | Turborepo + pnpm workspaces | — | Free |
 
-### Future Migration Path
+### 3-Software Architecture
 
-Next.js API routes (Vercel) → NestJS API (Azure) when scaling requires it. REST + JSON contract stays identical.
+```
+splitwalls-cloud/          ← NEW git repository
+  apps/
+    web/                   ← Next.js 14 (Vercel) — UI only
+    api/                   ← NestJS (Railway) — all business logic + credentials
+    da-bundle/             ← C# .NET 4.8 DA AppBundle (built locally, registered via admin workbench)
+  packages/
+    types/                 ← Shared TypeScript interfaces (SkillJson, JobConfig, ApiRequest/Response types)
+    tsconfig/              ← Shared tsconfig.base.json
+  turbo.json
+  pnpm-workspace.yaml
+  package.json
+```
+
+**Why NestJS from day 1 (not "when scaling"):**
+- Vercel serverless has a **10s timeout** — APS Model Derivative takes 30-120s. Current plan works around this with polling chains. NestJS on Railway has **no timeout**.
+- In-memory APS token cache in serverless has **cold-start gaps** — Railway persistent server cache works reliably.
+- NestJS enables **WebSockets/SSE** for real-time DA log streaming (Phase 2) — impossible on Vercel serverless.
+- APS credentials live in Railway env vars — clean separation: Vercel has ZERO secrets.
 
 ---
 
 ## 3. System Architecture
 
+### 3-Layer Architecture Diagram
+
 ```
 ┌──────────────────────────────────────────────────────────────────────┐
-│                    FRONTEND (Next.js on Vercel)                       │
+│  LAYER 1 — FRONTEND (Next.js 14 on Vercel)   apps/web               │
 │                                                                      │
-│  PUBLIC ROUTES                          ADMIN ROUTES (role: admin)    │
-│  ─────────────                          ─────────────────────────     │
+│  Secrets: NONE (only NEXT_PUBLIC_* vars)                             │
+│  No API routes — pure React UI                                       │
+│                                                                      │
+│  PUBLIC ROUTES                          ADMIN ROUTES (role: admin)   │
+│  ─────────────                          ─────────────────────────    │
 │  /                 Landing page         /admin                       │
 │  /sign-in          Clerk auth           /admin/bundles    Bundle Mgr │
 │  /sign-up          Clerk auth           /admin/test       Test Runner│
 │  /dashboard        Upload + history     /admin/logs/:id   Log Viewer │
 │  /viewer/:id       3D model viewer      /admin/viewer/:id 3D Viewer  │
-│  /configure/:id    Split config         /admin/history    Job History│
+│  /configure/:id    2D profile editor    /admin/history    Job History│
 │  /status/:id       Job progress                                      │
 │  /result/:id       3D result + download                              │
 │                                                                      │
-└──────────┬───────────────────┬───────────────────────────────────────┘
-           │                   │
-           ▼                   ▼
-┌──────────────┐    ┌──────────────────────────────────────────────────┐
-│   Clerk      │    │  Next.js API Routes (/api/...)                   │
-│   - Google   │    │                                                  │
-│   - Microsoft│    │  USER ROUTES:                                    │
-│   - Email    │    │  POST /api/upload           Upload .rvt          │
-│              │    │  POST /api/execute           Create WorkItem     │
-│   Metadata:  │    │  GET  /api/status/:id        Poll job           │
-│   { role }   │    │  GET  /api/download/:id      Signed URL         │
-│              │    │  POST /api/social/verify      Mark shared        │
-│              │    │  GET  /api/viewer/token        Viewer token      │
-│              │    │  POST /api/viewer/translate    .rvt → SVF2       │
-│              │    │  GET  /api/viewer/status/:urn  Transl. status    │
-└──────────────┘    │                                                  │
-                    │  ADMIN ROUTES (role check middleware):            │
-                    │  POST /api/admin/bundles          Upload .zip    │
-                    │  POST /api/admin/bundles/register  Register DA   │
-                    │  GET  /api/admin/bundles           List bundles  │
-                    │  POST /api/admin/activities        Create/update │
-                    │  POST /api/admin/test              Submit WorkItem│
-                    │  GET  /api/admin/test/:id          Poll + report │
-                    │  GET  /api/admin/test/:id/logs     Parsed logs   │
-                    │  POST /api/admin/viewer/translate  Trigger transl│
-                    │  GET  /api/admin/viewer/token      Viewer token  │
-                    │  GET  /api/admin/viewer/status/:urn  Transl status│
-                    │  GET  /api/admin/history           All test jobs │
-                    │                                                  │
-                    │  SHARED (internal):                               │
-                    │  POST /api/internal/aps/auth       2-legged OAuth│
-                    │  POST /api/internal/aps/oss        OSS operations│
-                    └──────────┬───────────────────────────────────────┘
-                               │
-                    ┌──────────▼───────────────────────────────────────┐
-                    │  APS Cloud                                       │
-                    │                                                  │
-                    │  OAuth 2-legged ─→ Access Token (cached)         │
-                    │  OSS ─→ Store .rvt, .zip bundles, skill.json     │
-                    │  Design Automation:                               │
-                    │    - AppBundle registration                       │
-                    │    - Activity creation                            │
-                    │    - WorkItem submission                          │
-                    │    - Report/log retrieval                         │
-                    │  Model Derivative ─→ Translate .rvt → SVF2       │
-                    │  Viewer SDK ─→ 3D visualization in browser       │
-                    └──────────────────────────────────────────────────┘
-                               │
-                    ┌──────────▼───────────────────────────────────────┐
-                    │  MongoDB Atlas                                    │
-                    │                                                  │
-                    │  User       { clerkId, email, role, createdAt }  │
-                    │  Job        { userId, status, revitVersion,      │
-                    │               ossInputUrn, ossResultUrn, config, │
-                    │               panelCount, createdAt }            │
-                    │  Share      { userId, jobId, platform, sharedAt }│
-                    │  Bundle     { name, version, engine, ossUrn,     │
-                    │               daAppBundleId, status, createdAt } │
-                    │  Activity   { name, bundleId, engine, daId,      │
-                    │               parameters, createdAt }            │
-                    │  TestJob    { bundleId, activityId, workItemId,  │
-                    │               status, inputUrn, resultUrn,       │
-                    │               inputViewableUrn, resultViewableUrn│
-                    │               reportCached, config, duration,    │
-                    │               createdAt }                        │
-                    │  ViewCache  { rvtFileHash, ossUrn, viewableUrn,  │
-                    │               translationStatus, createdAt }     │
-                    └──────────────────────────────────────────────────┘
+│  Auth: Clerk SDK client-side (useAuth, SignIn, SignUp components)    │
+│  All API calls: fetch(NEXT_PUBLIC_API_URL + '/...', {               │
+│                   headers: { Authorization: 'Bearer ' + clerkToken } │
+│                 })                                                   │
+│                                                                      │
+│  APS Viewer SDK: initialized in browser with token from NestJS      │
+│  (Viewer SDK calls APS directly from browser — standard APS pattern)│
+└──────────────────────────┬───────────────────────────────────────────┘
+                           │ REST/JSON
+                           │ Bearer: Clerk JWT (verified by NestJS)
+                           │ CORS: allowed origin = splitwalls.vercel.app
+                           ▼
+┌──────────────────────────────────────────────────────────────────────┐
+│  LAYER 2 — BACKEND API (NestJS on Railway)   apps/api               │
+│                                                                      │
+│  Secrets: APS_CLIENT_ID, APS_CLIENT_SECRET, CLERK_SECRET_KEY,       │
+│           DATABASE_URL, DA_NICKNAME, DA_ACTIVITY_*, CORS_ORIGIN      │
+│                                                                      │
+│  AUTH MODULE                                                         │
+│  ClerkAuthGuard   — verifies Clerk JWT on every protected route      │
+│  AdminGuard       — checks role: "admin" in Clerk session claims     │
+│                                                                      │
+│  USER ROUTES (ClerkAuthGuard):                                       │
+│  POST /jobs/upload-url      Get signed OSS URL for .rvt upload      │
+│  POST /jobs/:id/execute      Create WorkItem on APS DA              │
+│  GET  /jobs/:id/status       Poll DA WorkItem status                │
+│  GET  /jobs/:id/download     Get signed OSS URL for result          │
+│  POST /jobs/:id/social/verify  Mark shared → unlock download        │
+│  GET  /viewer/token           Short-lived Viewer-scoped APS token   │
+│  POST /viewer/translate       Trigger Model Derivative translation   │
+│  GET  /viewer/status/:urn     Poll translation status               │
+│                                                                      │
+│  ADMIN ROUTES (ClerkAuthGuard + AdminGuard):                         │
+│  POST /admin/bundles/upload   Upload .zip to APS OSS                │
+│  POST /admin/bundles/register  Register AppBundle on APS DA         │
+│  POST /admin/bundles/alias    Create/update alias                   │
+│  GET  /admin/bundles          List bundles                          │
+│  POST /admin/activities       Create Activity + alias               │
+│  POST /admin/test             Submit test WorkItem                  │
+│  GET  /admin/test/:id         Poll + parse report                   │
+│  GET  /admin/test/:id/logs    Fetch + parse + cache DA report       │
+│  GET  /admin/history          List all test jobs (filtered)         │
+│                                                                      │
+│  APS MODULE (internal services — not HTTP routes):                   │
+│  ApsAuthService    — 2-legged OAuth token cache (lazy refresh)       │
+│  ApsOssService     — upload, signed URLs, delete                    │
+│  ApsDaService      — AppBundle, Activity, WorkItem                  │
+│  ApsMdService      — Model Derivative trigger + poll                │
+│                                                                      │
+│  PRISMA SERVICE — MongoDB Atlas (only NestJS has DB access)          │
+│                                                                      │
+└──────────┬────────────────────┬───────────────────────────────────────┘
+           │                    │
+           ▼                    ▼
+┌──────────────┐    ┌────────────────────────────────────────────────┐
+│  MongoDB     │    │  APS Cloud                                     │
+│  Atlas       │    │                                                │
+│  (NestJS     │    │  OAuth 2-legged ─→ Access Token (in-memory    │
+│   only)      │    │                    cache, NestJS ApsAuthService│
+│              │    │  OSS ─→ Store .rvt, .zip bundles, skill.json  │
+│  7 models:   │    │  Design Automation:                            │
+│  User        │    │    - AppBundle registration                    │
+│  Job         │    │    - Activity creation                         │
+│  Share       │    │    - WorkItem submission + polling             │
+│  Bundle      │    │    - Report/log retrieval                      │
+│  Activity    │    │  Model Derivative ─→ Translate .rvt → SVF2    │
+│  TestJob     │    │  Viewer SDK ─→ Browser calls APS DIRECTLY     │
+│  ViewCache   │    │              using token from /viewer/token    │
+└──────────────┘    └────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│  LAYER 3 — C# DA AppBundle (APS Design Automation Compute)          │
+│  apps/da-bundle  (C# .NET 4.8, built locally, deployed via admin UI)│
+│                                                                      │
+│  Runs INSIDE APS DA cloud Revit engine (isolated compute)            │
+│  NO network access to web or api layers — communicates via OSS only │
+│  Reads: skill.json (uploaded to OSS by NestJS before WorkItem start) │
+│  Reads: input.rvt (user's file in OSS)                              │
+│  Writes: result.rvt + report.txt (to OSS, retrieved by NestJS)      │
+└──────────────────────────────────────────────────────────────────────┘
+```
+
+### NestJS Module Structure
+
+```
+apps/api/src/
+  main.ts                     CORS, Helmet, ValidationPipe, global prefix '/api'
+  app.module.ts               Root module (imports all below)
+
+  auth/
+    auth.module.ts
+    clerk.guard.ts            Verifies Clerk JWT, sets req.userId + req.userRole
+    admin.guard.ts            Checks req.userRole === 'admin'
+
+  aps/
+    aps.module.ts
+    aps-auth.service.ts       2-legged OAuth token cache (in-memory singleton, lazy refresh)
+    aps-oss.service.ts        upload(), getSignedUrl(), delete()
+    aps-da.service.ts         registerBundle(), createActivity(), submitWorkItem(), getReport()
+    aps-md.service.ts         translate(), getStatus()
+
+  jobs/
+    jobs.module.ts
+    jobs.controller.ts        User routes: /jobs/*
+    jobs.service.ts           Business logic for user-facing job lifecycle
+
+  admin/
+    admin.module.ts
+    admin.controller.ts       Admin routes: /admin/*
+    bundles.service.ts        Bundle + Activity management
+    test-runner.service.ts    TestJob lifecycle
+    da-report-parser.ts       Raw report text → ParsedReport (tolerant parser)
+
+  viewer/
+    viewer.module.ts
+    viewer.controller.ts      GET /viewer/token, POST /viewer/translate, GET /viewer/status/:urn
+    view-cache.service.ts     SHA-256 hash-based translation caching
+
+  social/
+    social.module.ts
+    social.controller.ts      POST /jobs/:id/social/verify
+
+  prisma/
+    prisma.module.ts
+    prisma.service.ts         Injectable PrismaClient (onModuleInit connects)
+
+  health/
+    health.controller.ts      GET /health → { status, db, apsToken }
+```
+
+### Shared Types Package
+
+```
+packages/types/src/
+  index.ts                    Re-exports everything
+
+  skill.ts                    MvpSkill, SplitRule, SegmentDef, OpeningDef, WallProfileConfig
+  job.ts                      JobStatus ('uploaded'|'executing'|'success'|'failed'), JobConfig
+  log.ts                      ParsedLogLine, ParsedReport
+  bundle.ts                   BundleStatus, ActivityStatus
+  api.ts                      All API request + response interfaces:
+                                CreateJobUploadUrlRequest / Response
+                                ExecuteJobRequest / Response
+                                GetJobStatusResponse
+                                GetViewerTokenResponse
+                                TranslateRequest / Response
+                                AdminUploadBundleResponse
+                                AdminSubmitTestRequest / Response
+                                AdminGetLogsResponse
 ```
 
 ---
@@ -433,51 +538,59 @@ Next.js API routes (Vercel) → NestJS API (Azure) when scaling requires it. RES
 
 ---
 
-## 6. API Routes — Complete
+## 6. API Routes — Complete (NestJS, global prefix `/api`)
+
+All routes are on the **NestJS server** (`NEXT_PUBLIC_API_URL`). Next.js has ZERO API routes.
+Auth: every protected route uses `ClerkAuthGuard` (verifies Bearer JWT). Admin routes also use `AdminGuard`.
 
 ### User Routes
 
 ```
-POST   /api/upload
-  Auth: Clerk (userId from session)
-  Body: multipart/form-data { file: .rvt, revitVersion: "2022"|"2023"|"2024" }
-  Action: Upload to APS OSS, create Job record (status: uploaded)
-  Returns: { jobId, ossUrn }
-
-POST   /api/execute
-  Auth: Clerk
-  Body: { jobId, config: { panelWidthMm, separatorWidthMm, disableWallJoins } }
+POST   /api/jobs/upload-url
+  Auth: ClerkAuthGuard
+  Body: { revitVersion: "2022"|"2023"|"2024", fileName: string, fileSizeBytes: number }
   Action:
-    1. Build skill.json (strategy: "noWindows", method: "uniform", all walls)
-    2. Select DA Activity alias by revitVersion
-    3. Create WorkItem on APS DA
-    4. Update Job record (status: executing, workItemId)
+    1. Generate signed OSS PUT URL (60-min expiry)
+    2. Create Job record (status: uploaded, ossInputUrn)
+  Returns: { jobId, signedUrl, ossUrn }
+
+  # Browser then does: PUT signedUrl (direct to APS OSS — no size limit, no timeout)
+
+POST   /api/jobs/:jobId/execute
+  Auth: ClerkAuthGuard
+  Body: { config: { panelWidthMm, separatorWidthMm, disableWallJoins, splitRule } }
+  Action:
+    1. Build skill.json from config
+    2. Upload skill.json to APS OSS
+    3. Select Activity alias by revitVersion
+    4. Create WorkItem on APS DA
+    5. Update Job record (status: executing, workItemId)
   Returns: { jobId, workItemId }
 
-GET    /api/status/:jobId
-  Auth: Clerk
+GET    /api/jobs/:jobId/status
+  Auth: ClerkAuthGuard
   Action: Poll APS DA WorkItem status, update Job record
-  Returns: { status, progress, reportUrl? }
+  Returns: { status, progress, panelCount?, errorMessage? }
 
-POST   /api/social/verify
-  Auth: Clerk
-  Body: { jobId, platform: "x"|"linkedin" }
+POST   /api/jobs/:jobId/social/verify
+  Auth: ClerkAuthGuard
+  Body: { platform: "x"|"linkedin" }
   Action: Create Share record, mark job as downloadable
   Returns: { downloadReady: true }
 
-GET    /api/download/:jobId
-  Auth: Clerk
-  Action: Verify Share exists for this job, generate signed OSS URL
+GET    /api/jobs/:jobId/download
+  Auth: ClerkAuthGuard
+  Action: Verify Share exists for this job, generate signed OSS GET URL
   Returns: { downloadUrl } (or 403 if not shared)
 
 GET    /api/viewer/token
-  Auth: Clerk
-  Action: Generate short-lived Viewer-scoped token (read-only, 1hr TTL)
+  Auth: ClerkAuthGuard
+  Action: Call APS OAuth to get a short-lived viewer-scoped token (read-only, 1hr TTL)
   Returns: { accessToken, expiresIn }
 
 POST   /api/viewer/translate
-  Auth: Clerk
-  Body: { ossUrn, fileHash? }
+  Auth: ClerkAuthGuard
+  Body: { ossUrn: string, fileHash?: string }
   Action:
     1. Check ViewCache by fileHash (if provided)
     2. If cached → return existing viewableUrn
@@ -486,63 +599,64 @@ POST   /api/viewer/translate
   Returns: { viewableUrn?, status: "cached"|"translating", translationId? }
 
 GET    /api/viewer/status/:urn
-  Auth: Clerk
+  Auth: ClerkAuthGuard
   Action: Poll Model Derivative translation status
   Returns: { status, progress, viewableUrn? }
+
+GET    /api/health
+  Auth: none (public)
+  Returns: { status: "ok", db: "connected", apsToken: "cached" }
+  Used by: Railway healthcheck
 ```
 
-### Admin Routes (role: admin middleware)
+### Admin Routes (ClerkAuthGuard + AdminGuard)
 
 ```
-POST   /api/admin/bundles
-  Auth: Clerk (admin role)
+POST   /api/admin/bundles/upload
   Body: multipart/form-data { file: .zip, engine: "Autodesk.Revit+2024", name: "SplitWallsDA" }
-  Action:
-    1. Upload .zip to APS OSS
-    2. POST to DA /appbundles to register (or update version)
-    3. Create/update Bundle record
-  Returns: { bundleId, daAppBundleId, version }
+  Action: Upload .zip to APS OSS, create Bundle record (status: pending)
+  Returns: { bundleId, ossUrn }
+
+POST   /api/admin/bundles/register
+  Body: { bundleId }
+  Action: POST to DA /appbundles to register (or update version), update Bundle record
+  Returns: { daAppBundleId, version }
+
+POST   /api/admin/bundles/alias
+  Body: { bundleId, alias: "prod"|"test" }
+  Action: POST to DA /appbundles/:id/aliases
+  Returns: { aliasId }
 
 GET    /api/admin/bundles
-  Auth: Clerk (admin role)
   Returns: { bundles: Bundle[] }
 
 POST   /api/admin/activities
-  Auth: Clerk (admin role)
   Body: { bundleId, name, engine, parameters: {...} }
-  Action:
-    1. POST to DA /activities to create
-    2. POST to DA /activities/:id/aliases to create "test" alias
-    3. Create Activity record
+  Action: POST to DA /activities + create "test" alias, create Activity record
   Returns: { activityId, daActivityId }
 
 POST   /api/admin/test
-  Auth: Clerk (admin role)
   Body: multipart/form-data { activityId, rvtFile?: File, rvtUrn?: string, inputJson: string }
   Action:
     1. Upload .rvt to OSS (or reuse rvtUrn)
-    2. Upload inputJson as skill.json to OSS (inline if <4KB)
+    2. Upload inputJson as skill.json to OSS
     3. Create WorkItem with selected Activity
     4. Create TestJob record (status: pending)
   Returns: { testJobId, workItemId }
 
 GET    /api/admin/test/:testJobId
-  Auth: Clerk (admin role)
   Action: Poll DA WorkItem status, update TestJob record
   Returns: { status, progress, duration, reportUrl? }
 
 GET    /api/admin/test/:testJobId/logs
-  Auth: Clerk (admin role)
   Action:
     1. If reportCached → return from MongoDB
     2. Else fetch from DA report URL → parse → cache → return
   Returns: { lines: ParsedLogLine[], errors: string[], duration: number }
 
-  # NOTE: Admin viewer uses shared /api/viewer/* routes (Decision #12)
-  # No separate /api/admin/viewer/* needed
+  # Admin viewer uses the same /api/viewer/* routes (Decision #12)
 
 GET    /api/admin/history
-  Auth: Clerk (admin role)
   Query: ?status=failed&engine=2024&page=1&limit=20
   Returns: { testJobs: TestJob[], total, page }
 ```
@@ -1042,19 +1156,32 @@ splitwalls.vercel.app
 
 ## 14. Environment Variables
 
+### Next.js (Vercel) — apps/web/.env
+
 ```env
-# Clerk
+# PUBLIC: exposed to browser (NEXT_PUBLIC_ prefix required)
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_...
-CLERK_SECRET_KEY=sk_...
 NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
 NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
 NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
 
-# MongoDB
-DATABASE_URL=mongodb+srv://...
+# Backend URL (NestJS on Railway)
+NEXT_PUBLIC_API_URL=https://api.splitwalls.up.railway.app
 
-# APS (Autodesk Platform Services)
+# Local dev override: NEXT_PUBLIC_API_URL=http://localhost:3001
+```
+
+### NestJS (Railway) — apps/api/.env
+
+```env
+# Clerk (server-side JWT verification)
+CLERK_SECRET_KEY=sk_...
+
+# MongoDB Atlas
+DATABASE_URL=mongodb+srv://user:pass@cluster.mongodb.net/splitwalls?retryWrites=true&w=majority
+
+# APS (Autodesk Platform Services) — NEVER in Vercel, ONLY in Railway
 APS_CLIENT_ID=
 APS_CLIENT_SECRET=
 APS_BUCKET_KEY=splitwalls-beta
@@ -1065,27 +1192,82 @@ DA_ACTIVITY_2022=SplitWalls2022
 DA_ACTIVITY_2023=SplitWalls2023
 DA_ACTIVITY_2024=SplitWalls2024
 DA_ACTIVITY_ALIAS=prod
+
+# CORS — comma-separated allowed origins
+CORS_ORIGIN=https://splitwalls.vercel.app,http://localhost:3000
+
+# Server
+PORT=3001
+NODE_ENV=production
+```
+
+### Security boundary summary
+
+```
+Vercel (Next.js):   ZERO secrets — only NEXT_PUBLIC_* vars
+Railway (NestJS):   ALL secrets — APS credentials, Clerk secret, DB URL
+
+APS_CLIENT_ID / APS_CLIENT_SECRET:  Railway env vars ONLY
+CLERK_SECRET_KEY:                   Railway env vars ONLY
+DATABASE_URL:                       Railway env vars ONLY
 ```
 
 ---
 
 ## 15. Implementation Roadmap (MVP + Admin Workbench)
 
-### Phase A: Project Scaffold (2-3 days)
+### Phase A: Project Scaffold (3-4 days)
 
-- [ ] Create Next.js 14 project with TypeScript
-- [ ] Install + configure Clerk (Google + Microsoft + email)
-- [ ] Install + configure Prisma with MongoDB Atlas
+**A1 — Turborepo Monorepo Setup (~4 hours)**
+- [ ] `pnpm create turbo@latest splitwalls-cloud` (select pnpm workspaces)
+- [ ] Delete default Turborepo example apps
+- [ ] Create `apps/web` (Next.js 14), `apps/api` (NestJS), `apps/da-bundle` (C# placeholder)
+- [ ] Create `packages/types` (shared TypeScript interfaces)
+- [ ] Create `packages/tsconfig` (shared tsconfig.base.json)
+- [ ] Configure `turbo.json` (pipeline: dev, build, lint, test)
+- [ ] Root `pnpm-workspace.yaml` + root `package.json` scripts
+- [ ] `.gitignore` for root + per-app
+- [ ] GitHub repo: `splitwalls-cloud` (new repo, separate from SplitWalls C# addin)
+
+**A2 — NestJS App Scaffold (~4 hours)**
+- [ ] `nest new apps/api --package-manager pnpm`
+- [ ] Install: `@nestjs/config`, `@nestjs/common`, `@clerk/clerk-sdk-node`, `@prisma/client`, `prisma`, `class-validator`, `class-transformer`, `helmet`
+- [ ] `main.ts`: `app.enableCors()` (CORS_ORIGIN from env), `app.use(helmet())`, `app.useGlobalPipes(ValidationPipe)`, global prefix `/api`, PORT from env
+- [ ] `ClerkAuthGuard` — verify Clerk JWT, set `req.userId` + `req.userRole`
+- [ ] `AdminGuard` — check `req.userRole === 'admin'`
+- [ ] `PrismaService` — injectable PrismaClient with `onModuleInit` + `onModuleDestroy`
+- [ ] Full Prisma schema (`apps/api/prisma/schema.prisma`) — all 7 models
+- [ ] `npx prisma db push` — create MongoDB collections
+- [ ] `ApsAuthService` — 2-legged OAuth token cache (in-memory, lazy refresh at <5min)
+- [ ] `ApsOssService`, `ApsDaService`, `ApsMdService` — stub implementations
+- [ ] `GET /api/health` — public health check (`{ status, db, apsToken }`)
+- [ ] Vitest setup + first test: `ApsAuthService` token caching
+
+**A3 — Next.js App Scaffold (~3 hours)**
+- [ ] `pnpm create next-app@latest apps/web --typescript --tailwind --app`
+- [ ] Install: `@clerk/nextjs`, `@splitwalls/types` (workspace package)
+- [ ] Clerk `middleware.ts` — protect `/dashboard`, `/configure`, `/result`, `/status`, `/admin` routes (redirect to /sign-in if not authed)
+- [ ] `ClerkProvider` in `app/layout.tsx`
+- [ ] Auth pages: `/sign-in`, `/sign-up` (Clerk components)
+- [ ] Landing page `/` (static, public)
+- [ ] Protected dashboard layout `/dashboard`
+- [ ] `lib/api-client.ts` — typed fetch wrapper that auto-attaches Clerk JWT:
+  ```ts
+  async function apiRequest<T>(path: string, opts?: RequestInit): Promise<T> {
+    const token = await getToken(); // from useAuth()
+    return fetch(process.env.NEXT_PUBLIC_API_URL + path, {
+      ...opts,
+      headers: { Authorization: `Bearer ${token}`, ...opts?.headers }
+    }).then(r => r.json());
+  }
+  ```
 - [ ] Set up Tailwind CSS + shadcn/ui
-- [ ] Create full Prisma schema (User, Job, Share, Bundle, Activity, TestJob, ViewCache)
-- [ ] Landing page (`/`)
-- [ ] Auth pages (`/sign-in`, `/sign-up`)
-- [ ] Protected dashboard layout (user)
-- [ ] Clerk middleware.ts — admin role gate for /admin/* and /api/admin/*
-- [ ] lib/aps-auth.ts — 2-legged OAuth token cache with lazy refresh
-- [ ] lib/aps-client.ts — apsRequest() with auto-token + 401 retry
-- [ ] lib/api-helpers.ts — withAuth(handler) Clerk wrapper
-- [ ] Vitest setup + first test (aps-auth token caching)
+
+**A4 — Deploy Scaffold (~2 hours)**
+- [ ] Railway: create project, connect GitHub, deploy `apps/api` (add env vars from Railway dashboard)
+- [ ] Vercel: import GitHub repo, set root dir = `apps/web`, add `NEXT_PUBLIC_*` env vars
+- [ ] Verify: `GET https://api.splitwalls.up.railway.app/api/health` returns `{ status: "ok" }`
+- [ ] Verify: `https://splitwalls.vercel.app` loads landing page
 
 ### Phase B: Upload + Configure Flow (5-7 days)
 
@@ -1225,7 +1407,7 @@ Phase G (social gate + polish)
 | WPF desktop editor | Can't test without Revit license | Deferred |
 | Parametric mode (no .rvt) | Need .rvt upload to prove pipeline | Phase 3 |
 | Skill library / marketplace | Premature — need users first | Phase 3 |
-| NestJS API migration | Vercel API routes are fine for beta | When scaling |
+| NestJS API migration | **Done — NestJS built from day 1 (v5 architecture change)** | — |
 | Custom domain | Use splitwalls.vercel.app for beta | When branding matters |
 | Webhook callbacks | Polling is simpler for MVP | Phase 2 |
 | Multi-user admin workbench | Only you (admin) for beta | When productizing workbench |
@@ -1245,7 +1427,9 @@ Phase G (social gate + polish)
 | .rvt files too large for OSS upload (>100MB) | LOW | MEDIUM | Client-side file size check. OSS supports up to 5GB with multipart. |
 | Wall splitting produces incorrect geometry | MEDIUM | HIGH | Admin workbench before/after Viewer catches this during development. |
 | DA report format changes | LOW | LOW | Parser is tolerant (falls back to raw text). Report is cached. |
-| Vercel serverless function timeout (10s default) | MEDIUM | MEDIUM | APS OSS upload uses signed URLs (direct browser→OSS). DA operations are async (fire + poll). |
+| Vercel serverless function timeout (10s default) | LOW | LOW | **Eliminated (v5)** — NestJS on Railway has no timeout. Only Viewer SDK calls are client-side. |
+| Railway free tier (500 CPU hours/month) exhausted | LOW | MEDIUM | Monitor in Railway dashboard. Upgrade to $5/month Hobby if beta traffic grows. |
+| CORS misconfiguration | LOW | HIGH | `CORS_ORIGIN` env var in Railway. If users see CORS errors, check Railway env var + Vercel URL. |
 
 ---
 
@@ -1296,12 +1480,45 @@ Phase G (social gate + polish)
    ```
 5. Run `npx prisma db push` to create collections
 
-### 18.4 Vercel
+### 18.4 Railway (NestJS backend)
 
-1. Go to https://vercel.com → Import Git repository
-2. Add all `.env` variables in Vercel dashboard → Settings → Environment Variables
-3. Deploy — Vercel auto-detects Next.js
-4. Your app is live at `splitwalls.vercel.app`
+1. Go to https://railway.app → Sign in with GitHub
+2. New Project → Deploy from GitHub repo → select `splitwalls-cloud`
+3. Railway auto-detects Node.js — set root directory to `apps/api`
+4. Add env vars in Railway dashboard → Variables tab:
+   ```
+   CLERK_SECRET_KEY=sk_...
+   DATABASE_URL=mongodb+srv://...
+   APS_CLIENT_ID=...
+   APS_CLIENT_SECRET=...
+   APS_BUCKET_KEY=splitwalls-beta
+   DA_NICKNAME=splitwalls
+   DA_ACTIVITY_2022=SplitWalls2022
+   DA_ACTIVITY_2023=SplitWalls2023
+   DA_ACTIVITY_2024=SplitWalls2024
+   DA_ACTIVITY_ALIAS=prod
+   CORS_ORIGIN=https://splitwalls.vercel.app,http://localhost:3000
+   PORT=3001
+   NODE_ENV=production
+   ```
+5. Set health check: `GET /api/health` (Railway uses this for restart logic)
+6. Your API is live at `https://api.splitwalls.up.railway.app`
+
+### 18.5 Vercel (Next.js frontend)
+
+1. Go to https://vercel.com → Import Git repository (`splitwalls-cloud`)
+2. Set root directory to `apps/web`
+3. Add env vars in Vercel dashboard → Settings → Environment Variables:
+   ```
+   NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_...
+   NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+   NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+   NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/dashboard
+   NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/dashboard
+   NEXT_PUBLIC_API_URL=https://api.splitwalls.up.railway.app
+   ```
+4. Deploy — Vercel auto-detects Next.js App Router
+5. Your app is live at `splitwalls.vercel.app`
 
 ---
 
@@ -1380,27 +1597,48 @@ components/
     ProfileLegend.tsx      — Color legend for profile types
 ```
 
-### Upload Flow (Revised for Signed URLs)
+### Architecture Decisions (v5 — 3-Software Architecture)
+
+| # | Issue | Decision | Rationale |
+|---|-------|----------|-----------|
+| 19 | Where to put APS credentials + business logic | **NestJS backend from day 1** (not "when scaling") | Eliminates Vercel 10s timeout, gives persistent token cache, WebSocket-ready, clean separation |
+| 20 | Repo structure | **Turborepo monorepo** (`apps/web` + `apps/api` + `apps/da-bundle` + `packages/types`) | Shared TypeScript types eliminate API contract drift; one CI pipeline; one README |
+| 21 | NestJS hosting | **Railway** | Simplest persistent Node.js hosting for beta; no DevOps; auto-deploy from GitHub; free 500h/month |
+| 22 | Client ↔ API communication | **Browser calls NestJS directly** (no Next.js API routes at all) | Zero proxy hops, no Vercel timeout risk on any path, cleanest separation; Next.js is pure UI |
+| 23 | API contract | **Shared TypeScript types** in `packages/types` — imported by both `apps/web` and `apps/api` | DRY; compile-time guarantee that client and server agree on request/response shapes |
+| 24 | Clerk JWT verification | **NestJS `ClerkAuthGuard`** verifies JWT on every protected route; admin role from JWT claims | NestJS owns all auth logic; Clerk session claims include role metadata |
+| 25 | Phase 2 real-time DA status | **Deferred** — use 5s polling for MVP; NestJS enables SSE/WebSocket when needed | Polling works fine for beta; Railway persistent server makes streaming trivial to add later |
+
+### Upload Flow (v5 — NestJS + Signed URLs)
 
 ```
-Browser                          API Route                    APS OSS
-───────                          ─────────                    ───────
+Browser                          NestJS (Railway)             APS OSS
+───────                          ────────────────             ───────
 
 1. Hash file (SHA-256)
-   Check ViewCache
-   ────────────────────→  POST /api/upload
-                          Generate signed URL ──→  (prepares bucket)
-                          ←── signed URL + ossUrn
-                          Create Job record
+   Send upload request
+   ────────────────────→  POST /api/jobs/upload-url
+                          Auth: ClerkAuthGuard
+                          Generate signed PUT URL ──→ (prepares bucket)
+                          Create Job record (MongoDB)
+                          ←── signed URL + jobId + ossUrn
+
    ←── { signedUrl, jobId, ossUrn }
 
 2. Upload .rvt directly   ──────────────────────────────────→  PUT (signed URL)
-   (no size limit)                                             Stored in OSS
+   (no size limit)                                             Stored in APS OSS
 
-3. Notify completion
-   ────────────────────→  POST /api/upload/complete
-                          Trigger Model Derivative
-                          ←── { status: "translating" }
+3. Execute job
+   ────────────────────→  POST /api/jobs/:jobId/execute
+                          Build skill.json
+                          Upload skill.json to OSS
+                          Create WorkItem on APS DA
+                          ←── { workItemId }
+
+4. Poll status            →  GET /api/jobs/:jobId/status (every 5s)
+                          Poll APS DA WorkItem
+                          Update MongoDB Job record
+                          ←── { status, progress }
 ```
 
 ---
